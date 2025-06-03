@@ -1,0 +1,754 @@
+@import "tailwindcss";
+
+:root {
+  --background: #070c0c;
+  --foreground: #ffffff;
+
+  --color-accent: #6c5cd3;
+  --color-accent-darker: #6254be;
+  --color-brand: #84eef5;
+  --color-brand-darker: #73cfd6;
+
+  --text-secondary: #cdcece;
+  --text-secondary-dark: "rgba(255, 255, 255, 0.45)";
+
+  --color-gray: #18181b;
+
+  --color-lightGray: #cdcece;
+  --color-danger: #b31313;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #070c0c;
+    --foreground: #ffffff;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+h2 {
+  font-size: 18px;
+  color: white;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Webkit (Chrome, Safari, newer versions of Opera) */
+::-webkit-scrollbar {
+  width: 5px; /* Width of the entire scrollbar */
+}
+
+/* Scrollbar Track */
+::-webkit-scrollbar-track {
+  background: var(--background); /* Light gray background for the track */
+}
+
+/* Scrollbar Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand); /* Use your brand color */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Scrollbar Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(
+    in srgb,
+    var(--color-brand) 80%,
+    white
+  ); /* Slightly lighter on hover */
+}
+
+/* Wallet adapter button refinement */
+.wallet-adapter-button {
+  padding: 0 !important;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 36px !important;
+  background-color: var(--color-gray) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.wallet-adapter-button:hover {
+  background-color: #222224 !important;
+}
+
+.wallet-adapter-button:not([disabled]):hover {
+  background-color: #222224 !important;
+}
+
+.wallet-adapter-button-start-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-right: 8px !important;
+  color: var(--color-brand) !important;
+}
+
+.wallet-adapter-dropdown-list {
+  background: var(--background) !important;
+  border: 1px solid var(--color-gray) !important;
+  border-radius: 8px !important;
+}
+
+.wallet-adapter-dropdown-list-item {
+  font-size: 14px !important;
+  padding: 8px 16px !important;
+  border-radius: 0 !important;
+  color: white !important;
+}
+
+.wallet-adapter-dropdown-list-item:hover {
+  background-color: var(--color-gray) !important;
+}
+
+/* Wallet Modal Styling to match the dark theme */
+.wallet-adapter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 1;
+  transition: opacity 150ms linear;
+  z-index: 1040;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent !important;
+}
+
+/* Animation classes for Character Generation overlay */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.wallet-adapter-modal-wrapper {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+  background-color: transparent !important;
+}
+
+.wallet-adapter-modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Modal content for dark theme */
+.wallet-adapter-modal-content {
+  background-color: var(--background) !important;
+  border: 1px solid var(--color-gray) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6) !important;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Modal refinements */
+.wallet-adapter-modal-title {
+  font-weight: 500;
+  font-size: 18px !important;
+  line-height: 1.5;
+  margin: 0;
+  padding: 24px !important;
+  text-align: center;
+  color: white !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background-color: var(--background) !important;
+}
+
+/* Replace the default title with our custom one */
+.wallet-adapter-modal-title::before {
+  content: "";
+  display: none;
+}
+
+/* Hide the original "Connect Wallet" text */
+.wallet-adapter-modal-title span {
+  display: block;
+  visibility: visible;
+}
+
+/* Override the title text */
+.wallet-adapter-modal-title span::before {
+  content: "Connect a wallet on Solana to continue";
+  display: block;
+}
+
+/* Wallet list structure */
+.wallet-adapter-modal-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background) !important;
+}
+
+/* Wallet list items */
+.wallet-adapter-modal-list .wallet-adapter-button {
+  display: flex;
+  justify-content: flex-start !important;
+  align-items: center;
+  width: 100%;
+  background-color: var(--background) !important;
+  padding: 16px 24px !important;
+  border-radius: 0 !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+  height: auto !important;
+  border: none !important;
+  color: white !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button:hover {
+  background-color: var(--color-gray) !important;
+}
+
+/* More wallets button */
+.wallet-adapter-modal-list-more {
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--color-brand) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+  margin: 16px 24px !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+}
+
+.wallet-adapter-modal-list-more::after {
+  content: "▾";
+  margin-left: 6px;
+  display: inline-block;
+}
+
+.wallet-adapter-modal-list-more svg {
+  display: none;
+}
+
+/* Wallet logo styling */
+.wallet-adapter-modal-list-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  object-fit: contain;
+  margin-right: 16px;
+}
+
+/* For the detected badge */
+.wallet-adapter-modal-list-wallet-detected {
+  font-size: 12px;
+  color: var(--text-secondary) !important;
+  font-weight: 400;
+  text-transform: none;
+  margin-left: auto;
+  padding: 0;
+  background-color: transparent;
+}
+
+/* Wallet list and button icons */
+.wallet-adapter-modal-list .wallet-adapter-button-end-icon {
+  margin-left: auto;
+  margin-right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button-start-icon {
+  margin-right: 16px;
+}
+
+/* Modal middle section */
+.wallet-adapter-modal-middle {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 24px;
+  background-color: var(--background) !important;
+}
+
+.wallet-adapter-modal-middle-button {
+  margin-top: 16px !important;
+  width: 100% !important;
+  background-color: var(--color-brand) !important;
+  color: #000000 !important;
+  font-weight: 500 !important;
+  border-radius: 4px !important;
+}
+
+/* Wallet name styling */
+.wallet-adapter-modal-list-wallet-name {
+  color: white;
+  font-weight: 500;
+}
+
+.wallet-adapter-modal-list-wallet-name-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Close button */
+.wallet-adapter-modal-button-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 8px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  z-index: 1060;
+}
+
+.wallet-adapter-modal-button-close:hover {
+  opacity: 0.8;
+}
+
+.wallet-adapter-modal-button-close svg {
+  fill: white;
+  width: 14px;
+  height: 14px;
+}
+
+.wallet-adapter-modal-list-button {
+  display: flex;
+  align-items: center;
+  border-radius: 0 !important;
+  padding: 12px 20px !important;
+  height: 60px !important;
+}
+
+.wallet-adapter-modal-list-button-icon {
+  margin-right: 20px !important;
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.wallet-adapter-modal-list-button:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.wallet-adapter-modal-list-button-text {
+  font-size: 16px;
+  color: white;
+  font-weight: 400;
+}
+
+/* Remove unused styles since we now use dedicated components */
+.wallet-button-wrapper,
+.eth-button-wrapper {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Center text in wallet buttons */
+.wallet-button-wrapper button,
+.eth-button-wrapper button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Hidden wallet adapter buttons */
+.hidden .wallet-adapter-button {
+  position: absolute;
+  opacity: 0;
+  pointer-events: auto;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Wallet modal footer */
+.wallet-adapter-modal-list-more-container {
+  background-color: var(--background) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Expand and collapse area */
+.wallet-adapter-collapse,
+.wallet-adapter-collapse-button {
+  background-color: var(--background) !important;
+}
+
+/* All wallet modal sections need the same background */
+.wallet-adapter-modal-container,
+.wallet-adapter-modal-wrapper-no-logo {
+  background-color: transparent !important;
+}
+
+/* Replace with more specific selectors targeting only what we need */
+.wallet-adapter-modal-title,
+.wallet-adapter-modal-list,
+.wallet-adapter-modal-list-more,
+.wallet-adapter-modal-middle,
+.wallet-adapter-modal-content,
+.wallet-adapter-modal-list-more-container,
+.wallet-adapter-modal-button-container,
+.wallet-adapter-modal-qr-container,
+.wallet-adapter-modal-qr-instructions,
+.wallet-adapter-modal-qr-title,
+.wallet-adapter-modal-installed-wallets,
+.wallet-adapter-modal-footer,
+.wallet-adapter-modal-list-wallet-name,
+.wallet-adapter-modal-list-wallet-name-icon,
+.wallet-adapter-collapse,
+.wallet-adapter-collapse-button {
+  background-color: var(--background) !important;
+}
+
+/* Button container in the footer */
+.wallet-adapter-modal-button-container {
+  background-color: var(--background) !important;
+}
+
+/* QR code container */
+.wallet-adapter-modal-qr-container {
+  background-color: var(--background) !important;
+  border: 1px solid var(--color-gray) !important;
+}
+
+/* Instructions in QR code */
+.wallet-adapter-modal-qr-instructions {
+  color: white !important;
+  background-color: var(--background) !important;
+}
+
+/* QR code title */
+.wallet-adapter-modal-qr-title {
+  color: white !important;
+  background-color: var(--background) !important;
+}
+
+/* QR code image background */
+.wallet-adapter-modal-qr-image {
+  background-color: white !important;
+  border-radius: 8px !important;
+  padding: 8px !important;
+}
+
+/* New wallets installed section */
+.wallet-adapter-modal-installed-wallets {
+  background-color: var(--background) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Modal footer text */
+.wallet-adapter-modal-footer {
+  background-color: var(--background) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-secondary) !important;
+  padding: 12px 0 !important;
+  text-align: center !important;
+  font-size: 12px !important;
+}
+
+/* Force dark theme for special cases like expanded lists */
+.wallet-adapter-modal-list-wallet-expanded {
+  background-color: var(--background) !important;
+}
+
+/* Fix the detected badge background */
+.wallet-adapter-modal-list-wallet-detected {
+  background-color: transparent !important;
+}
+
+/* Override wallet button backgrounds but only inside the adapter modal */
+.wallet-adapter-modal .wallet-adapter-button-trigger {
+  background-color: var(--color-brand) !important;
+}
+
+/* Fix the buttons in the adapter modal */
+.wallet-adapter-modal-button {
+  background-color: var(--color-gray) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.wallet-adapter-modal-button:hover {
+  background-color: #222224 !important;
+}
+
+/* Fix the image container in QR code display */
+.wallet-adapter-modal-qr-container img {
+  background-color: white !important;
+  border-radius: 8px !important;
+  padding: 8px !important;
+}
+
+/* Policy Pages Styles */
+.policy-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.policy-content h2 {
+  margin-bottom: 16px;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.policy-content h3 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.policy-content h4 {
+  margin-top: 20px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.policy-content p {
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.policy-list {
+  margin-bottom: 20px;
+  margin-left: 24px;
+  list-style-type: disc;
+}
+
+.policy-list li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.policy-tabs .ant-tabs-tab {
+  padding: 12px 16px;
+  font-size: 16px;
+  margin: 0;
+}
+
+.policy-tabs .ant-tabs-tab-active {
+  background-color: rgba(132, 238, 245, 0.1);
+  border-right: 2px solid var(--color-brand);
+  color: var(--color-brand);
+}
+
+.policy-tabs .ant-tabs-content {
+  padding-left: 24px;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+@media (max-width: 768px) {
+  .policy-tabs .ant-tabs-tab {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .policy-content {
+    padding: 12px;
+  }
+  
+  .policy-content h2 {
+    font-size: 24px;
+  }
+  
+  .policy-content h3 {
+    font-size: 20px;
+  }
+  
+  .policy-content h4 {
+    font-size: 16px;
+  }
+}
+
+/* XP Leaderboard styles */
+.leaderboard-tabs .ant-tabs-nav {
+  margin-bottom: 0 !important;
+}
+
+.leaderboard-tabs .ant-tabs-tab {
+  padding: 12px 16px;
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--text-secondary) !important;
+  transition: color 0.3s;
+}
+
+.leaderboard-tabs .ant-tabs-tab-active {
+  color: var(--color-brand) !important;
+}
+
+.leaderboard-tabs .ant-tabs-ink-bar {
+  background-color: var(--color-brand) !important;
+}
+
+.leaderboard-tabs .ant-tabs-content {
+  padding: 0;
+  background-color: transparent;
+}
+
+.leaderboard-tabs .ant-tabs-nav::before {
+  border-bottom: 1px solid var(--color-gray) !important;
+}
+
+/* Mobile leaderboard tabs optimization */
+.mobile-leaderboard-tabs .ant-tabs-nav {
+  width: 100%;
+}
+
+.mobile-leaderboard-tabs .ant-tabs-nav .ant-tabs-nav-list {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.mobile-leaderboard-tabs .ant-tabs-tab {
+  padding: 10px 8px !important;
+  margin: 0 !important;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* Ensure tab content doesn't overflow */
+.leaderboard-tabs .ant-tabs-tabpane {
+  overflow-x: hidden;
+}
+
+/* Make long usernames truncate properly */
+.leaderboard-tabs .truncate {
+  max-width: 120px;
+}
+
+@media (max-width: 640px) {
+  .leaderboard-tabs .truncate {
+    max-width: 80px;
+  }
+}
+
+/* Analytics Radio Button styles */
+.custom-radio-btn {
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--text-secondary) !important;
+}
+
+.custom-radio-btn:hover {
+  color: white !important;
+}
+
+.ant-radio-button-wrapper-checked.custom-radio-btn {
+  background-color: rgba(132, 238, 245, 0.1) !important;
+  color: var(--color-brand) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.ant-radio-button-wrapper-checked.custom-radio-btn::before {
+  background-color: transparent !important;
+}
+
+.ant-radio-group .ant-radio-button-wrapper:first-child {
+  border-left: none !important;
+}
+
+/* Custom pagination styles for clips pages */
+.custom-pagination .ant-pagination-item {
+  background-color: var(--color-gray);
+  border-color: var(--color-gray);
+}
+
+.custom-pagination .ant-pagination-item a {
+  color: var(--text-primary);
+}
+
+.custom-pagination .ant-pagination-item-active {
+  background-color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+
+.custom-pagination .ant-pagination-item-active a {
+  color: #ffffff;
+}
+
+.custom-pagination .ant-pagination-prev,
+.custom-pagination .ant-pagination-next {
+  color: var(--text-primary);
+}
+
+.custom-pagination .ant-pagination-prev:hover,
+.custom-pagination .ant-pagination-next:hover {
+  color: var(--color-brand);
+}
+
+.custom-pagination .ant-pagination-jump-prev,
+.custom-pagination .ant-pagination-jump-next {
+  color: var(--text-secondary);
+}
+
+.custom-pagination .ant-pagination-options-quick-jumper input {
+  background-color: var(--color-gray);
+  border-color: var(--color-gray);
+  color: var(--text-primary);
+}

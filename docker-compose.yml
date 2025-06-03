@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  live-frontend:
+    build: .
+    container_name: live-frontend-container
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - NEXT_PUBLIC_CHARACTER_API_URL=http://65.108.203.70:5000
+      - NEXT_PUBLIC_LIVE2D_URL=http://65.108.203.70:3001
+      - NEXT_PUBLIC_WEBSOCKET_URL=ws://65.108.203.70:8080
+      - NEXT_PUBLIC_AUDIO_URL=http://65.108.203.70:3002
+      - NEXT_PUBLIC_STREAM_URL=https://stream.avie.live
+      - NEXT_PUBLIC_API_WS_URL=${NEXT_PUBLIC_API_WS_URL}
+      - NEXT_PUBLIC_DEFAULT_LOCALE=en
+      - NEXT_PUBLIC_SELF_URL=http://demo.avie.live
+      - NEXT_SHARP_PATH=/app/node_modules/sharp
+      - NEXT_PUBLIC_BASE_PATH=""
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      - ./public:/app/public
+    restart: unless-stopped
+    networks:
+      - livetoken-network
+
+networks:
+  livetoken-network:
+    external: true 
