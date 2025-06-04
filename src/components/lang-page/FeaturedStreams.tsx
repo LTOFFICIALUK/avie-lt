@@ -203,9 +203,6 @@ const FeaturedStreams: React.FC<FeaturedStreamsProps> = ({
             </div>
           ))}
         </div>
-
-        {/* Gradient Fade Effect */}
-        <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-black/50 to-transparent pointer-events-none" />
       </div>
     </section>
   );

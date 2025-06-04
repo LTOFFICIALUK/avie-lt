@@ -2,7 +2,9 @@
 import React, { useState, useRef } from "react";
 import { Navigation } from "../../components/landing/Navigation";
 import { Footer } from "../../components/footer/Footer";
-import { Button, Progress, Tag } from "antd";
+import { Button, Progress, Tag, Modal, Tabs, Typography } from "antd";
+import Link from "next/link";
+import Image from "next/image";
 import {
   RocketOutlined,
   CheckCircleOutlined,
@@ -29,7 +31,15 @@ import {
   UsergroupAddOutlined,
   CalendarOutlined,
   FireOutlined,
+  CloseOutlined,
+  MailOutlined,
+  HeartOutlined,
 } from "@ant-design/icons";
+import { AuthSheet } from "../../components/auth/AuthSheet";
+import Login from "../../components/auth/Login";
+import Register from "../../components/auth/Register";
+import FormVerify2FA from "../../components/auth/FormVerify2FA";
+import PasswordReset from "../../components/auth/PasswordReset";
 
 interface RoadmapFeature {
   name: string;
@@ -88,10 +98,10 @@ const ROADMAP_PHASES: RoadmapPhase[] = [
         priority: 'medium'
       },
       {
-        name: "Character Generator",
-        description: "AI-powered avatar and character creation tools for enhanced streaming personas",
+        name: "Clipping Tools",
+        description: "Use our enhanced clipping tools to create engaging content for your audience and social media pages",
         status: 'completed',
-        icon: BulbOutlined,
+        icon: FireOutlined,
         priority: 'medium'
       },
       {
@@ -130,10 +140,10 @@ const ROADMAP_PHASES: RoadmapPhase[] = [
         priority: 'high'
       },
       {
-        name: "Interactive Stream Overlays",
-        description: "Customizable overlay widgets for polls, goals, alerts, and viewer interactions",
-        status: 'in-progress',
-        icon: EyeOutlined,
+        name: "Character Generator",
+        description: "AI-powered avatar and character creation tools for enhanced community building",
+        status: 'completed',
+        icon: BulbOutlined,
         priority: 'medium'
       },
       {
@@ -257,6 +267,81 @@ const PRIORITY_CONFIG = {
   low: { color: 'blue', text: 'Low Priority' }
 };
 
+// Hero Graphics Component
+const HeroGraphics = () => {
+  return (
+    <div className="relative w-full max-w-4xl mx-auto mt-20">
+      {/* Central Streaming Hub */}
+      <div className="relative flex items-center justify-center">
+        {/* Main Central Circle */}
+        <div className="w-32 h-32 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-2xl border border-purple-400/30 relative z-10">
+          <VideoCameraOutlined className="text-4xl text-white" />
+          {/* Pulse Animation */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 animate-ping opacity-20"></div>
+        </div>
+
+        {/* Floating Elements Around Central Hub */}
+        {/* SOL Token */}
+        <div className="absolute -top-8 left-12 w-16 h-16 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full border border-green-400/30 flex items-center justify-center animate-bounce">
+          <DollarOutlined className="text-green-400 text-xl" />
+        </div>
+
+        {/* Viewer Count */}
+        <div className="absolute top-8 -right-16 w-20 h-12 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl border border-blue-400/30 flex items-center justify-center">
+          <EyeOutlined className="text-blue-400 mr-1" />
+          <span className="text-blue-400 text-sm font-bold">1.2K</span>
+        </div>
+
+        {/* Heart/Likes */}
+        <div className="absolute -bottom-6 -left-12 w-14 h-14 bg-gradient-to-br from-pink-500/20 to-red-500/20 rounded-full border border-pink-400/30 flex items-center justify-center animate-pulse">
+          <HeartOutlined className="text-pink-400 text-lg" />
+        </div>
+
+        {/* Gift/Rewards */}
+        <div className="absolute bottom-12 right-8 w-16 h-16 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-full border border-yellow-400/30 flex items-center justify-center">
+          <GiftOutlined className="text-yellow-400 text-xl" />
+        </div>
+
+        {/* Trophy */}
+        <div className="absolute -top-12 -right-8 w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full border border-purple-400/30 flex items-center justify-center animate-bounce">
+          <TrophyOutlined className="text-purple-400 text-lg" />
+        </div>
+
+        {/* AVIE Token */}
+        <div className="absolute -bottom-8 right-16 w-18 h-12 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-indigo-400/30 flex items-center justify-center">
+          <StarOutlined className="text-indigo-400 mr-1" />
+          <span className="text-indigo-400 text-sm font-bold">AVIE</span>
+        </div>
+
+        {/* Live Indicator */}
+        <div className="absolute top-16 left-16 w-16 h-8 bg-gradient-to-r from-red-500/30 to-pink-500/30 rounded-full border border-red-400/40 flex items-center justify-center">
+          <div className="w-2 h-2 bg-red-500 rounded-full mr-1 animate-pulse"></div>
+          <span className="text-red-400 text-xs font-bold">LIVE</span>
+        </div>
+      </div>
+
+      {/* Connecting Lines */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{zIndex: 1}}>
+        <defs>
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="rgb(168, 85, 247)" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="rgb(59, 130, 246)" stopOpacity="0.1" />
+          </linearGradient>
+        </defs>
+        
+        {/* Connection lines from center to floating elements */}
+        <line x1="50%" y1="50%" x2="30%" y2="25%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
+        <line x1="50%" y1="50%" x2="75%" y2="35%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
+        <line x1="50%" y1="50%" x2="25%" y2="75%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
+        <line x1="50%" y1="50%" x2="70%" y2="80%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
+      </svg>
+
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-gradient-radial from-purple-600/10 via-transparent to-transparent rounded-full blur-3xl"></div>
+    </div>
+  );
+};
+
 // Roadmap Graphics Component
 const RoadmapGraphics = ({ activePhase, setActivePhase }: { activePhase: number; setActivePhase: (phase: number) => void }) => {
   return (
@@ -266,9 +351,12 @@ const RoadmapGraphics = ({ activePhase, setActivePhase }: { activePhase: number;
         <div className="flex flex-col items-center">
           <button 
             onClick={() => setActivePhase(0)}
-            className="w-24 h-24 bg-gradient-to-br from-green-600 to-emerald-600 rounded-full flex items-center justify-center shadow-2xl border border-green-400/30 cursor-pointer"
+            className="w-24 h-24 bg-gradient-to-br from-green-600 to-emerald-600 rounded-full flex items-center justify-center shadow-2xl border border-green-400/30 cursor-pointer relative"
           >
             <CheckCircleOutlined className="text-3xl text-white" />
+            {/* Sequential pulse animation - Phase 1 */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-600 to-emerald-600 opacity-20" 
+                 style={{ animation: 'sequentialPulse 4.5s infinite' }}></div>
           </button>
           <div className="mt-4 text-center">
             <div className="text-sm font-bold text-green-400">PHASE 1</div>
@@ -288,7 +376,9 @@ const RoadmapGraphics = ({ activePhase, setActivePhase }: { activePhase: number;
             className="w-24 h-24 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-2xl border border-blue-400/30 cursor-pointer relative"
           >
             <ClockCircleOutlined className="text-3xl text-white" />
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 animate-ping opacity-20"></div>
+            {/* Sequential pulse animation - Phase 2 (delayed) */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 opacity-20" 
+                 style={{ animation: 'sequentialPulse 4.5s infinite 1.5s' }}></div>
           </button>
           <div className="mt-4 text-center">
             <div className="text-sm font-bold text-blue-400">PHASE 2</div>
@@ -305,9 +395,12 @@ const RoadmapGraphics = ({ activePhase, setActivePhase }: { activePhase: number;
         <div className="flex flex-col items-center">
           <button 
             onClick={() => setActivePhase(2)}
-            className="w-24 h-24 bg-gradient-to-br from-purple-600/50 to-pink-600/50 rounded-full flex items-center justify-center shadow-2xl border border-purple-400/30 cursor-pointer"
+            className="w-24 h-24 bg-gradient-to-br from-purple-600/50 to-pink-600/50 rounded-full flex items-center justify-center shadow-2xl border border-purple-400/30 cursor-pointer relative"
           >
             <CalendarOutlined className="text-3xl text-purple-300" />
+            {/* Sequential pulse animation - Phase 3 (more delayed) */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 opacity-20" 
+                 style={{ animation: 'sequentialPulse 4.5s infinite 3s' }}></div>
           </button>
           <div className="mt-4 text-center">
             <div className="text-sm font-bold text-purple-400">PHASE 3</div>
@@ -318,6 +411,20 @@ const RoadmapGraphics = ({ activePhase, setActivePhase }: { activePhase: number;
 
       {/* Background Glow */}
       <div className="absolute inset-0 bg-gradient-radial from-purple-600/10 via-transparent to-transparent rounded-full blur-3xl"></div>
+      
+      {/* Custom CSS for sequential pulse animation */}
+      <style jsx>{`
+        @keyframes sequentialPulse {
+          0%, 66.67%, 100% {
+            transform: scale(1);
+            opacity: 0.2;
+          }
+          33.33% {
+            transform: scale(1.4);
+            opacity: 0.4;
+          }
+        }
+      `}</style>
     </div>
   );
 };
@@ -377,6 +484,17 @@ const RoadmapContent = ({ activePhase, setActivePhase }: { activePhase: number; 
 
 const RoadmapPage = () => {
   const [activePhase, setActivePhase] = useState(0);
+  const authSheetRef = useRef<HTMLDivElement>(null);
+
+  const handleGetStarted = () => {
+    // Trigger the AuthSheet modal by programmatically clicking the button
+    if (authSheetRef.current) {
+      const button = authSheetRef.current.querySelector('button');
+      if (button) {
+        button.click();
+      }
+    }
+  };
 
   return (
     <>
@@ -395,8 +513,8 @@ const RoadmapPage = () => {
         </div>
 
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-          <div className="relative z-10 text-center max-w-6xl mx-auto">
+        <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
+          <div className="relative z-10 text-center max-w-6xl mx-auto -mt-20">
             <div className="mb-6">
               <span className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-sm font-medium text-purple-300 mb-6">
                 <RocketOutlined className="mr-2" />
@@ -405,7 +523,7 @@ const RoadmapPage = () => {
             </div>
             
             <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight">
-              Building the Future
+              Building the Future of Streaming
             </h1>
             
             <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -413,18 +531,51 @@ const RoadmapPage = () => {
               <span className="text-[var(--color-brand)] font-bold">AVIE</span> platform throughout 2025.
             </p>
 
+            {/* Hero Graphics */}
+            <HeroGraphics />
+          </div>
+        </section>
+
+        {/* Visual Separator */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent h-px"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent h-px translate-y-1"></div>
+        </div>
+
+        {/* Phases Introduction Section */}
+        <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-gray-900/20 to-transparent">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Development Phases
+            </h2>
+            <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+              Follow our journey through three major development phases, each bringing revolutionary features to the AVIE ecosystem.
+            </p>
+            
             {/* Interactive Roadmap Graphics */}
             <RoadmapGraphics activePhase={activePhase} setActivePhase={setActivePhase} />
           </div>
         </section>
 
-        {/* Phase Content */}
-        <div className="relative z-10 -mt-20">
+        {/* Visual Separator */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent h-px"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent h-px translate-y-1"></div>
+        </div>
+
+        {/* Phase Content Section */}
+        <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900/10 via-gray-800/5 to-gray-900/10">
           <RoadmapContent activePhase={activePhase} setActivePhase={setActivePhase} />
+        </section>
+
+        {/* Visual Separator */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent h-px"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent h-px translate-y-1"></div>
         </div>
 
         {/* CTA Section */}
-        <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent">
+        <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent">
           <div className="max-w-4xl mx-auto text-center">
             <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-purple-900/30 border border-purple-700/30 backdrop-blur-sm">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -437,20 +588,23 @@ const RoadmapPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   type="button"
+                  onClick={handleGetStarted}
                   className="bg-gradient-to-r from-purple-600 to-blue-600 border-0 hover:from-purple-700 hover:to-blue-700 h-12 px-8 text-lg font-semibold rounded-full text-white flex items-center justify-center gap-2 shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                  aria-label="Get Early Access"
+                  aria-label="Get Started"
                   tabIndex={0}
                 >
-                  <RocketOutlined /> Get Early Access
+                  <RocketOutlined /> Get Started
                 </button>
-                <button
-                  type="button"
-                  className="border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 h-12 px-8 text-lg rounded-full flex items-center justify-center gap-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                  aria-label="Join Community"
-                  tabIndex={0}
-                >
-                  <MessageOutlined /> Join Community
-                </button>
+                <Link href="/community">
+                  <button
+                    type="button"
+                    className="border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 h-12 px-8 text-lg rounded-full flex items-center justify-center gap-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    aria-label="Join Community"
+                    tabIndex={0}
+                  >
+                    <MessageOutlined /> Join Community
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -458,6 +612,13 @@ const RoadmapPage = () => {
       </main>
 
       <Footer />
+      
+      {/* Hidden AuthSheet for programmatic triggering */}
+      <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
+        <div ref={authSheetRef}>
+          <AuthSheet />
+        </div>
+      </div>
     </>
   );
 };

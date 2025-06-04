@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Navigation } from "../../components/landing/Navigation";
 import { Footer } from "../../components/footer/Footer";
+import Link from "next/link";
 import {
   FileTextOutlined,
   RocketOutlined,
@@ -33,6 +34,7 @@ import {
   XOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { AuthSheet } from "../../components/auth/AuthSheet";
 
 const PROBLEM_SOLUTIONS = [
   {
@@ -118,13 +120,66 @@ const TECH_STACK = [
 ];
 
 const SECURITY_FEATURES = [
-  { feature: "KYC/AML Verification", description: "Required for all creator token launches and users interacting with monetized systems" },
+  { feature: "KYC/AML Verification", description: "May be required for creator token launches and users interacting with monetized systems" },
   { feature: "Smart Contract Audits", description: "All core contracts are subject to external audit and public reporting" },
   { feature: "Content Moderation", description: "AVIE uses hybrid human-AI systems to enforce platform rules and maintain a safe environment" },
   { feature: "Data Handling", description: "Compliant with global standards such as GDPR, CCPA, and Data Protection laws" }
 ];
 
+// Hero Graphics Component
+const HeroGraphics = () => {
+  return (
+    <div className="relative w-full max-w-4xl mx-auto">
+      {/* Floating Elements */}
+      <div className="relative flex items-center justify-center">
+        {/* SOL Token */}
+        <div className="absolute -top-8 left-12 w-16 h-16 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full border border-green-400/30 flex items-center justify-center animate-bounce">
+          <DollarOutlined className="text-green-400 text-xl" />
+        </div>
+
+        {/* Viewer Count */}
+        <div className="absolute top-8 -right-16 w-20 h-12 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl border border-blue-400/30 flex items-center justify-center">
+          <EyeOutlined className="text-blue-400 mr-1" />
+          <span className="text-blue-400 text-sm font-bold">1.2K</span>
+        </div>
+
+        {/* Heart/Likes */}
+        <div className="absolute -bottom-6 -left-12 w-14 h-14 bg-gradient-to-br from-pink-500/20 to-red-500/20 rounded-full border border-pink-400/30 flex items-center justify-center animate-pulse">
+          <HeartOutlined className="text-pink-400 text-lg" />
+        </div>
+
+        {/* Gift/Rewards */}
+        <div className="absolute bottom-12 right-8 w-16 h-16 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-full border border-yellow-400/30 flex items-center justify-center">
+          <GiftOutlined className="text-yellow-400 text-xl" />
+        </div>
+
+        {/* Trophy */}
+        <div className="absolute -top-12 -right-8 w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full border border-purple-400/30 flex items-center justify-center animate-bounce">
+          <TrophyOutlined className="text-purple-400 text-lg" />
+        </div>
+
+        {/* AVIE Token */}
+        <div className="absolute -bottom-8 right-16 w-18 h-12 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-indigo-400/30 flex items-center justify-center">
+          <StarOutlined className="text-indigo-400 mr-1" />
+          <span className="text-indigo-400 text-sm font-bold">AVIE</span>
+        </div>
+
+        {/* Live Indicator */}
+        <div className="absolute top-16 left-16 w-16 h-8 bg-gradient-to-r from-red-500/30 to-pink-500/30 rounded-full border border-red-400/40 flex items-center justify-center">
+          <div className="w-2 h-2 bg-red-500 rounded-full mr-1 animate-pulse"></div>
+          <span className="text-red-400 text-xs font-bold">LIVE</span>
+        </div>
+      </div>
+
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-gradient-radial from-purple-600/10 via-transparent to-transparent rounded-full blur-3xl"></div>
+    </div>
+  );
+};
+
 const WhitepaperPage = () => {
+  const authSheetRef = useRef<HTMLDivElement>(null);
+
   const sections = [
     { key: 'executive-summary', title: 'Executive Summary' },
     { key: 'platform-overview', title: 'Platform Overview' },
@@ -148,6 +203,16 @@ const WhitepaperPage = () => {
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleJoinMovement = () => {
+    // Trigger the AuthSheet modal by programmatically clicking the button
+    if (authSheetRef.current) {
+      const button = authSheetRef.current.querySelector('button');
+      if (button) {
+        button.click();
+      }
+    }
   };
 
   return (
@@ -198,6 +263,11 @@ const WhitepaperPage = () => {
                 Download PDF
               </button>
             </div>
+          </div>
+
+          {/* Hero Graphics Overlay */}
+          <div className="absolute top-1/2 left-0 right-0 bottom-0 z-0">
+            <HeroGraphics />
           </div>
         </section>
 
@@ -437,7 +507,7 @@ const WhitepaperPage = () => {
                 
                 <div className="p-4 rounded-lg bg-gradient-to-br from-purple-900/20 to-indigo-900/20 border border-purple-500/30 text-center">
                   <h4 className="text-purple-400 font-semibold mb-2">Compliance</h4>
-                  <p className="text-gray-400 text-sm">All redemptions are subject to KYC verification and compliance review</p>
+                  <p className="text-gray-400 text-sm">All redemptions may be subject to KYC verification and compliance review</p>
                 </div>
               </div>
             </section>
@@ -496,11 +566,13 @@ const WhitepaperPage = () => {
               </h2>
               <div className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 border border-gray-700/50 rounded-lg p-8 backdrop-blur-sm text-center">
                 <p className="text-gray-300 text-lg mb-4">
-                  Visit <span className="text-purple-400 font-semibold">https://avie.live/docs/roadmap</span> for a full breakdown of current and upcoming product phases.
+                  Visit <span className="text-purple-400 font-semibold">https://avie.live/roadmap</span> for a full breakdown of current and upcoming product phases.
                 </p>
-                <button className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold transition-all duration-300 transform hover:scale-105">
-                  View Full Roadmap
-                </button>
+                <Link href="/roadmap">
+                  <button className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold transition-all duration-300 transform hover:scale-105">
+                    View Full Roadmap
+                  </button>
+                </Link>
               </div>
             </section>
 
@@ -523,7 +595,7 @@ const WhitepaperPage = () => {
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-red-400 rounded-full mt-2" />
-                    <p className="text-gray-300">AVIE complies with applicable KYC/AML and international regulatory standards</p>
+                    <p className="text-gray-300">AVIE complies with applicable international regulatory standards</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-red-400 rounded-full mt-2" />
@@ -561,14 +633,19 @@ const WhitepaperPage = () => {
                   </p>
                   
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105">
+                    <button
+                      onClick={handleJoinMovement}
+                      className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                    >
                       <RocketOutlined className="mr-2" />
                       Join the Movement
                     </button>
-                    <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg transition-all duration-300">
-                      <TeamOutlined className="mr-2" />
-                      Join Community
-                    </button>
+                    <Link href="/community">
+                      <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg transition-all duration-300">
+                        <TeamOutlined className="mr-2" />
+                        Join Community
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -589,6 +666,13 @@ const WhitepaperPage = () => {
       </main>
 
       <Footer />
+      
+      {/* Hidden AuthSheet for programmatic triggering */}
+      <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}>
+        <div ref={authSheetRef}>
+          <AuthSheet />
+        </div>
+      </div>
     </div>
   );
 };
