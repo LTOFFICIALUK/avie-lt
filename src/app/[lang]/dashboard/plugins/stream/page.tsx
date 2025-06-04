@@ -216,7 +216,7 @@ const StreamPage = () => {
             <FiVideo className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold text-white mb-4">
-            Stream
+            Go Live
           </h1>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Get your stream key to start broadcasting live on our platform. Connect with OBS, Streamlabs, or any RTMP-compatible streaming software.

@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Button, message } from "antd";
 import { CloseOutlined, MenuUnfoldOutlined, MenuFoldOutlined, CopyOutlined } from "@ant-design/icons";
+import TabSwitcher from "./TabSwitcher";
 
 // Define a proper type for menu items
 interface MenuItem {
@@ -50,7 +51,7 @@ const SideMenu = ({ items, onClose, collapsed = false, onToggleCollapse }: Props
         overflow-hidden
       `}
     >
-      <div className="mb-6 flex justify-between items-center min-h-[40px]">
+      <div className="mb-2 flex justify-between items-center min-h-[40px]">
         <div 
           className={`
             transition-opacity duration-300 ease-in-out
@@ -93,6 +94,11 @@ const SideMenu = ({ items, onClose, collapsed = false, onToggleCollapse }: Props
             </Button>
           )}
         </div>
+      </div>
+
+      {/* Tab Switcher */}
+      <div className="mb-0">
+        <TabSwitcher collapsed={collapsed} />
       </div>
 
       {items.map((item, index) => (

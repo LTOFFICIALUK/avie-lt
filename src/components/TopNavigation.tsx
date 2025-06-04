@@ -6,6 +6,7 @@ import {
   HomeOutlined,
   MenuOutlined,
   SearchOutlined,
+  SettingOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { useParams, usePathname, useRouter } from "next/navigation";
@@ -94,25 +95,6 @@ export function TopNavigation({ onOpenSidebar }: TopNavigationProps) {
       <>
         {isAuthenticated ? (
           <>
-            {/* Dashboard/Home button - hidden on mobile */}
-            {!isSmallScreen && (
-              pathname.includes("/dashboard") ? (
-                <Button type="primary">
-                  <Link href={`/${lang}`}>
-                    <HomeOutlined className="w-6 h-6" />
-                    Home
-                  </Link>
-                </Button>
-              ) : (
-                <Button type="primary">
-                  <Link href={`/${lang}/dashboard`}>
-                    <DashboardOutlined className="w-6 h-6" />
-                    Dashboard
-                  </Link>
-                </Button>
-              )
-            )}
-            
             {/* Mobile search button moved next to notifications */}
             {isSmallScreen && (
               <Button 
@@ -123,6 +105,23 @@ export function TopNavigation({ onOpenSidebar }: TopNavigationProps) {
                 style={{ border: "none", background: "transparent", padding: 0 }}
               />
             )}
+            
+            {/* Settings Button */}
+            <Link href={`/${lang}/dashboard/settings`}>
+              <Button 
+                type="text" 
+                icon={<SettingOutlined style={{ fontSize: 24 }} />} 
+                className="flex items-center justify-center text-white hover:bg-[var(--color-gray)]/20 rounded-lg transition-all duration-200"
+                style={{ 
+                  border: "none", 
+                  background: "transparent", 
+                  width: 48, 
+                  height: 48,
+                  padding: 0
+                }}
+                title="Settings"
+              />
+            </Link>
             
             {/*<Badge count={5} size="small">
               <BellOutlined style={{ fontSize: 22 }} />

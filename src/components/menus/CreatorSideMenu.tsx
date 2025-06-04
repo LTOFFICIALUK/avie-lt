@@ -64,6 +64,7 @@ const CreatorMenu = ({ onClose, collapsed = false, onToggleCollapse }: Props) =>
       label: "Playlist",
       icon: PlayCircleOutlined,
       href: "/dashboard/content/playlist",
+      badge: "Coming Soon",
     },
   ];
 
@@ -91,6 +92,7 @@ const CreatorMenu = ({ onClose, collapsed = false, onToggleCollapse }: Props) =>
           icon={route.icon}
           active={pathname.endsWith(`${route.href}`)}
           collapsed={collapsed}
+          badge={route.badge}
         />
       )),
     },
