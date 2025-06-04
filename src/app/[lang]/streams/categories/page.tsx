@@ -100,6 +100,9 @@ export default function CategoriesPage() {
             />
           </div>
 
+          {/* Divider Line */}
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent mb-6"></div>
+
           {isLoading ? (
             <div className="flex items-center justify-center py-16">
               <Spin

@@ -1,14 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Typography, Button, Select, Empty, Pagination, Spin, message } from 'antd';
-import { PlusOutlined, ScissorOutlined } from '@ant-design/icons';
 import { ClipCard, ClipCardSkeleton } from '@/components/stream/ClipCard';
 import { api } from '@/lib/api';
+import { useToast } from '@/providers/ToastProvider';
 import Link from 'next/link';
-
-const { Title, Text } = Typography;
-const { Option } = Select;
 
 interface Clip {
   id: string;
@@ -19,11 +15,13 @@ interface Clip {
   viewCount: number;
   createdAt: string;
   streamer: {
+    id: string;
     displayName: string;
     avatarUrl?: string;
     isVerified?: boolean;
   };
   clipper: {
+    id: string;
     displayName: string;
     avatarUrl?: string;
     isVerified?: boolean;
@@ -43,6 +41,12 @@ interface ClipsResponse {
   };
 }
 
+const sortOptions = [
+  { value: 'recent', label: 'Most Recent' },
+  { value: 'views', label: 'Most Viewed' },
+  { value: 'duration', label: 'Longest' },
+];
+
 export default function ClipsPage() {
   const [clips, setClips] = useState<Clip[]>([]);
   const [loading, setLoading] = useState(true);
@@ -50,6 +54,7 @@ export default function ClipsPage() {
   const [totalClips, setTotalClips] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [sortBy, setSortBy] = useState('recent');
+  const toast = useToast();
 
   const fetchClips = async (page: number = 1, sort: string = 'recent') => {
     try {
@@ -66,9 +71,9 @@ export default function ClipsPage() {
     } catch (error: any) {
       console.error('Error fetching clips:', error);
       if (error.response?.status === 401) {
-        message.error('Please log in to view your clips');
+        toast.error('Please log in to view your clips');
       } else {
-        message.error('Failed to load clips');
+        toast.error('Failed to load clips');
       }
     } finally {
       setLoading(false);
@@ -81,7 +86,7 @@ export default function ClipsPage() {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    fetchClips(page, sortBy);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSortChange = (value: string) => {
@@ -90,66 +95,129 @@ export default function ClipsPage() {
     fetchClips(1, value);
   };
 
+  const formatNumber = (num: number) => {
+    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
+    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    return num.toString();
+  };
+
+  const currentSort = sortOptions.find(option => option.value === sortBy);
+
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--background)' }}>
+    <div className="min-h-screen text-white" style={{ backgroundColor: 'var(--background)' }}>
+      {/* Header Section */}
       <div className="max-w-7xl mx-auto px-4 py-6">
-        {/* Header */}
+        {/* Breadcrumbs */}
+        <div className="flex items-center gap-2 mb-4">
+          <Link href="/clips/discover" className="text-gray-400 hover:text-white transition-colors">
+            Clips
+          </Link>
+        </div>
+
+        {/* Title and Actions */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <div>
-            <Title level={1} style={{ color: 'var(--text-primary)', margin: 0, fontSize: '32px' }}>
+            <h1 className="text-3xl font-bold text-white mb-2">
               My Clips
-            </Title>
-            <Text style={{ color: 'var(--text-secondary)', fontSize: '16px' }}>
+            </h1>
+            <p className="text-gray-400">
               Manage and view your created clips
-            </Text>
+            </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* Sort dropdown */}
-            <Select
-              value={sortBy}
-              onChange={handleSortChange}
-              style={{ width: 140 }}
-              size="large"
-            >
-              <Option value="recent">Most Recent</Option>
-              <Option value="views">Most Viewed</Option>
-              <Option value="duration">Longest</Option>
-            </Select>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+            {/* Sort Dropdown */}
+            <div className="relative">
+              <select
+                value={sortBy}
+                onChange={(e) => handleSortChange(e.target.value)}
+                className="appearance-none bg-gray-800/50 border border-gray-600/50 rounded-lg px-4 py-2 pr-10 text-white focus:outline-none focus:border-[var(--color-brand)] cursor-pointer transition-all duration-200 hover:bg-gray-800/70 text-sm"
+                style={{ 
+                  '--focus-border-color': 'var(--color-brand)' 
+                } as React.CSSProperties}
+              >
+                {sortOptions.map((option) => (
+                  <option key={option.value} value={option.value} className="bg-gray-800">
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
 
-            {/* Create clip button */}
+            {/* Create Clip Button */}
             <Link href="/browse">
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-                size="large"
+              <button 
+                className="px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2 text-sm text-black"
                 style={{
                   backgroundColor: 'var(--color-brand)',
-                  borderColor: 'var(--color-brand)',
-                  height: '40px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-brand-darker)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-brand)';
                 }}
               >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
                 Create Clip
-              </Button>
+              </button>
             </Link>
           </div>
         </div>
 
-        {/* Stats */}
-        {!loading && (
-          <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: 'var(--color-gray)' }}>
-            <div className="flex items-center gap-6">
-              <div className="text-center">
-                <div className="text-2xl font-bold" style={{ color: 'var(--color-brand)' }}>
-                  {totalClips}
+        {/* Divider Line */}
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent mb-6"></div>
+
+        {/* Active Sort Indicator */}
+        {sortBy !== 'recent' && (
+          <div className="flex items-center gap-3 mb-6">
+            <span className="text-sm text-gray-400">Sorted by:</span>
+            <span 
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm"
+              style={{
+                backgroundColor: 'rgba(132, 238, 245, 0.2)',
+                color: 'var(--color-brand)'
+              }}
+            >
+              {currentSort?.label}
+            </span>
+          </div>
+        )}
+
+        {/* Stats Banner */}
+        {!loading && clips.length > 0 && (
+          <div className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-gray-700/50">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-8">
+                <div className="text-center">
+                  <div 
+                    className="text-2xl sm:text-3xl font-bold"
+                    style={{ color: 'var(--color-brand)' }}
+                  >
+                    {formatNumber(totalClips)}
+                  </div>
+                  <div className="text-sm text-gray-400">Total Clips</div>
                 </div>
-                <Text style={{ color: 'var(--text-secondary)' }}>Total Clips</Text>
+                <div className="text-center">
+                  <div 
+                    className="text-2xl sm:text-3xl font-bold"
+                    style={{ color: 'var(--color-brand)' }}
+                  >
+                    {formatNumber(clips.reduce((total, clip) => total + clip.viewCount, 0))}
+                  </div>
+                  <div className="text-sm text-gray-400">Total Views</div>
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold" style={{ color: 'var(--color-brand)' }}>
-                  {clips.reduce((total, clip) => total + clip.viewCount, 0).toLocaleString()}
-                </div>
-                <Text style={{ color: 'var(--text-secondary)' }}>Total Views</Text>
+              
+              <div className="text-sm text-gray-400">
+                Page {currentPage} of {totalPages}
               </div>
             </div>
           </div>
@@ -163,38 +231,41 @@ export default function ClipsPage() {
             ))}
           </div>
         ) : clips.length === 0 ? (
-          <div className="text-center py-16">
-            <ScissorOutlined 
-              style={{ 
-                fontSize: '64px', 
-                color: 'var(--text-secondary)', 
-                marginBottom: '16px' 
-              }} 
-            />
-            <Title level={2} style={{ color: 'var(--text-primary)', marginBottom: '8px' }}>
-              No clips yet
-            </Title>
-            <Text style={{ color: 'var(--text-secondary)', display: 'block', marginBottom: '24px' }}>
-              Start watching streams and create your first clip!
-            </Text>
+          <div className="text-center py-20">
+            <div className="mb-8">
+              <div className="text-6xl mb-4">✂️</div>
+              <h2 className="text-2xl font-bold text-white mb-2">
+                No clips yet
+              </h2>
+              <p className="text-gray-400 max-w-md mx-auto">
+                Start watching streams and create your first clip! Share your favorite moments with the community.
+              </p>
+            </div>
+            
             <Link href="/browse">
-              <Button
-                type="primary"
-                size="large"
-                icon={<PlusOutlined />}
+              <button 
+                className="px-6 py-3 rounded-lg font-medium transition-colors duration-200 inline-flex items-center gap-2 text-black"
                 style={{
                   backgroundColor: 'var(--color-brand)',
-                  borderColor: 'var(--color-brand)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-brand-darker)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-brand)';
                 }}
               >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
                 Browse Streams
-              </Button>
+              </button>
             </Link>
           </div>
         ) : (
           <>
             {/* Clips Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
               {clips.map((clip) => (
                 <ClipCard key={clip.id} clip={clip} />
               ))}
@@ -202,19 +273,60 @@ export default function ClipsPage() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex justify-center">
-                <Pagination
-                  current={currentPage}
-                  total={totalClips}
-                  pageSize={20}
-                  onChange={handlePageChange}
-                  showSizeChanger={false}
-                  showQuickJumper
-                  showTotal={(total, range) => 
-                    `${range[0]}-${range[1]} of ${total} clips`
-                  }
-                  className="custom-pagination"
-                />
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="text-sm text-gray-400">
+                  Showing {((currentPage - 1) * 20) + 1}-{Math.min(currentPage * 20, totalClips)} of {totalClips} clips
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors duration-200"
+                  >
+                    Previous
+                  </button>
+                  
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                      let pageNum;
+                      if (totalPages <= 5) {
+                        pageNum = i + 1;
+                      } else if (currentPage <= 3) {
+                        pageNum = i + 1;
+                      } else if (currentPage >= totalPages - 2) {
+                        pageNum = totalPages - 4 + i;
+                      } else {
+                        pageNum = currentPage - 2 + i;
+                      }
+                      
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => handlePageChange(pageNum)}
+                          className={`w-8 h-8 rounded-lg transition-colors duration-200 ${
+                            currentPage === pageNum
+                              ? 'font-medium text-black'
+                              : 'bg-gray-800 hover:bg-gray-700 text-white'
+                          }`}
+                          style={currentPage === pageNum ? {
+                            backgroundColor: 'var(--color-brand)'
+                          } : {}}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors duration-200"
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             )}
           </>

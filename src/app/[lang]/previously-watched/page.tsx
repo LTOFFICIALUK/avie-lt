@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { LeftOutlined } from '@ant-design/icons';
 import { formatDistanceToNow } from 'date-fns';
+import PreviouslyWatchedCard from './PreviouslyWatchedCard';
 
 interface WatchHistoryItem {
   id: string;
@@ -21,7 +22,11 @@ interface WatchHistoryItem {
     } | null;
     isLive?: boolean;
     viewerCount?: number;
-    category?: string;
+    category?: {
+      id: string;
+      name: string;
+      slug: string;
+    } | null;
   } | null;
   watchedAt: string;
   watchDuration: number | null;
@@ -51,6 +56,8 @@ const PreviouslyWatchedPage = () => {
       });
       
       if (response.data.status === 'success') {
+        console.log('Watch history response:', response.data.data);
+        console.log('First item:', response.data.data.watchHistory[0]);
         setWatchHistory(response.data.data.watchHistory);
       } else {
         setError('Failed to load watch history');
@@ -78,97 +85,9 @@ const PreviouslyWatchedPage = () => {
   const liveContent = watchHistory.filter(item => item.content?.isLive);
   const endedContent = watchHistory.filter(item => !item.content?.isLive);
 
-  const StreamCard = ({ item }: { item: WatchHistoryItem }) => {
-    if (!item.content) return null;
-
-    const linkHref = item.contentType === 'STREAM' 
-      ? `/watch/${item.content.id}` 
-      : `/clip/${item.content.id}`;
-
-    return (
-      <Link href={linkHref} className="group">
-        <div className="bg-zinc-900 rounded-lg overflow-hidden transition-transform hover:scale-105">
-          <div className="relative aspect-video">
-            {item.content.thumbnail ? (
-              <Image 
-                src={item.content.thumbnail} 
-                alt={item.content.title} 
-                fill
-                className="object-cover"
-              />
-            ) : (
-              <div className="bg-zinc-800 w-full h-full flex items-center justify-center">
-                <span className="text-zinc-500">No thumbnail</span>
-              </div>
-            )}
-            
-            {/* Live indicator */}
-            {item.content.isLive && (
-              <div className="absolute top-2 left-2 flex items-center space-x-1 bg-red-600 text-white text-xs px-2 py-1 rounded-md">
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                <span>LIVE</span>
-              </div>
-            )}
-            
-            {/* Viewer count */}
-            {item.content.viewerCount && (
-              <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-md">
-                👁 {formatViewerCount(item.content.viewerCount)}
-              </div>
-            )}
-          </div>
-          
-          <div className="p-3">
-            <div className="flex items-center space-x-2 mb-2">
-              {item.content.creator && (
-                <>
-                  <div className="relative w-6 h-6 rounded-full overflow-hidden bg-zinc-800 flex-shrink-0">
-                    {item.content.creator.avatarUrl ? (
-                      <Image
-                        src={item.content.creator.avatarUrl}
-                        alt={item.content.creator.displayName}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-zinc-700 flex items-center justify-center">
-                        <span className="text-xs text-zinc-400">
-                          {item.content.creator.displayName.charAt(0).toUpperCase()}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  <span className="text-sm text-zinc-300 truncate">
-                    {item.content.creator.displayName}
-                  </span>
-                  {item.content.isLive && (
-                    <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
-                  )}
-                </>
-              )}
-            </div>
-            
-            <h3 className="text-white font-medium text-sm mb-1 line-clamp-2 leading-tight">
-              {item.content.title}
-            </h3>
-            
-            <div className="flex items-center justify-between text-xs text-zinc-400">
-              <span>{item.content.category || 'Gaming'}</span>
-              {!item.content.isLive && (
-                <span>
-                  {formatDistanceToNow(new Date(item.watchedAt), { addSuffix: true })}
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-      </Link>
-    );
-  };
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-zinc-950 text-white">
+      <div className="min-h-screen text-white">
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
@@ -180,7 +99,7 @@ const PreviouslyWatchedPage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-zinc-950 text-white">
+      <div className="min-h-screen text-white">
         <div className="container mx-auto px-4 py-8">
           <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-4 text-red-400">
             {error}
@@ -191,26 +110,15 @@ const PreviouslyWatchedPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+    <div className="min-h-screen text-white">
       <div className="container mx-auto px-4 py-6">
-        {/* Header */}
-        <div className="flex items-center space-x-4 mb-8">
-          <Link href="/" className="p-2 hover:bg-zinc-800 rounded-lg transition-colors">
-            <LeftOutlined className="w-5 h-5 text-zinc-400" />
-          </Link>
-          <div>
-            <span className="text-zinc-400 text-sm">Following</span>
-            <h1 className="text-2xl font-bold text-white">Following</h1>
-          </div>
-        </div>
-
         {/* Live Now Section */}
         {liveContent.length > 0 && (
           <div className="mb-12">
             <h2 className="text-xl font-semibold text-white mb-6">Live Now</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {liveContent.map((item) => (
-                <StreamCard key={item.id} item={item} />
+                <PreviouslyWatchedCard key={item.id} item={item} formatViewerCount={formatViewerCount} />
               ))}
             </div>
           </div>
@@ -219,10 +127,14 @@ const PreviouslyWatchedPage = () => {
         {/* Ended Streams Section */}
         {endedContent.length > 0 && (
           <div>
-            <h2 className="text-xl font-semibold text-white mb-6">Ended Streams</h2>
+            {/* Section Header with Divider */}
+            <div className="w-full mb-6">
+              <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent mb-6"></div>
+              <h2 className="text-xl font-semibold text-white mb-6">Ended Streams</h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {endedContent.map((item) => (
-                <StreamCard key={item.id} item={item} />
+                <PreviouslyWatchedCard key={item.id} item={item} formatViewerCount={formatViewerCount} />
               ))}
             </div>
           </div>
