@@ -22,6 +22,7 @@ import {
   UsergroupAddOutlined,
   CrownOutlined,
   DiscordOutlined,
+  CheckCircleOutlined,
 } from "@ant-design/icons";
 
 const SOCIAL_PLATFORMS = [
@@ -271,8 +272,14 @@ const CommunityPage = () => {
                       <div className="grid grid-cols-2 gap-2 mb-6">
                         {platform.features.map((feature, featureIndex) => (
                           <div key={featureIndex} className="flex items-center">
-                            <div className={`w-2 h-2 ${platform.textColor.replace('text-', 'bg-')} rounded-full mr-2`} />
-                            <span className="text-sm text-gray-400">{feature}</span>
+                            <span className={`mr-3 flex-shrink-0 text-lg font-bold ${
+                              platform.name === 'Discord' ? 'text-indigo-400' :
+                              platform.name === 'Telegram' ? 'text-blue-400' :
+                              platform.name === "AVIE's X" ? 'text-gray-400' :
+                              platform.name === 'Founder X' ? 'text-amber-400' :
+                              'text-purple-400'
+                            }`}>•</span>
+                            <span className="text-sm text-gray-300">{feature}</span>
                           </div>
                         ))}
                       </div>
