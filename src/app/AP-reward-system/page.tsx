@@ -227,37 +227,39 @@ const APRewardsPage = () => {
         </div>
 
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-          <div className="relative z-10 text-center max-w-6xl mx-auto">
-            <div className="mb-6">
-              <span className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-sm font-medium text-purple-300 mb-6">
-                <TrophyOutlined className="mr-2" />
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 text-center w-full max-w-none">
+            <div className="mb-8 lg:mb-12">
+              <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-base lg:text-lg font-medium text-purple-300 mb-8">
+                <TrophyOutlined className="mr-3 text-lg lg:text-xl" />
                 Earn While You Engage
               </span>
             </div>
             
-            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-8 lg:mb-12 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight px-4">
               AVIE Points System
             </h1>
             
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-300 mb-12 lg:mb-16 max-w-6xl mx-auto leading-relaxed px-4">
               Turn your engagement into earnings. Watch, stream, chat, and earn{" "}
               <span className="text-purple-400 font-bold">AVIE Points (AP)</span> that convert directly to{" "}
               <span className="text-green-400 font-bold">$SOL</span> tokens bi-weekly.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-6 lg:gap-8 justify-center items-center mb-16 lg:mb-20">
               <button 
                 onClick={handleJoinNow}
-                className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300 transform hover:scale-105"
               >
-                <RocketOutlined className="mr-2" />
+                <RocketOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
                 Start Earning Now
               </button>
             </div>
 
             {/* Hero Graphics */}
-            <HeroGraphics />
+            <div className="scale-75 sm:scale-90 md:scale-100 lg:scale-110 xl:scale-125 2xl:scale-150">
+              <HeroGraphics />
+            </div>
           </div>
         </section>
 
@@ -444,14 +446,14 @@ const APRewardsPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={handleJoinNow}
-                  className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                  className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300 transform hover:scale-105"
                 >
-                  <RocketOutlined className="mr-2" />
+                  <RocketOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
                   Start Earning Today
                 </button>
                 <Link href="/dashboard">
-                  <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg transition-all duration-300">
-                    <TrophyOutlined className="mr-2" />
+                  <button className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300">
+                    <TrophyOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
                     View Dashboard
                   </button>
                 </Link>

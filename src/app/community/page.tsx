@@ -192,7 +192,7 @@ const CommunityPage = () => {
 
       <main className="overflow-x-hidden pt-12 md:pt-14 lg:pt-16">
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20 pointer-events-none" />
           
           {/* Background Pattern */}
@@ -201,29 +201,29 @@ const CommunityPage = () => {
             <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full blur-3xl"></div>
           </div>
           
-          <div className="relative z-10 text-center max-w-6xl mx-auto">
-            <div className="mb-6">
-              <span className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-sm font-medium text-purple-300 mb-6">
-                <TeamOutlined className="mr-2 text-white" />
+          <div className="relative z-10 text-center w-full max-w-none">
+            <div className="mb-8 lg:mb-12">
+              <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-base lg:text-lg font-medium text-purple-300 mb-8">
+                <TeamOutlined className="mr-3 text-lg lg:text-xl text-white" />
                 Join AVIE Community Members
               </span>
             </div>
             
-            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-8 lg:mb-12 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight px-4">
               Connect. Share. Grow.
             </h1>
             
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-300 mb-12 lg:mb-16 max-w-6xl mx-auto leading-relaxed px-4">
               Join the vibrant <span className="text-[var(--color-brand)] font-bold">AVIE</span> community across multiple platforms. 
               Connect with creators, viewers, and blockchain enthusiasts from around the world.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-6 lg:gap-8 justify-center items-center mb-16 lg:mb-20">
               <Button 
                 type="primary" 
                 size="large"
                 icon={<DiscordOutlined />}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 border-0 hover:from-purple-700 hover:to-blue-700 h-12 px-6 text-lg font-semibold"
+                className="bg-gradient-to-r from-purple-600 to-blue-600 border-0 hover:from-purple-700 hover:to-blue-700 h-14 lg:h-16 xl:h-18 px-8 lg:px-12 text-lg lg:text-xl xl:text-2xl font-semibold"
                 onClick={() => handleJoinCommunity("https://discord.gg/gpWuwPpWxp")}
               >
                 Join Discord
@@ -231,7 +231,7 @@ const CommunityPage = () => {
               <Button 
                 size="large"
                 icon={<SendOutlined />}
-                className="border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 h-12 px-6 text-lg"
+                className="border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 h-14 lg:h-16 xl:h-18 px-8 lg:px-12 text-lg lg:text-xl xl:text-2xl"
                 onClick={() => handleJoinCommunity("https://t.me/+ADEbvu_yTFs1ZTI0")}
               >
                 Join Telegram
@@ -239,7 +239,9 @@ const CommunityPage = () => {
             </div>
 
             {/* Community Graphics */}
-            <CommunityGraphics />
+            <div className="scale-75 sm:scale-90 md:scale-100 lg:scale-110 xl:scale-125 2xl:scale-150">
+              <CommunityGraphics />
+            </div>
           </div>
         </section>
 
@@ -348,7 +350,7 @@ const CommunityPage = () => {
                   type="primary" 
                   size="large"
                   icon={<DiscordOutlined />}
-                  className="bg-gradient-to-r from-indigo-600 to-purple-600 border-0 hover:from-indigo-700 hover:to-purple-700 h-12 px-8 text-lg font-semibold"
+                  className="bg-gradient-to-r from-indigo-600 to-purple-600 border-0 hover:from-indigo-700 hover:to-purple-700 h-14 lg:h-16 xl:h-18 px-8 lg:px-12 text-lg lg:text-xl xl:text-2xl font-semibold"
                   onClick={() => handleJoinCommunity("https://discord.gg/gpWuwPpWxp")}
                 >
                   Join Discord Now
@@ -356,7 +358,7 @@ const CommunityPage = () => {
                 <Button 
                   size="large"
                   icon={<SendOutlined />}
-                  className="border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 h-12 px-8 text-lg"
+                  className="border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 h-14 lg:h-16 xl:h-18 px-8 lg:px-12 text-lg lg:text-xl xl:text-2xl"
                   onClick={() => handleJoinCommunity("https://t.me/+ADEbvu_yTFs1ZTI0")}
                 >
                   Join Telegram

@@ -231,35 +231,35 @@ const WhitepaperPage = () => {
         </div>
 
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-          <div className="relative z-10 text-center max-w-6xl mx-auto">
-            <div className="mb-6">
-              <span className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-sm font-medium text-purple-300 mb-6">
-                <FileTextOutlined className="mr-2" />
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 text-center w-full max-w-none">
+            <div className="mb-8 lg:mb-12">
+              <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-base lg:text-lg font-medium text-purple-300 mb-8">
+                <FileTextOutlined className="mr-3 text-lg lg:text-xl" />
                 Official Whitepaper
               </span>
             </div>
             
-            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-8 lg:mb-12 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight px-4">
               AVIE Whitepaper
             </h1>
             
-            <p className="text-lg sm:text-xl text-gray-400 mb-8">
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-400 mb-12 lg:mb-16 max-w-4xl mx-auto px-4">
               Technical documentation and platform overview
             </p>
 
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <span className="px-3 py-1 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 text-sm">
+            <div className="flex items-center justify-center gap-6 lg:gap-8 mb-12 lg:mb-16">
+              <span className="px-4 lg:px-6 py-2 lg:py-3 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 text-base lg:text-lg xl:text-xl">
                 Last Updated: 05/17/2025
               </span>
-              <span className="px-3 py-1 rounded-full bg-purple-600/20 border border-purple-500/30 text-purple-400 text-sm">
+              <span className="px-4 lg:px-6 py-2 lg:py-3 rounded-full bg-purple-600/20 border border-purple-500/30 text-purple-400 text-base lg:text-lg xl:text-xl">
                 Version 1.0
               </span>
             </div>
             
-            <div className="flex justify-center">
-              <button className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105">
-                <DownloadOutlined className="mr-2" />
+            <div className="flex justify-center mb-16 lg:mb-20">
+              <button className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300 transform hover:scale-105">
+                <DownloadOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
                 Download PDF
               </button>
             </div>
@@ -267,7 +267,9 @@ const WhitepaperPage = () => {
 
           {/* Hero Graphics Overlay */}
           <div className="absolute top-1/2 left-0 right-0 bottom-0 z-0">
-            <HeroGraphics />
+            <div className="scale-75 sm:scale-90 md:scale-100 lg:scale-110 xl:scale-125 2xl:scale-150">
+              <HeroGraphics />
+            </div>
           </div>
         </section>
 
@@ -635,14 +637,14 @@ const WhitepaperPage = () => {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
                       onClick={handleJoinMovement}
-                      className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                      className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300 transform hover:scale-105"
                     >
-                      <RocketOutlined className="mr-2" />
+                      <RocketOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
                       Join the Movement
                     </button>
                     <Link href="/community">
-                      <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg transition-all duration-300">
-                        <TeamOutlined className="mr-2" />
+                      <button className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300">
+                        <TeamOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
                         Join Community
                       </button>
                     </Link>

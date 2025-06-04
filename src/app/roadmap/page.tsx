@@ -513,26 +513,28 @@ const RoadmapPage = () => {
         </div>
 
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
-          <div className="relative z-10 text-center max-w-6xl mx-auto -mt-20">
-            <div className="mb-6">
-              <span className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-sm font-medium text-purple-300 mb-6">
-                <RocketOutlined className="mr-2" />
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
+          <div className="relative z-10 text-center w-full max-w-none -mt-20">
+            <div className="mb-8 lg:mb-12">
+              <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-base lg:text-lg font-medium text-purple-300 mb-8">
+                <RocketOutlined className="mr-3 text-lg lg:text-xl" />
                 AVIE 2025 Development Roadmap
               </span>
             </div>
             
-            <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-8 lg:mb-12 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight px-4">
               Building the Future of Streaming
             </h1>
             
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-300 mb-12 lg:mb-16 max-w-6xl mx-auto leading-relaxed px-4">
               Our comprehensive roadmap outlines the exciting features and improvements coming to the{" "}
               <span className="text-[var(--color-brand)] font-bold">AVIE</span> platform throughout 2025.
             </p>
 
             {/* Hero Graphics */}
-            <HeroGraphics />
+            <div className="scale-75 sm:scale-90 md:scale-100 lg:scale-110 xl:scale-125 2xl:scale-150">
+              <HeroGraphics />
+            </div>
           </div>
         </section>
 
@@ -589,20 +591,20 @@ const RoadmapPage = () => {
                 <button
                   type="button"
                   onClick={handleGetStarted}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 border-0 hover:from-purple-700 hover:to-blue-700 h-12 px-8 text-lg font-semibold rounded-full text-white flex items-center justify-center gap-2 shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 border-0 hover:from-purple-700 hover:to-blue-700 h-14 lg:h-16 xl:h-18 px-8 lg:px-12 text-lg lg:text-xl xl:text-2xl font-semibold rounded-full text-white flex items-center justify-center gap-3 shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
                   aria-label="Get Started"
                   tabIndex={0}
                 >
-                  <RocketOutlined /> Get Started
+                  <RocketOutlined className="text-lg lg:text-xl xl:text-2xl" /> Get Started
                 </button>
                 <Link href="/community">
                   <button
                     type="button"
-                    className="border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 h-12 px-8 text-lg rounded-full flex items-center justify-center gap-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    className="border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 h-14 lg:h-16 xl:h-18 px-8 lg:px-12 text-lg lg:text-xl xl:text-2xl rounded-full flex items-center justify-center gap-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
                     aria-label="Join Community"
                     tabIndex={0}
                   >
-                    <MessageOutlined /> Join Community
+                    <MessageOutlined className="text-lg lg:text-xl xl:text-2xl" /> Join Community
                   </button>
                 </Link>
               </div>
