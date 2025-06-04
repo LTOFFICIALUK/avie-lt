@@ -85,9 +85,9 @@ const FollowingPage = () => {
     return count.toString();
   };
 
-  // Separate live creators from offline creators
+  // Show all creators in the followed creators grid regardless of live status
   const liveCreators = creators.filter(creator => creator.isLive);
-  const offlineCreators = creators.filter(creator => !creator.isLive);
+  const allFollowedCreators = creators; // Show all creators in followed section
 
   if (loading) {
     return (
@@ -126,6 +126,9 @@ const FollowingPage = () => {
         </div>
       ) : (
         <div className="space-y-12">
+          {/* Divider Line */}
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent mb-6"></div>
+
           {/* Live Now Section */}
           {liveCreators.length > 0 && (
             <section>
@@ -134,9 +137,6 @@ const FollowingPage = () => {
                 <div className="flex items-center space-x-3">
                   <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
                   <h2 className="text-2xl font-bold text-white">Live Now</h2>
-                  <span className="text-sm text-gray-400 bg-red-500/10 px-2 py-1 rounded-full">
-                    {liveCreators.length} live
-                  </span>
                 </div>
               </div>
 
@@ -180,11 +180,11 @@ const FollowingPage = () => {
                     </Link>
 
                     {/* Stream Info */}
-                    <div className="mt-3 space-y-2">
+                    <div className="mt-3 space-y-3">
                       {/* Category */}
                       {creator.stream?.category && (
                         <Link href={`/${lang}/category/${creator.stream.category.slug}`}>
-                          <p className="text-purple-400 text-xs font-medium uppercase tracking-wide hover:text-purple-300 transition-colors">
+                          <p className="text-white text-xs font-medium uppercase tracking-wide hover:text-gray-300 transition-colors">
                             {creator.stream.category.name}
                           </p>
                         </Link>
@@ -192,42 +192,39 @@ const FollowingPage = () => {
 
                       {/* Stream Title */}
                       <Link href={`/${lang}/streams/${creator.displayName}`}>
-                        <h3 className="text-white text-sm font-semibold line-clamp-2 leading-tight hover:text-purple-300 transition-colors cursor-pointer">
+                        <h3 className="mt-1 text-white text-sm font-semibold line-clamp-2 leading-tight hover:text-purple-300 transition-colors cursor-pointer">
                           {creator.stream?.title || "Live Stream"}
                         </h3>
                       </Link>
 
                       {/* Creator Info */}
-                      <div className="flex items-center justify-between">
-                        <Link href={`/${lang}/profile/${creator.displayName}`} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-                          <div className="w-6 h-6 rounded-full overflow-hidden border border-gray-600">
-                            {creator.avatarUrl ? (
-                              <Image
-                                src={creator.avatarUrl}
-                                alt={creator.displayName}
-                                width={24}
-                                height={24}
-                                className="object-cover"
-                              />
-                            ) : (
-                              <div className="w-full h-full flex items-center justify-center text-gray-400">
-                                {creator.displayName.charAt(0).toUpperCase()}
-                              </div>
-                            )}
-                          </div>
-                          <span className="text-gray-300 text-xs font-medium">{creator.displayName}</span>
-                        </Link>
-
-                        {/* Follower Count */}
-                        <p className="text-gray-400 text-xs mb-1">
-                          {creator.followers ? formatFollowers(creator.followers) : '0'} followers
-                        </p>
+                      <div className="flex items-start justify-between pt-2">
+                        <div className="flex-1">
+                          <Link href={`/${lang}/profile/${creator.displayName}`} className="flex items-center space-x-2 hover:opacity-80 transition-opacity mb-1">
+                            <div className="w-6 h-6 rounded-full overflow-hidden border border-gray-600 flex-shrink-0">
+                              {creator.avatarUrl ? (
+                                <Image
+                                  src={creator.avatarUrl}
+                                  alt={creator.displayName}
+                                  width={24}
+                                  height={24}
+                                  className="object-cover"
+                                />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center text-gray-400">
+                                  {creator.displayName.charAt(0).toUpperCase()}
+                                </div>
+                              )}
+                            </div>
+                            <span className="text-gray-300 text-base font-medium">{creator.displayName}</span>
+                          </Link>
+                        </div>
 
                         <Button 
                           onClick={() => handleUnfollow(creator.id, creator.displayName)}
                           icon={<UserDeleteOutlined />}
                           size="small"
-                          className="bg-gray-800/50 hover:bg-red-600 text-gray-300 hover:text-white border border-gray-600/50 hover:border-red-600 transition-all duration-200 text-xs h-7 px-3 rounded-md"
+                          className="bg-gray-800/50 hover:bg-red-600 text-gray-300 hover:text-white border border-gray-600/50 hover:border-red-600 transition-all duration-200 text-xs h-7 px-3 rounded-md flex-shrink-0"
                           title="Unfollow"
                         >
                           Unfollow
@@ -240,23 +237,25 @@ const FollowingPage = () => {
             </section>
           )}
 
+          {/* Divider Line */}
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent mb-6"></div>
+
           {/* Followed Creators Section */}
-          {offlineCreators.length > 0 && (
+          {allFollowedCreators.length > 0 && (
             <section>
-              {/* Section Header with Divider */}
+              {/* Section Header */}
               <div className="w-full mb-6">
-                <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent mb-6"></div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-white">Followed Creators</h2>
                   <span className="text-sm text-gray-400">
-                    {offlineCreators.length} offline
+                    {allFollowedCreators.length} creators
                   </span>
                 </div>
               </div>
 
               {/* Followed Creators Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-0">
-                {offlineCreators.map((creator) => (
+                {allFollowedCreators.map((creator) => (
                   <div key={creator.id} className="group flex flex-col items-center text-center p-2">
                     {/* Circular Avatar */}
                     <Link href={`/${lang}/profile/${creator.displayName}`}>

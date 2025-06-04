@@ -7,4 +7,5 @@ export interface Plugin {
   isActive?: boolean;
   isLoading?: boolean;
   isRedeploying?: boolean;
+  comingSoon?: boolean;
 }

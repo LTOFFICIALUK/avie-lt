@@ -47,10 +47,23 @@ const SideMenu = ({ items, onClose, collapsed = false, onToggleCollapse }: Props
         text-md font-medium p-5 pt-8 
         bg-[var(--background)] text-[var(--text-secondary)] 
         transition-all duration-300 ease-in-out
-        border-r border-gray-600/40
         overflow-hidden
+        relative
       `}
+      style={{
+        transform: 'scale(0.9)',
+        transformOrigin: 'top left'
+      }}
     >
+      {/* Full height border */}
+      <div 
+        className="absolute top-0 right-0 w-px h-screen bg-gray-600/40"
+        style={{
+          transform: 'translateX(calc(100% / 0.9))',
+          transformOrigin: 'top left'
+        }}
+      />
+      
       <div className="mb-2 flex justify-between items-center min-h-[40px]">
         <div 
           className={`

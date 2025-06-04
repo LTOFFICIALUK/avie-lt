@@ -296,7 +296,7 @@ export default function RootPage() {
         </div>
 
         {/* Featured Streams Section */}
-        <div className="w-full px-4 mt-8">
+        <div className="w-full px-4 mt-2">
           <FeaturedStreams
             streams={featuredStreams}
             className="max-w-7xl mx-auto"

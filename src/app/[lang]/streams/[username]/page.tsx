@@ -57,6 +57,25 @@ export default function StreamPage({ params }: StreamPageProps) {
   // Check if current user is the streamer
   const isCurrentUserStreamer = user?.displayName === username;
 
+  // Function to check subscription status
+  const checkSubscriptionStatus = async () => {
+    // Skip subscription check if user is viewing their own stream
+    if (isCurrentUserStreamer) {
+      setIsSubscribed(false);
+      return false;
+    }
+    
+    try {
+      const subscriptionResponse = await api.get(`/api/profile/subscribe/status/${username}`);
+      setIsSubscribed(subscriptionResponse.data.isSubscribed || false);
+      return subscriptionResponse.data.isSubscribed || false;
+    } catch (error: any) {
+      console.error('Error checking subscription status:', error);
+      setIsSubscribed(false);
+      return false;
+    }
+  };
+
   // Function to fetch all required data
   const fetchAllData = async () => {
     try {
@@ -81,20 +100,15 @@ export default function StreamPage({ params }: StreamPageProps) {
         //
       }
       
-      // Fetch streamer info
-      const streamerResponse = await api.get(`/api/profile/${username}`);
+      // Fetch streamer info and subscription status in parallel
+      const [streamerResponse] = await Promise.all([
+        api.get(`/api/profile/${username}`),
+        checkSubscriptionStatus() // Use the dedicated function
+      ]);
+      
       const streamerData = streamerResponse.data.data || streamerResponse.data;
       if (streamerData) {
         setStreamerInfo(streamerData);
-        
-        // Check subscription status using a GET request
-        try {
-          const subscriptionResponse = await api.get(`/api/profile/subscribe/status/${username}`);
-          setIsSubscribed(subscriptionResponse.data.isSubscribed || false);
-        } catch (error: any) {
-          console.error('Error checking subscription status:', error);
-          setIsSubscribed(false);
-        }
       }
     } catch (err) {
       console.error('Error fetching data:', err);
@@ -112,16 +126,24 @@ export default function StreamPage({ params }: StreamPageProps) {
       } else {
         await api.post(`/api/profile/subscribe/${username}`);
       }
-      setIsSubscribed(!isSubscribed);
+      
+      // Instead of just toggling the local state, re-fetch the subscription status from server
+      // to ensure consistency
+      const [streamerResponse] = await Promise.all([
+        api.get(`/api/profile/${username}`),
+        checkSubscriptionStatus() // Use the dedicated function
+      ]);
       
       // Update streamer info to reflect new follower count
-      const streamerResponse = await api.get(`/api/profile/${username}`);
       const streamerData = streamerResponse.data.data || streamerResponse.data;
       if (streamerData) {
         setStreamerInfo(streamerData);
       }
+      
     } catch (error) {
       console.error('Error updating subscription:', error);
+      // On error, re-fetch the current subscription status to ensure UI is accurate
+      await checkSubscriptionStatus();
     } finally {
       setIsSubscribing(false);
     }

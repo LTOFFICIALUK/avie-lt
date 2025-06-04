@@ -31,26 +31,26 @@ import PasswordReset from "../auth/PasswordReset";
 const FEATURES = [
   {
     icon: PlayCircleOutlined,
-    title: "Stream & Earn",
-    description: "Go live and earn $SOL tokens based on viewer engagement, watch time, and content quality.",
+    title: "Rewarding Streamers",
+    description: "Go live and be rewarded with AP Rewards based on a wide range of engagement metrics.",
     color: "text-blue-400"
   },
   {
     icon: DollarOutlined,
-    title: "Watch & Earn",
-    description: "Viewers earn $SOL tokens for watching streams, engaging with content, and supporting creators.",
+    title: "Rewarding Communities",
+    description: "Viewers compete for AP Rewards by watching streams, engaging with content, and supporting creators.",
     color: "text-green-400"
   },
   {
     icon: TrophyOutlined,
-    title: "Compete & Win",
-    description: "Participate in streaming competitions and tournaments with $AVIE token rewards.",
+    title: "AI Powered Tools",
+    description: "Take advantage of our AI-powered tools to enhance your streaming experience and grow your audience.",
     color: "text-yellow-400"
   },
   {
     icon: SafetyOutlined,
-    title: "Blockchain Security",
-    description: "Built on Solana blockchain ensuring transparent, secure, and instant transactions.",
+    title: "MultiStream Capabilities",
+    description: "AVIE doesn't limit you to one platform. You can stream to multiple platforms at the same time, empowering creator growth.",
     color: "text-purple-400"
   }
 ];
@@ -65,19 +65,19 @@ const HOW_IT_WORKS = [
   {
     step: "02", 
     title: "Start Streaming",
-    description: "Go live with your content and begin earning $SOL tokens from day one.",
+    description: "Go live with your content and start being rewarded with AP Rewards from day one.",
     icon: PlayCircleOutlined
   },
   {
     step: "03",
-    title: "Engage & Earn",
-    description: "Build your audience, engage with viewers, and watch your $SOL earnings grow.",
+    title: "Engage & Grow",
+    description: "Build your audience, engage with viewers, and watch your AP Rewards grow.",
     icon: DollarOutlined
   },
   {
     step: "04",
-    title: "Stake $AVIE",
-    description: "Use $AVIE platform tokens for premium features, governance, and bonus rewards.",
+    title: "Thrive & Improve",
+    description: "Leverage AVIE's tools to build a loyal audience, boost your visibility across platforms.",
     icon: StarOutlined
   }
 ];
@@ -171,7 +171,7 @@ const RewardsDashboard = () => {
             <div className="w-3 h-3 bg-green-500 rounded-full"></div>
           </div>
           <div className="flex-1 text-center">
-            <span className="text-sm text-gray-400 font-mono">avie.app/dashboard</span>
+            <span className="pr-10 text-sm text-gray-400 font-mono">avie.live/dashboard/analytics</span>
           </div>
         </div>
 
@@ -180,9 +180,9 @@ const RewardsDashboard = () => {
           {/* Top Metrics Row */}
           <div className="grid grid-cols-3 gap-4 mb-6">
             <div className="bg-gradient-to-br from-green-900/30 to-emerald-900/20 rounded-xl p-4 border border-green-700/30">
-              <div className="text-sm text-green-400 mb-1">Today's Earnings</div>
-              <div className="text-2xl font-bold text-white">+$47.23</div>
-              <div className="text-xs text-green-400">SOL</div>
+              <div className="text-sm text-green-400 mb-1"> Total AP</div>
+              <div className="text-2xl font-bold text-white">+ 147.23</div>
+              <div className="text-xs text-green-400">Past 24 Hours</div>
             </div>
             <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/20 rounded-xl p-4 border border-blue-700/30">
               <div className="text-sm text-blue-400 mb-1">Live Viewers</div>
@@ -192,7 +192,7 @@ const RewardsDashboard = () => {
               </div>
             </div>
             <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/20 rounded-xl p-4 border border-purple-700/30">
-              <div className="text-sm text-purple-400 mb-1">Stream Score</div>
+              <div className="text-sm text-purple-400 mb-1">Unique Viewers</div>
               <div className="text-2xl font-bold text-white">92%</div>
               <div className="text-xs text-purple-400 flex items-center">
                 <FireOutlined className="mr-1" /> trending
@@ -203,7 +203,7 @@ const RewardsDashboard = () => {
           {/* Earnings Chart */}
           <div className="bg-gradient-to-br from-gray-800/40 to-gray-900/40 rounded-xl p-4 mb-6 border border-gray-700/30">
             <div className="flex items-center justify-between mb-4">
-              <div className="text-white font-semibold">Earnings Overview</div>
+              <div className="text-white font-semibold">Rewards Overview</div>
               <div className="text-sm text-gray-400">Last 7 days</div>
             </div>
             
@@ -242,23 +242,23 @@ const RewardsDashboard = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-sm text-gray-300">Stream Rewards</span>
+                  <span className="text-sm text-gray-300">All Time</span>
                 </div>
-                <span className="text-green-400 font-semibold">+$12.45</span>
+                <span className="text-green-400 font-semibold">+12,412</span>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                  <span className="text-sm text-gray-300">Viewer Engagement</span>
+                  <span className="text-sm text-gray-300">Last 7 Days</span>
                 </div>
-                <span className="text-blue-400 font-semibold">+$8.92</span>
+                <span className="text-blue-400 font-semibold">+8,920</span>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                  <span className="text-sm text-gray-300">AVIE Staking</span>
+                  <span className="text-sm text-gray-300">Last 24 Hours</span>
                 </div>
-                <span className="text-purple-400 font-semibold">+$3.67</span>
+                <span className="text-purple-400 font-semibold">+3,670</span>
               </div>
             </div>
           </div>
@@ -313,7 +313,7 @@ const LandingPage = () => {
             
             <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
               Join <span className="text-[var(--color-brand)] font-bold">AVIE</span>, the revolutionary streaming platform where creators and viewers earn{" "}
-              <span className="text-green-400 font-bold">$SOL</span> tokens for every stream, every view and every interaction.
+              <span className="text-green-400 font-bold">AP Rewards</span> for every stream, every view and every interaction.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -350,7 +350,7 @@ const LandingPage = () => {
                 How AVIE Works
               </h2>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Start earning $SOL tokens in just four simple steps
+                Start earning AP Rewards in just four simple steps
               </p>
             </div>
             
@@ -399,10 +399,10 @@ const LandingPage = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                See Your Earnings in Real-Time
+                See Your Rewards in Real-Time
               </h2>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Track your $SOL earnings, viewer engagement, and streaming performance with our intuitive dashboard
+                Track your AP Rewards, viewer engagement, and streaming performance with our intuitive dashboard
               </p>
             </div>
             
@@ -450,7 +450,7 @@ const LandingPage = () => {
                 Dual Token Economy
               </h2>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Earn $SOL for content, stake $AVIE for platform benefits
+                Collect AP Rewards for content and supporting your favorite creators
               </p>
             </div>
             
@@ -462,8 +462,8 @@ const LandingPage = () => {
                     <DollarOutlined className="text-xl text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">$SOL Rewards</h3>
-                    <p className="text-green-400">Earn while you stream & watch</p>
+                    <h3 className="text-2xl font-bold text-white">AP Rewards</h3>
+                    <p className="text-green-400">Be rewarded while you stream & watch</p>
                   </div>
                 </div>
                 <ul className="space-y-3 text-gray-300">
@@ -512,7 +512,7 @@ const LandingPage = () => {
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
-                    Enhanced earning multipliers
+                    Enhanced reward multipliers
                   </li>
                 </ul>
               </div>
@@ -525,10 +525,10 @@ const LandingPage = () => {
           <div className="max-w-4xl mx-auto text-center">
             <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-purple-900/30 border border-purple-700/30">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Ready to Start Earning?
+                Ready to be Rewarded?
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join thousands of creators and viewers already earning $SOL on the AVIE platform. 
+                Join our growing community of creators and viewers and compete for AP Rewards on the AVIE platform. 
                 Your streaming journey starts here.
               </p>
               
@@ -625,7 +625,7 @@ const AuthSheetControlled = ({ open, onClose }: { open: boolean; onClose: () => 
         <div className="flex justify-center items-center gap-3">
           <Image
             src="/favicon/avie-logo-512x512-noback.png"
-            alt="Livestreamcoin Logo"
+            alt="AVIE Logo"
             width={32}
             height={32}
             className="w-8 h-8"
@@ -635,7 +635,7 @@ const AuthSheetControlled = ({ open, onClose }: { open: boolean; onClose: () => 
               ? "Verify Your Login"
               : resetPasswordMode
               ? "Reset Your Password"
-              : "Join Livestreamcoin today"}
+              : "Join AVIE today"}
           </Typography.Title>
         </div>
         <button

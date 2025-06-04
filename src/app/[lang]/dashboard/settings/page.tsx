@@ -299,7 +299,7 @@ export default function SettingsPage() {
           {/* Preferences */}
           <div className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800">
             <h3 className="text-lg font-semibold text-white mb-6">Preferences</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex items-center justify-between p-4 bg-zinc-800/50 rounded-lg border border-zinc-700">
                 <label className="text-sm font-medium text-zinc-300">Email Notifications</label>
                 <label className="relative inline-flex items-center cursor-pointer">
@@ -333,27 +333,6 @@ export default function SettingsPage() {
                         preferences: {
                           ...prev!.preferences,
                           smsAlerts: e.target.checked,
-                        },
-                      }))
-                    }
-                    className="sr-only peer"
-                  />
-                  <div className="w-9 h-5 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-600"></div>
-                </label>
-              </div>
-
-              <div className="flex items-center justify-between p-4 bg-zinc-800/50 rounded-lg border border-zinc-700">
-                <label className="text-sm font-medium text-zinc-300">Dark Mode</label>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={profile?.preferences?.darkMode || false}
-                    onChange={(e) =>
-                      setProfile((prev) => ({
-                        ...prev!,
-                        preferences: {
-                          ...prev!.preferences,
-                          darkMode: e.target.checked,
                         },
                       }))
                     }

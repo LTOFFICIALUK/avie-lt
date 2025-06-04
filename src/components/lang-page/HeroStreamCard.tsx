@@ -103,7 +103,7 @@ const HeroStreamCard: React.FC<HeroStreamCardProps> = ({
 
           {/* Stream Title */}
           <h3 className="line-clamp-1 text-white text-sm font-bold leading-tight mb-2 break-words">
-            Trench Trading nfguerigfurehgurygorihgryugrbgrougb
+            {stream.title || 'Live Stream'}
           </h3>
 
           {/* Streamer info with avatar and bullet point */}
