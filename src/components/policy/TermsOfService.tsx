@@ -14,7 +14,7 @@ export function TermsOfService() {
 
       <Title level={3}>1. Acceptance of Terms</Title>
       <Paragraph>
-        By creating an account, browsing, streaming, uploading content, or otherwise interacting with AVIE, you agree to comply with and be legally bound by these Terms. This is a binding agreement between you and AVIE.
+        By creating an account and using AVIE, you agree to comply with these Terms, including the understanding that any digital assets, AP or tokens available on the platform are for utility purposes only. This is a binding agreement between you and AVIE.
       </Paragraph>
 
       <Title level={3}>2. Eligibility</Title>
@@ -51,6 +51,7 @@ export function TermsOfService() {
         <li>Use the Platform to distribute malware, spam, or conduct phishing attacks.</li>
         <li>Circumvent, disable, or interfere with platform security features.</li>
         <li>Impersonate AVIE, our team, or other users.</li>
+        <li>Use bots or any other non-human system within the AVIE ecosystem. This includes, but is not limited to manipulating features such as viewer, subscription or follower counts and chat messages.</li>
       </ul>
       <Paragraph>
         We reserve the right to monitor usage and enforce our rules through moderation, suspension, or legal action.
@@ -58,7 +59,7 @@ export function TermsOfService() {
 
       <Title level={3}>5. License Grant</Title>
       <Paragraph>
-        You retain full ownership of your content. However, by uploading, broadcasting, or sharing content on AVIE, you grant us a worldwide, copyright-free, royalty-free, sublicensable license to:
+        You retain full ownership of your content. When uploading, broadcasting, or sharing content on AVIE, you grant us a limited, non-exclusive license to:
       </Paragraph>
       <ul className="policy-list">
         <li>Host, distribute, display, and reproduce your content on the AVIE Platform and social media.</li>
@@ -66,7 +67,7 @@ export function TermsOfService() {
         <li>Store and cache content as required to operate the Platform.</li>
       </ul>
       <Paragraph>
-        Notwithstanding the foregoing, we shall retain a perpetual, worldwide, royalty-free, sublicensable right to use clips of your content for any marketing purposes or strategies we develop. This license survives deletion of your content from the Platform, except where limited by applicable law or to comply with investigations.
+        We shall retain a limited right to use clips of your content for marketing purposes related to the platform. This license survives deletion of your content from the Platform, except where limited by applicable law or to comply with investigations.
       </Paragraph>
 
       <Title level={3}>6. Streaming & Content Responsibility</Title>
@@ -105,7 +106,7 @@ export function TermsOfService() {
         Upon termination:
       </Paragraph>
       <ul className="policy-list">
-        <li>Your access to content, AP rewards, and platform features may be revoked.</li>
+        <li>Your access to content, AP, platform utility tokens, and platform features may be revoked, with no compensation for any potential perceived value of digital assets.</li>
         <li>AVIE may retain your data as necessary for compliance with applicable laws.</li>
       </ul>
 

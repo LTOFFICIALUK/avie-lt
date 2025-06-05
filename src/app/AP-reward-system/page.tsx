@@ -188,49 +188,49 @@ const APRewardsPage = () => {
         />
 
         {/* How It Works */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-12 sm:mb-14 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 How AVIE Points Work
               </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
                 Simple, transparent, and rewarding. Earn AP through platform engagement and redeem for real value.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 md:gap-8 relative">
               {HOW_IT_WORKS_STEPS.map((step, index) => (
                 <div key={index} className="relative flex flex-col items-center">
                   <div className="text-center">
-                    <div className={`w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 relative z-10`}>
-                      <step.icon className="text-2xl text-white" />
+                    <div className={`w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 relative z-10`}>
+                      <step.icon className="text-xl sm:text-2xl text-white" />
                     </div>
-                    <div className="text-sm font-bold text-purple-400 mb-2">STEP {index + 1}</div>
-                    <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
-                    <p className="text-gray-400 leading-relaxed">{step.description}</p>
+                    <div className="text-xs sm:text-sm font-bold text-purple-400 mb-2">STEP {index + 1}</div>
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">{step.title}</h3>
+                    <p className="text-gray-400 leading-relaxed text-sm sm:text-base px-2 sm:px-0">{step.description}</p>
                   </div>
                   
                   {/* Dynamic connecting line */}
                   {index < HOW_IT_WORKS_STEPS.length - 1 && (
                     <>
                       {/* Horizontal line for large screens (4 columns) */}
-                      <div className="hidden lg:block absolute top-8 left-1/2 w-full h-px bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 transform translate-x-4 z-0" 
+                      <div className="hidden lg:block absolute top-6 sm:top-8 left-1/2 w-full h-px bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 transform translate-x-4 z-0" 
                            style={{ width: 'calc(100% + 2rem)' }} />
                       
                       {/* Vertical line for medium screens (2 columns) - between pairs */}
                       {index % 2 === 0 && index < HOW_IT_WORKS_STEPS.length - 2 && (
-                        <div className="hidden md:block lg:hidden absolute top-full left-1/2 w-px h-8 bg-gradient-to-b from-purple-600 to-purple-400 transform -translate-x-1/2 mt-4 z-0" />
+                        <div className="hidden sm:block lg:hidden absolute top-full left-1/2 w-px h-6 sm:h-8 bg-gradient-to-b from-purple-600 to-purple-400 transform -translate-x-1/2 mt-3 sm:mt-4 z-0" />
                       )}
                       
                       {/* Horizontal line for medium screens (2 columns) - within pairs */}
                       {index % 2 === 0 && index < HOW_IT_WORKS_STEPS.length - 1 && (
-                        <div className="hidden md:block lg:hidden absolute top-8 left-1/2 w-full h-px bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 transform translate-x-4 z-0"
+                        <div className="hidden sm:block lg:hidden absolute top-6 sm:top-8 left-1/2 w-full h-px bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 transform translate-x-4 z-0"
                              style={{ width: 'calc(100% + 2rem)' }} />
                       )}
                       
                       {/* Vertical line for mobile (1 column) */}
-                      <div className="block md:hidden absolute top-full left-1/2 w-px h-8 bg-gradient-to-b from-purple-600 to-purple-400 transform -translate-x-1/2 mt-4 z-0" />
+                      <div className="block sm:hidden absolute top-full left-1/2 w-px h-6 bg-gradient-to-b from-purple-600 to-purple-400 transform -translate-x-1/2 mt-3 z-0" />
                     </>
                   )}
                 </div>
@@ -240,39 +240,39 @@ const APRewardsPage = () => {
         </section>
 
         {/* Earning Activities */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-gray-900/20 to-transparent">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-gray-900/20 to-transparent">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-12 sm:mb-14 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Ways to Earn AVIE Points
               </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
                 Multiple earning opportunities for both viewers and creators through meaningful engagement
               </p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-7 md:gap-8">
               {EARNING_ACTIVITIES.map((category, categoryIndex) => (
-                <div key={categoryIndex} className={`bg-gradient-to-br ${category.bgGradient} border ${category.borderColor} rounded-2xl p-8 backdrop-blur-sm`}>
-                  <div className="flex items-center mb-6">
-                    <div className={`p-4 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 ${category.color} mr-4`}>
-                      <category.icon className="text-3xl" />
+                <div key={categoryIndex} className={`bg-gradient-to-br ${category.bgGradient} border ${category.borderColor} rounded-xl sm:rounded-2xl p-6 sm:p-7 md:p-8 backdrop-blur-sm`}>
+                  <div className="flex items-center mb-5 sm:mb-6">
+                    <div className={`p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 ${category.color} mr-3 sm:mr-4`}>
+                      <category.icon className="text-2xl sm:text-3xl" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-white">For {category.category}</h3>
-                      <p className={`${category.color} font-medium`}>Earn AP through meaningful engagement</p>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white">For {category.category}</h3>
+                      <p className={`${category.color} font-medium text-sm sm:text-base`}>Earn AP through meaningful engagement</p>
                     </div>
                   </div>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {category.activities.map((activity, activityIndex) => (
-                      <div key={activityIndex} className="flex items-center p-4 rounded-lg bg-gray-800/30 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300">
-                        <div className={`p-2 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 ${category.color} mr-4`}>
-                          <activity.icon className="text-lg" />
+                      <div key={activityIndex} className="flex items-center p-3 sm:p-4 rounded-lg bg-gray-800/30 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300">
+                        <div className={`p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 ${category.color} mr-3 sm:mr-4`}>
+                          <activity.icon className="text-base sm:text-lg" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-white font-semibold mb-1">{activity.action}</h4>
-                          <p className="text-gray-400 text-sm">{activity.description}</p>
+                          <h4 className="text-white font-semibold mb-1 text-sm sm:text-base">{activity.action}</h4>
+                          <p className="text-gray-400 text-xs sm:text-sm">{activity.description}</p>
                         </div>
                       </div>
                     ))}
@@ -284,32 +284,32 @@ const APRewardsPage = () => {
         </section>
 
         {/* Reward Tiers */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-12 sm:mb-14 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Reward Tiers & Multipliers
               </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
                 Unlock higher earning potential as you engage more with the platform
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
               {REWARD_TIERS.map((tier, index) => (
-                <div key={index} className={`bg-gradient-to-br ${tier.bgGradient} border ${tier.borderColor} rounded-2xl p-6 text-center hover:border-opacity-75 transition-all duration-300 backdrop-blur-sm`}>
-                  <div className={`text-2xl font-bold ${tier.color} mb-2`}>{tier.tier}</div>
-                  <div className="text-gray-400 text-sm mb-4">
+                <div key={index} className={`bg-gradient-to-br ${tier.bgGradient} border ${tier.borderColor} rounded-xl sm:rounded-2xl p-5 sm:p-6 text-center hover:border-opacity-75 transition-all duration-300 backdrop-blur-sm`}>
+                  <div className={`text-xl sm:text-2xl font-bold ${tier.color} mb-2`}>{tier.tier}</div>
+                  <div className="text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4">
                     {tier.tier} Tier Member
                   </div>
                   
-                  <div className={`text-3xl font-bold ${tier.color} mb-4`}>
+                  <div className={`text-2xl sm:text-3xl font-bold ${tier.color} mb-3 sm:mb-4`}>
                     {tier.multiplier}
                   </div>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-1.5 sm:space-y-2">
                     {tier.perks.map((perk, perkIndex) => (
-                      <div key={perkIndex} className="flex items-center text-sm text-gray-300">
+                      <div key={perkIndex} className="flex items-center text-xs sm:text-sm text-gray-300">
                         <CheckCircleOutlined className="text-green-400 mr-2 text-xs" />
                         {perk}
                       </div>
@@ -322,61 +322,61 @@ const APRewardsPage = () => {
         </section>
 
         {/* Key Features */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-12 sm:mb-14 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Why AVIE Points?
               </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
                 A revolutionary reward system designed for the modern streaming economy
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-2xl p-8 text-center backdrop-blur-sm">
-                <DollarOutlined className="text-4xl text-green-400 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-3">Real Value</h3>
-                <p className="text-gray-300">Convert AP directly to $SOL tokens with transparent exchange rates</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7 md:gap-8">
+              <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl sm:rounded-2xl p-6 sm:p-7 md:p-8 text-center backdrop-blur-sm">
+                <DollarOutlined className="text-3xl sm:text-4xl text-green-400 mb-3 sm:mb-4" />
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">Real Value</h3>
+                <p className="text-gray-300 text-sm sm:text-base">Convert AP directly to $SOL tokens with transparent exchange rates</p>
               </div>
               
-              <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-2xl p-8 text-center backdrop-blur-sm">
-                <ClockCircleOutlined className="text-4xl text-blue-400 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-3">Bi-Weekly Payouts</h3>
-                <p className="text-gray-300">Automatic distribution every two weeks with transparent calculations</p>
+              <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-xl sm:rounded-2xl p-6 sm:p-7 md:p-8 text-center backdrop-blur-sm">
+                <ClockCircleOutlined className="text-3xl sm:text-4xl text-blue-400 mb-3 sm:mb-4" />
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">Bi-Weekly Payouts</h3>
+                <p className="text-gray-300 text-sm sm:text-base">Automatic distribution every two weeks with transparent calculations</p>
               </div>
               
-              <div className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-2xl p-8 text-center backdrop-blur-sm">
-                <SafetyOutlined className="text-4xl text-purple-400 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-3">Secure & Fair</h3>
-                <p className="text-gray-300">Anti-bot protection and fair distribution algorithms ensure legitimate earnings</p>
+              <div className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-xl sm:rounded-2xl p-6 sm:p-7 md:p-8 text-center backdrop-blur-sm">
+                <SafetyOutlined className="text-3xl sm:text-4xl text-purple-400 mb-3 sm:mb-4" />
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">Secure & Fair</h3>
+                <p className="text-gray-300 text-sm sm:text-base">Anti-bot protection and fair distribution algorithms ensure legitimate earnings</p>
               </div>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-purple-900/30 border border-purple-700/30 backdrop-blur-sm">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-purple-900/30 border border-purple-700/30 backdrop-blur-sm">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Ready to Start Earning?
               </h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto px-2 sm:px-0">
                 Join thousands of users already earning $SOL through the AVIE Points system. 
                 Your engagement has never been more valuable.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                 <button
                   onClick={handleJoinNow}
-                  className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
                 >
                   <RocketOutlined className="mr-2" />
                   Start Earning Today
                 </button>
                 <Link href="/dashboard">
-                  <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg transition-all duration-300">
+                  <button className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 active:scale-95">
                     <TrophyOutlined className="mr-2" />
                     View Dashboard
                   </button>

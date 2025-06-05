@@ -132,49 +132,49 @@ const CommunityPage = () => {
         <CommunityHero />
 
         {/* Social Platforms Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-12 sm:mb-14 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Our Social Platforms
               </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
                 Connect with us across all major social platforms for updates, discussions, and community events
               </p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-7 md:gap-8">
               {SOCIAL_PLATFORMS.map((platform, index) => (
-                <div key={index} className={`p-8 rounded-2xl bg-gradient-to-br ${platform.bgGradient} border ${platform.borderColor} hover:border-opacity-75 transition-all duration-300 group backdrop-blur-sm`}>
-                  <div className="flex items-start space-x-6">
-                    <div className={`p-4 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 ${platform.textColor} group-hover:scale-110 transition-transform duration-300`}>
-                      <platform.icon className="text-3xl" />
+                <div key={index} className={`p-6 sm:p-7 md:p-8 rounded-xl sm:rounded-2xl bg-gradient-to-br ${platform.bgGradient} border ${platform.borderColor} hover:border-opacity-75 transition-all duration-300 group backdrop-blur-sm`}>
+                  <div className="flex items-start space-x-4 sm:space-x-5 md:space-x-6">
+                    <div className={`p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 ${platform.textColor} group-hover:scale-110 transition-transform duration-300`}>
+                      <platform.icon className="text-2xl sm:text-3xl" />
                     </div>
                     <div className="flex-1">
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-2xl font-bold text-white">{platform.name}</h3>
+                      <div className="flex items-center justify-between mb-2 sm:mb-3">
+                        <h3 className="text-xl sm:text-2xl font-bold text-white">{platform.name}</h3>
                       </div>
-                      <p className="text-gray-300 mb-6 leading-relaxed">{platform.description}</p>
+                      <p className="text-gray-300 mb-4 sm:mb-5 md:mb-6 leading-relaxed text-sm sm:text-base">{platform.description}</p>
                       
                       {/* Features */}
-                      <div className="grid grid-cols-2 gap-2 mb-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4 sm:mb-5 md:mb-6">
                         {platform.features.map((feature, featureIndex) => (
                           <div key={featureIndex} className="flex items-center">
-                            <span className={`mr-3 flex-shrink-0 text-lg font-bold ${
+                            <span className={`mr-2 sm:mr-3 flex-shrink-0 text-base sm:text-lg font-bold ${
                               platform.name === 'Discord' ? 'text-indigo-400' :
                               platform.name === 'Telegram' ? 'text-blue-400' :
                               platform.name === "AVIE's X" ? 'text-gray-400' :
                               platform.name === 'Founder X' ? 'text-amber-400' :
                               'text-purple-400'
                             }`}>•</span>
-                            <span className="text-sm text-gray-300">{feature}</span>
+                            <span className="text-xs sm:text-sm text-gray-300">{feature}</span>
                           </div>
                         ))}
                       </div>
                       
                       <button
                         onClick={() => handleJoinCommunity(platform.url)}
-                        className={`inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r ${platform.buttonGradient} text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto`}
+                        className={`inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-gradient-to-r ${platform.buttonGradient} text-white font-semibold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 w-full sm:w-auto`}
                       >
                         <platform.icon className="mr-2" />
                         Join {platform.name}
@@ -188,27 +188,27 @@ const CommunityPage = () => {
         </section>
 
         {/* Community Highlights Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-12 sm:mb-14 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Community Highlights
               </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
                 Experience exclusive events, contests, and opportunities available only to our community members
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-7 md:gap-8">
               {COMMUNITY_HIGHLIGHTS.map((highlight, index) => (
-                <div key={index} className={`p-6 rounded-2xl bg-gradient-to-br ${highlight.bgGradient} border ${highlight.borderColor} hover:border-opacity-75 transition-all duration-300 backdrop-blur-sm`}>
-                  <div className="flex items-start space-x-4">
-                    <div className={`p-3 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 ${highlight.color}`}>
-                      <highlight.icon className="text-2xl" />
+                <div key={index} className={`p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br ${highlight.bgGradient} border ${highlight.borderColor} hover:border-opacity-75 transition-all duration-300 backdrop-blur-sm`}>
+                  <div className="flex items-start space-x-3 sm:space-x-4">
+                    <div className={`p-2.5 sm:p-3 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 ${highlight.color}`}>
+                      <highlight.icon className="text-xl sm:text-2xl" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-2">{highlight.title}</h3>
-                      <p className="text-gray-400 leading-relaxed">{highlight.description}</p>
+                      <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{highlight.title}</h3>
+                      <p className="text-gray-400 leading-relaxed text-sm sm:text-base">{highlight.description}</p>
                     </div>
                   </div>
                 </div>
@@ -218,28 +218,28 @@ const CommunityPage = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-purple-900/30 border border-purple-700/30 backdrop-blur-sm">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-purple-900/30 border border-purple-700/30 backdrop-blur-sm">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Ready to Join Our Community?
               </h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto px-2 sm:px-0">
                 Connect with our growing community of streamers, viewers, and blockchain enthusiasts. 
                 Be part of the future of decentralized streaming.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                 <button
                   onClick={() => handleJoinCommunity("https://discord.gg/gpWuwPpWxp")}
-                  className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
                 >
                   <DiscordOutlined className="mr-2" />
                   Join Discord Now
                 </button>
                 <button
                   onClick={() => handleJoinCommunity("https://t.me/+ADEbvu_yTFs1ZTI0")}
-                  className="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 font-semibold text-lg transition-all duration-300"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 active:scale-95"
                 >
                   <SendOutlined className="mr-2" />
                   Join Telegram

@@ -82,6 +82,11 @@ export function CommunityGuidelines() {
         <li>Creators must not target or solicit interaction from minors in inappropriate ways.</li>
       </ul>
 
+      <Title level={4}>2.3 Botting</Title>
+      <Paragraph>
+        The use of bots or any other non-human system within the AVIE ecosystem is prohibited. This includes, but is not limited to manipulating features such as viewer, subscription or follower counts and chat messages.
+      </Paragraph>
+
       <Title level={3}>3. Moderation & Enforcement</Title>
       <Title level={4}>3.1 Enforcement Tiers</Title>
       <Paragraph>
@@ -107,7 +112,7 @@ export function CommunityGuidelines() {
 
       <Title level={4}>3.4 Spam & Manipulation</Title>
       <ul className="policy-list">
-        <li>Artificial manipulation of platform features (e.g., follower inflation, engagement bots, view count manipulation) is strictly prohibited.</li>
+        <li>Artificial manipulation of platform features (e.g., follower inflation, engagement bots, view count manipulation) is strictly permitted.</li>
       </ul>
 
       <Title level={4}>3.5 Token & Financial Activity</Title>

@@ -253,49 +253,49 @@ const LandingPage = () => {
         />
 
         {/* How It Works Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-12 sm:mb-14 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 How AVIE Works
               </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
                 Start earning AP Rewards in just four simple steps
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 md:gap-8 relative">
               {HOW_IT_WORKS.map((step, index) => (
                 <div key={index} className="relative flex flex-col items-center">
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
-                      <step.icon className="text-2xl text-white" />
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 relative z-10">
+                      <step.icon className="text-xl sm:text-2xl text-white" />
                     </div>
-                    <div className="text-sm font-bold text-purple-400 mb-2">STEP {step.step}</div>
-                    <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
-                    <p className="text-gray-400 leading-relaxed">{step.description}</p>
+                    <div className="text-xs sm:text-sm font-bold text-purple-400 mb-2">STEP {step.step}</div>
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">{step.title}</h3>
+                    <p className="text-gray-400 leading-relaxed text-sm sm:text-base px-2 sm:px-0">{step.description}</p>
                   </div>
                   
                   {/* Dynamic connecting line */}
                   {index < HOW_IT_WORKS.length - 1 && (
                     <>
                       {/* Horizontal line for large screens (4 columns) */}
-                      <div className="hidden lg:block absolute top-8 left-1/2 w-full h-px bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 transform translate-x-4 z-0" 
+                      <div className="hidden lg:block absolute top-6 sm:top-8 left-1/2 w-full h-px bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 transform translate-x-4 z-0" 
                            style={{ width: 'calc(100% + 2rem)' }} />
                       
                       {/* Vertical line for medium screens (2 columns) - between pairs */}
                       {index % 2 === 0 && index < HOW_IT_WORKS.length - 2 && (
-                        <div className="hidden md:block lg:hidden absolute top-full left-1/2 w-px h-8 bg-gradient-to-b from-purple-600 to-purple-400 transform -translate-x-1/2 mt-4 z-0" />
+                        <div className="hidden sm:block lg:hidden absolute top-full left-1/2 w-px h-6 sm:h-8 bg-gradient-to-b from-purple-600 to-purple-400 transform -translate-x-1/2 mt-3 sm:mt-4 z-0" />
                       )}
                       
                       {/* Horizontal line for medium screens (2 columns) - within pairs */}
                       {index % 2 === 0 && index < HOW_IT_WORKS.length - 1 && (
-                        <div className="hidden md:block lg:hidden absolute top-8 left-1/2 w-full h-px bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 transform translate-x-4 z-0"
+                        <div className="hidden sm:block lg:hidden absolute top-6 sm:top-8 left-1/2 w-full h-px bg-gradient-to-r from-purple-600 via-purple-500 to-purple-400 transform translate-x-4 z-0"
                              style={{ width: 'calc(100% + 2rem)' }} />
                       )}
                       
                       {/* Vertical line for mobile (1 column) */}
-                      <div className="block md:hidden absolute top-full left-1/2 w-px h-8 bg-gradient-to-b from-purple-600 to-purple-400 transform -translate-x-1/2 mt-4 z-0" />
+                      <div className="block sm:hidden absolute top-full left-1/2 w-px h-6 bg-gradient-to-b from-purple-600 to-purple-400 transform -translate-x-1/2 mt-3 z-0" />
                     </>
                   )}
                 </div>
@@ -305,13 +305,13 @@ const LandingPage = () => {
         </section>
 
         {/* Dashboard Preview Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-gray-900/20 to-transparent">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-gray-900/20 to-transparent">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-12 sm:mb-14 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 See Your Rewards in Real-Time
               </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
                 Track your AP Rewards, viewer engagement, and streaming performance with our intuitive dashboard
               </p>
             </div>
@@ -323,27 +323,27 @@ const LandingPage = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-12 sm:mb-14 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Why Choose AVIE?
               </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
                 Revolutionary features that make streaming profitable for everyone
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-7 md:gap-8">
               {FEATURES.map((feature, index) => (
-                <div key={index} className="p-6 rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300">
-                  <div className="flex items-start space-x-4">
-                    <div className={`p-3 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 ${feature.color}`}>
-                      <feature.icon className="text-2xl" />
+                <div key={index} className="p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300">
+                  <div className="flex items-start space-x-3 sm:space-x-4">
+                    <div className={`p-2.5 sm:p-3 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 ${feature.color}`}>
+                      <feature.icon className="text-xl sm:text-2xl" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                      <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                      <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                      <p className="text-gray-400 leading-relaxed text-sm sm:text-base">{feature.description}</p>
                     </div>
                   </div>
                 </div>
@@ -353,76 +353,76 @@ const LandingPage = () => {
         </section>
 
         {/* Tokenomics Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="text-center mb-12 sm:mb-14 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Dual Token Economy
               </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
                 Collect AP Rewards for content and supporting your favorite creators
               </p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-7 md:gap-8">
               {/* SOL Earnings */}
-              <div className="p-8 rounded-2xl bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-700/30">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mr-4">
-                    <DollarOutlined className="text-xl text-white" />
+              <div className="p-6 sm:p-7 md:p-8 rounded-xl sm:rounded-2xl bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-700/30">
+                <div className="flex items-center mb-5 sm:mb-6">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600 rounded-full flex items-center justify-center mr-3 sm:mr-4">
+                    <DollarOutlined className="text-lg sm:text-xl text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">AP Rewards</h3>
-                    <p className="text-green-400">Be rewarded while you stream & watch</p>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white">AP Rewards</h3>
+                    <p className="text-green-400 text-sm sm:text-base">Be rewarded while you stream & watch</p>
                   </div>
                 </div>
-                <ul className="space-y-3 text-gray-300">
+                <ul className="space-y-2.5 sm:space-y-3 text-gray-300">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-400 rounded-full mr-3" />
-                    Stream rewards based on engagement
+                    <span className="text-sm sm:text-base">Stream rewards based on engagement</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-400 rounded-full mr-3" />
-                    Viewer rewards for watch time
+                    <span className="text-sm sm:text-base">Viewer rewards for watch time</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-400 rounded-full mr-3" />
-                    Instant payouts to Solana wallet
+                    <span className="text-sm sm:text-base">Instant payouts to Solana wallet</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-green-400 rounded-full mr-3" />
-                    No minimum withdrawal limits
+                    <span className="text-sm sm:text-base">No minimum withdrawal limits</span>
                   </li>
                 </ul>
               </div>
 
               {/* AVIE Token */}
-              <div className="p-8 rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-700/30">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mr-4">
-                    <StarOutlined className="text-xl text-white" />
+              <div className="p-6 sm:p-7 md:p-8 rounded-xl sm:rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-700/30">
+                <div className="flex items-center mb-5 sm:mb-6">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-600 rounded-full flex items-center justify-center mr-3 sm:mr-4">
+                    <StarOutlined className="text-lg sm:text-xl text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">$AVIE Token</h3>
-                    <p className="text-purple-400">Platform governance & utility</p>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white">$AVIE Token</h3>
+                    <p className="text-purple-400 text-sm sm:text-base">Platform governance & utility</p>
                   </div>
                 </div>
-                <ul className="space-y-3 text-gray-300">
+                <ul className="space-y-2.5 sm:space-y-3 text-gray-300">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
-                    Stake for premium features
+                    <span className="text-sm sm:text-base">Stake for premium features</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
-                    Governance voting rights
+                    <span className="text-sm sm:text-base">Governance voting rights</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
-                    Exclusive tournament access
+                    <span className="text-sm sm:text-base">Exclusive tournament access</span>
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
-                    Enhanced reward multipliers
+                    <span className="text-sm sm:text-base">Enhanced reward multipliers</span>
                   </li>
                 </ul>
               </div>
@@ -431,26 +431,26 @@ const LandingPage = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-purple-900/30 border border-purple-700/30 backdrop-blur-sm">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-purple-900/30 border border-purple-700/30 backdrop-blur-sm">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                 Ready to be Rewarded?
               </h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto px-2 sm:px-0">
                 Join our growing community of creators and viewers and compete for AP Rewards on the AVIE platform. 
                 Your streaming journey starts here.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                 <button
                   onClick={handleStartStreaming}
-                  className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                  className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
                 >
                   <RocketOutlined className="mr-2" />
                   Start Streaming Today
                 </button>
-                <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg transition-all duration-300">
+                <button className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 active:scale-95">
                   Learn More
                 </button>
               </div>

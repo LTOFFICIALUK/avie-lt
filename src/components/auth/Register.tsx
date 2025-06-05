@@ -146,168 +146,257 @@ const Register = () => {
   };
 
   return (
-    <Form 
-      form={form}
-      onFinish={handleRegister} 
-      layout="vertical" 
-      className="space-y-6"
-      onValuesChange={handleValuesChange}
-    >
-      <div className="space-y-6">
-        <div>
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[
-              { required: true, message: "Please input your username!" },
-              { min: 3, message: "Username must be at least 3 characters!" },
-              { 
-                validator: (_, value) => {
-                  if (!value) return Promise.resolve();
-                  
-                  const validation = validateUsername(value);
-                  if (!validation.isValid) {
-                    return Promise.reject(new Error(validation.message));
+    <div className="space-y-5">
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .ant-input:-webkit-autofill,
+          .ant-input:-webkit-autofill:hover,
+          .ant-input:-webkit-autofill:focus,
+          .ant-input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px rgba(31, 41, 55, 0.8) inset !important;
+            -webkit-text-fill-color: #ffffff !important;
+            background-color: rgba(31, 41, 55, 0.8) !important;
+            border-color: rgba(75, 85, 99, 0.6) !important;
+            caret-color: #ffffff !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+          }
+          
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px rgba(31, 41, 55, 0.8) inset !important;
+            -webkit-text-fill-color: #ffffff !important;
+            background-color: rgba(31, 41, 55, 0.8) !important;
+            border-color: rgba(75, 85, 99, 0.6) !important;
+            caret-color: #ffffff !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+          }
+          
+          input[type="password"]:-webkit-autofill,
+          input[type="password"]:-webkit-autofill:hover,
+          input[type="password"]:-webkit-autofill:focus,
+          input[type="password"]:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px rgba(31, 41, 55, 0.8) inset !important;
+            -webkit-text-fill-color: #ffffff !important;
+            background-color: rgba(31, 41, 55, 0.8) !important;
+            border-color: rgba(75, 85, 99, 0.6) !important;
+            caret-color: #ffffff !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+          }
+          
+          .ant-input-password .ant-input:-webkit-autofill,
+          .ant-input-password .ant-input:-webkit-autofill:hover,
+          .ant-input-password .ant-input:-webkit-autofill:focus,
+          .ant-input-password .ant-input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px rgba(31, 41, 55, 0.8) inset !important;
+            -webkit-text-fill-color: #ffffff !important;
+            background-color: rgba(31, 41, 55, 0.8) !important;
+            border-color: rgba(75, 85, 99, 0.6) !important;
+            caret-color: #ffffff !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+          }
+        `
+      }} />
+      <Form 
+        form={form}
+        onFinish={handleRegister} 
+        layout="vertical" 
+        className="space-y-5"
+        onValuesChange={handleValuesChange}
+      >
+        <div className="space-y-5">
+          <div>
+            <Form.Item
+              label={<span className="text-gray-300 font-medium text-sm">Username</span>}
+              name="username"
+              rules={[
+                { required: true, message: "Please input your username!" },
+                { min: 3, message: "Username must be at least 3 characters!" },
+                { 
+                  validator: (_, value) => {
+                    if (!value) return Promise.resolve();
+                    
+                    const validation = validateUsername(value);
+                    if (!validation.isValid) {
+                      return Promise.reject(new Error(validation.message));
+                    }
+                    return Promise.resolve();
                   }
-                  return Promise.resolve();
                 }
-              }
-            ]}
-          >
-            <Input placeholder="Choose a username" />
-          </Form.Item>
-          <div className="mt-1">
-            <Typography.Text className="text-xs text-yellow-500">
-              <span className="font-medium">Important:</span> Your username is permanent and cannot be changed later.
-            </Typography.Text>
+              ]}
+              className="mb-4"
+            >
+              <Input 
+                placeholder="Choose a username" 
+                className="bg-gray-800/80 border-gray-700/60 text-white placeholder-gray-500 rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200"
+                style={{
+                  backgroundColor: 'rgba(31, 41, 55, 0.8)',
+                  borderColor: 'rgba(75, 85, 99, 0.6)',
+                  color: '#ffffff'
+                }}
+              />
+            </Form.Item>
+            <div className="-mt-3 mb-4">
+              <Typography.Text className="text-xs text-amber-400/80">
+                <span className="font-medium">Important:</span> Your username is permanent and cannot be changed later.
+              </Typography.Text>
+            </div>
           </div>
-        </div>
 
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            { required: true, message: "Please input your email!" },
-            { type: "email", message: "Please enter a valid email!" },
-          ]}
-        >
-          <Input placeholder="Enter your email" />
-        </Form.Item>
-
-        <div>
           <Form.Item
-            label="Password"
-            name="password"
+            label={<span className="text-gray-300 font-medium text-sm">Email</span>}
+            name="email"
             rules={[
-              { required: true, message: "Please input your password!" },
-              { min: 8, message: "Password must be at least 8 characters!" },
+              { required: true, message: "Please input your email!" },
+              { type: "email", message: "Please enter a valid email!" },
             ]}
+            className="mb-4"
+          >
+            <Input 
+              placeholder="Enter your email" 
+              className="bg-gray-800/80 border-gray-700/60 text-white placeholder-gray-500 rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200"
+              style={{
+                backgroundColor: 'rgba(31, 41, 55, 0.8)',
+                borderColor: 'rgba(75, 85, 99, 0.6)',
+                color: '#ffffff'
+              }}
+            />
+          </Form.Item>
+
+          <div>
+            <Form.Item
+              label={<span className="text-gray-300 font-medium text-sm">Password</span>}
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+                { min: 8, message: "Password must be at least 8 characters!" },
+              ]}
+              className="mb-4"
+            >
+              <Input.Password
+                placeholder="Choose a password"
+                className="bg-gray-800/80 border-gray-700/60 text-white placeholder-gray-500 rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 [&_.ant-input]:bg-transparent [&_.ant-input]:border-0 [&_.ant-input]:text-white [&_.ant-input]:placeholder-gray-500 [&_.ant-input-suffix]:bg-transparent"
+                style={{
+                  backgroundColor: 'rgba(31, 41, 55, 0.8)',
+                  borderColor: 'rgba(75, 85, 99, 0.6)',
+                  color: '#ffffff'
+                }}
+                iconRender={(visible: boolean) => (
+                  <button
+                    type="button"
+                    onClick={() => setShowRegisterPassword(!showRegisterPassword)}
+                    className="text-gray-400 hover:text-purple-400 transition-colors duration-200 p-1 bg-transparent border-0"
+                  >
+                    {visible ? (
+                      <EyeInvisibleOutlined className="w-4 h-4" />
+                    ) : (
+                      <EyeOutlined className="w-4 h-4" />
+                    )}
+                  </button>
+                )}
+              />
+            </Form.Item>
+
+            {form.getFieldValue('password') && (
+              <div className="-mt-3 mb-4">
+                <div className="flex gap-1 mb-2">
+                  {[1, 2, 3, 4, 5].map((index) => (
+                    <div
+                      key={index}
+                      className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
+                        index <= passwordStrength.score
+                          ? index <= 2
+                            ? "bg-red-500"
+                            : index === 3
+                            ? "bg-amber-500"
+                            : "bg-green-500"
+                          : "bg-gray-700"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <Typography.Text className={`${getPasswordStrengthLabel().color} text-xs font-medium`}>
+                  {getPasswordStrengthLabel().text}
+                </Typography.Text>
+              </div>
+            )}
+          </div>
+
+          <Form.Item
+            label={<span className="text-gray-300 font-medium text-sm">Confirm Password</span>}
+            name="confirmPassword"
+            rules={[
+              { required: true, message: "Please confirm your password!" },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error("Passwords do not match!"));
+                },
+              }),
+            ]}
+            className="mb-4"
           >
             <Input.Password
-              placeholder="Choose a password"
+              placeholder="Confirm your password"
+              className="bg-gray-800/80 border-gray-700/60 text-white placeholder-gray-500 rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 [&_.ant-input]:bg-transparent [&_.ant-input]:border-0 [&_.ant-input]:text-white [&_.ant-input]:placeholder-gray-500 [&_.ant-input-suffix]:bg-transparent"
+              style={{
+                backgroundColor: 'rgba(31, 41, 55, 0.8)',
+                borderColor: 'rgba(75, 85, 99, 0.6)',
+                color: '#ffffff'
+              }}
               iconRender={(visible: boolean) => (
                 <button
                   type="button"
-                  onClick={() => setShowRegisterPassword(!showRegisterPassword)}
-                  className="text-zinc-400 hover:text-white"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="text-gray-400 hover:text-purple-400 transition-colors duration-200 p-1 bg-transparent border-0"
                 >
                   {visible ? (
-                    <EyeInvisibleOutlined className="h-4 w-4" />
+                    <EyeInvisibleOutlined className="w-4 h-4" />
                   ) : (
-                    <EyeOutlined className="h-4 w-4" />
+                    <EyeOutlined className="w-4 h-4" />
                   )}
                 </button>
               )}
             />
           </Form.Item>
 
-          {form.getFieldValue('password') && (
-            <div className="mt-3">
-              <div className="flex gap-1">
-                {[1, 2, 3, 4, 5].map((index) => (
-                  <div
-                    key={index}
-                    className={`h-1 flex-1 rounded-full transition-all ${
-                      index <= passwordStrength.score
-                        ? index <= 2
-                          ? "bg-red-500"
-                          : index === 3
-                          ? "bg-yellow-500"
-                          : "bg-green-500"
-                        : "bg-zinc-700"
-                    }`}
-                  />
-                ))}
-              </div>
-              <Typography.Text className={getPasswordStrengthLabel().color}>
-                {getPasswordStrengthLabel().text}
-              </Typography.Text>
+          {error && (
+            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm mb-4">
+              <Typography.Text type="danger">{error}</Typography.Text>
             </div>
           )}
+
+          {verificationMessage && (
+            <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm mb-4">
+              <Typography.Text type="success">{verificationMessage}</Typography.Text>
+            </div>
+          )}
+
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+            disabled={passwordStrength.score < 3}
+            className="w-full h-12 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 border-0 text-white font-semibold rounded-lg text-sm transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ 
+              height: '48px',
+              background: passwordStrength.score < 3 ? 'rgba(75, 85, 99, 0.5)' : 'linear-gradient(90deg, rgb(147, 51, 234), rgb(37, 99, 235))',
+              borderRadius: '8px'
+            }}
+          >
+            {isLoading ? "Creating Account..." : "Create Account"}
+          </Button>
+
+          <Typography.Text className="text-xs text-gray-400 text-center block">
+            By clicking Create Account, you are agreeing to our Terms of Service and
+            acknowledging our Privacy Notice.
+          </Typography.Text>
         </div>
-
-        <Form.Item
-          label="Confirm Password"
-          name="confirmPassword"
-          rules={[
-            { required: true, message: "Please confirm your password!" },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(new Error("Passwords do not match!"));
-              },
-            }),
-          ]}
-        >
-          <Input.Password
-            placeholder="Confirm your password"
-            iconRender={(visible: boolean) => (
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="text-zinc-400 hover:text-white"
-              >
-                {visible ? (
-                  <EyeInvisibleOutlined className="h-4 w-4" />
-                ) : (
-                  <EyeOutlined className="h-4 w-4" />
-                )}
-              </button>
-            )}
-          />
-        </Form.Item>
-
-        {error && (
-          <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/25 text-red-400">
-            <Typography.Text type="danger">{error}</Typography.Text>
-          </div>
-        )}
-
-        {verificationMessage && (
-          <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/25 text-green-400">
-            <Typography.Text type="success">{verificationMessage}</Typography.Text>
-          </div>
-        )}
-
-        <Button
-          type="primary"
-          htmlType="submit"
-          loading={isLoading}
-          disabled={passwordStrength.score < 3}
-          style={{ height: 30 }}
-          className="w-full"
-        >
-          {isLoading ? "Creating Account..." : "Create Account"}
-        </Button>
-
-        <Typography.Text className="text-xs text-zinc-400">
-          By clicking Create Account, you are agreeing to our Terms of Service and
-          acknowledging our Privacy Notice.
-        </Typography.Text>
-      </div>
-    </Form>
+      </Form>
+    </div>
   );
 };
 

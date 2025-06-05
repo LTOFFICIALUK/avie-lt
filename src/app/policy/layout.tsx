@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../[lang]/globals.css";
-import { Footer } from "@/components/footer/Footer";
 import ThemeWrapper from "@/components/ThemeWrapper";
 import { ToastProvider } from "@/providers/ToastProvider";
 
@@ -41,7 +40,6 @@ export default function PolicyLayout({
               {/* Policy pages don't require authentication or wallet connection */}
               {children}
             </div>
-            <Footer />
           </ToastProvider>
         </ThemeWrapper>
       </body>

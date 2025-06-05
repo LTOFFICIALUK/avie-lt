@@ -193,9 +193,9 @@ const CommunityHero: React.FC<CommunityHeroProps> = ({
           </div>
         )}
         
-        {/* Minimal graphics for all other screens */}
+        {/* Minimal graphics for sm and up (hidden on mobile) */}
         {showGraphics && (
-          <div className="block 2xl:hidden mt-2 sm:mt-3 lg:mt-4">
+          <div className="hidden sm:block 2xl:hidden mt-2 sm:mt-3 lg:mt-4">
             <div className="relative w-full max-w-xs mx-auto">
               <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg border border-purple-400/30 relative mx-auto">
                 <TeamOutlined className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white" />
