@@ -33,8 +33,10 @@ import {
   SendOutlined,
   XOutlined,
   UserOutlined,
+  ClockCircleOutlined,
 } from "@ant-design/icons";
 import { AuthSheet } from "../../components/auth/AuthSheet";
+import { CommunityHero } from "../../components/landing/CommunityHero";
 
 const PROBLEM_SOLUTIONS = [
   {
@@ -126,57 +128,6 @@ const SECURITY_FEATURES = [
   { feature: "Data Handling", description: "Compliant with global standards such as GDPR, CCPA, and Data Protection laws" }
 ];
 
-// Hero Graphics Component
-const HeroGraphics = () => {
-  return (
-    <div className="relative w-full max-w-4xl mx-auto">
-      {/* Floating Elements */}
-      <div className="relative flex items-center justify-center">
-        {/* SOL Token */}
-        <div className="absolute -top-8 left-12 w-16 h-16 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full border border-green-400/30 flex items-center justify-center animate-bounce">
-          <DollarOutlined className="text-green-400 text-xl" />
-        </div>
-
-        {/* Viewer Count */}
-        <div className="absolute top-8 -right-16 w-20 h-12 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl border border-blue-400/30 flex items-center justify-center">
-          <EyeOutlined className="text-blue-400 mr-1" />
-          <span className="text-blue-400 text-sm font-bold">1.2K</span>
-        </div>
-
-        {/* Heart/Likes */}
-        <div className="absolute -bottom-6 -left-12 w-14 h-14 bg-gradient-to-br from-pink-500/20 to-red-500/20 rounded-full border border-pink-400/30 flex items-center justify-center animate-pulse">
-          <HeartOutlined className="text-pink-400 text-lg" />
-        </div>
-
-        {/* Gift/Rewards */}
-        <div className="absolute bottom-12 right-8 w-16 h-16 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-full border border-yellow-400/30 flex items-center justify-center">
-          <GiftOutlined className="text-yellow-400 text-xl" />
-        </div>
-
-        {/* Trophy */}
-        <div className="absolute -top-12 -right-8 w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full border border-purple-400/30 flex items-center justify-center animate-bounce">
-          <TrophyOutlined className="text-purple-400 text-lg" />
-        </div>
-
-        {/* AVIE Token */}
-        <div className="absolute -bottom-8 right-16 w-18 h-12 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-indigo-400/30 flex items-center justify-center">
-          <StarOutlined className="text-indigo-400 mr-1" />
-          <span className="text-indigo-400 text-sm font-bold">AVIE</span>
-        </div>
-
-        {/* Live Indicator */}
-        <div className="absolute top-16 left-16 w-16 h-8 bg-gradient-to-r from-red-500/30 to-pink-500/30 rounded-full border border-red-400/40 flex items-center justify-center">
-          <div className="w-2 h-2 bg-red-500 rounded-full mr-1 animate-pulse"></div>
-          <span className="text-red-400 text-xs font-bold">LIVE</span>
-        </div>
-      </div>
-
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-radial from-purple-600/10 via-transparent to-transparent rounded-full blur-3xl"></div>
-    </div>
-  );
-};
-
 const WhitepaperPage = () => {
   const authSheetRef = useRef<HTMLDivElement>(null);
 
@@ -231,47 +182,24 @@ const WhitepaperPage = () => {
         </div>
 
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-          <div className="relative z-10 text-center w-full max-w-none">
-            <div className="mb-8 lg:mb-12">
-              <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-base lg:text-lg font-medium text-purple-300 mb-8">
-                <FileTextOutlined className="mr-3 text-lg lg:text-xl" />
-                Official Whitepaper
-              </span>
-            </div>
-            
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-8 lg:mb-12 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight px-4">
-              AVIE Whitepaper
-            </h1>
-            
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-400 mb-12 lg:mb-16 max-w-4xl mx-auto px-4">
-              Technical documentation and platform overview
-            </p>
-
-            <div className="flex items-center justify-center gap-6 lg:gap-8 mb-12 lg:mb-16">
-              <span className="px-4 lg:px-6 py-2 lg:py-3 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 text-base lg:text-lg xl:text-xl">
-                Last Updated: 05/17/2025
-              </span>
-              <span className="px-4 lg:px-6 py-2 lg:py-3 rounded-full bg-purple-600/20 border border-purple-500/30 text-purple-400 text-base lg:text-lg xl:text-xl">
-                Version 1.0
-              </span>
-            </div>
-            
-            <div className="flex justify-center mb-16 lg:mb-20">
-              <button className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300 transform hover:scale-105">
-                <DownloadOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
-                Download PDF
-              </button>
-            </div>
-          </div>
-
-          {/* Hero Graphics Overlay */}
-          <div className="absolute top-1/2 left-0 right-0 bottom-0 z-0">
-            <div className="scale-75 sm:scale-90 md:scale-100 lg:scale-110 xl:scale-125 2xl:scale-150">
-              <HeroGraphics />
-            </div>
-          </div>
-        </section>
+        <CommunityHero 
+          badgeText="Last Updated: 05/17/2025"
+          badgeIcon={<ClockCircleOutlined className="mr-2 text-white" />}
+          title="Official AVIE Whitepaper"
+          description="Technical documentation and overview for the AVIE platform and its features."
+          button1={{
+            text: "Roadmap",
+            icon: <RocketOutlined />,
+            onClick: () => window.location.href = '/roadmap',
+            variant: 'primary'
+          }}
+          button2={{
+            text: "AP Rewards",
+            icon: <TrophyOutlined />,
+            onClick: () => window.location.href = '/AP-reward-system',
+            variant: 'secondary'
+          }}
+        />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-8 relative z-10">
           {/* Table of Contents - Sidebar */}
@@ -637,14 +565,14 @@ const WhitepaperPage = () => {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
                       onClick={handleJoinMovement}
-                      className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300 transform hover:scale-105"
+                      className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
                     >
-                      <RocketOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
+                      <RocketOutlined className="mr-2" />
                       Join the Movement
                     </button>
                     <Link href="/community">
-                      <button className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300">
-                        <TeamOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
+                      <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg transition-all duration-300">
+                        <TeamOutlined className="mr-2" />
                         Join Community
                       </button>
                     </Link>

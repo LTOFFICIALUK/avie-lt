@@ -27,6 +27,7 @@ import Login from "../auth/Login";
 import Register from "../auth/Register";
 import FormVerify2FA from "../auth/FormVerify2FA";
 import PasswordReset from "../auth/PasswordReset";
+import { CommunityHero } from "./CommunityHero";
 
 const FEATURES = [
   {
@@ -81,81 +82,6 @@ const HOW_IT_WORKS = [
     icon: StarOutlined
   }
 ];
-
-// Hero Graphics Component
-const HeroGraphics = () => {
-  return (
-    <div className="relative w-full max-w-4xl mx-auto mt-16">
-      {/* Central Streaming Hub */}
-      <div className="relative flex items-center justify-center">
-        {/* Main Central Circle */}
-        <div className="w-32 h-32 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-2xl border border-purple-400/30 relative z-10">
-          <VideoCameraOutlined className="text-4xl text-white" />
-          {/* Pulse Animation */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 animate-ping opacity-20"></div>
-        </div>
-
-        {/* Floating Elements Around Central Hub */}
-        {/* SOL Token */}
-        <div className="absolute -top-8 left-12 w-16 h-16 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full border border-green-400/30 flex items-center justify-center animate-bounce">
-          <DollarOutlined className="text-green-400 text-xl" />
-        </div>
-
-        {/* Viewer Count */}
-        <div className="absolute top-8 -right-16 w-20 h-12 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl border border-blue-400/30 flex items-center justify-center">
-          <EyeOutlined className="text-blue-400 mr-1" />
-          <span className="text-blue-400 text-sm font-bold">1.2K</span>
-        </div>
-
-        {/* Heart/Likes */}
-        <div className="absolute -bottom-6 -left-12 w-14 h-14 bg-gradient-to-br from-pink-500/20 to-red-500/20 rounded-full border border-pink-400/30 flex items-center justify-center animate-pulse">
-          <HeartOutlined className="text-pink-400 text-lg" />
-        </div>
-
-        {/* Gift/Rewards */}
-        <div className="absolute bottom-12 right-8 w-16 h-16 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-full border border-yellow-400/30 flex items-center justify-center">
-          <GiftOutlined className="text-yellow-400 text-xl" />
-        </div>
-
-        {/* Trophy */}
-        <div className="absolute -top-12 -right-8 w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full border border-purple-400/30 flex items-center justify-center animate-bounce">
-          <TrophyOutlined className="text-purple-400 text-lg" />
-        </div>
-
-        {/* AVIE Token */}
-        <div className="absolute -bottom-8 right-16 w-18 h-12 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-indigo-400/30 flex items-center justify-center">
-          <StarOutlined className="text-indigo-400 mr-1" />
-          <span className="text-indigo-400 text-sm font-bold">AVIE</span>
-        </div>
-
-        {/* Live Indicator */}
-        <div className="absolute top-16 left-16 w-16 h-8 bg-gradient-to-r from-red-500/30 to-pink-500/30 rounded-full border border-red-400/40 flex items-center justify-center">
-          <div className="w-2 h-2 bg-red-500 rounded-full mr-1 animate-pulse"></div>
-          <span className="text-red-400 text-xs font-bold">LIVE</span>
-        </div>
-      </div>
-
-      {/* Connecting Lines */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{zIndex: 1}}>
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgb(168, 85, 247)" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="rgb(59, 130, 246)" stopOpacity="0.1" />
-          </linearGradient>
-        </defs>
-        
-        {/* Connection lines from center to floating elements */}
-        <line x1="50%" y1="50%" x2="30%" y2="25%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
-        <line x1="50%" y1="50%" x2="75%" y2="35%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
-        <line x1="50%" y1="50%" x2="25%" y2="75%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
-        <line x1="50%" y1="50%" x2="70%" y2="80%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
-      </svg>
-
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-radial from-purple-600/10 via-transparent to-transparent rounded-full blur-3xl"></div>
-    </div>
-  );
-};
 
 // Rewards Dashboard Component
 const RewardsDashboard = () => {
@@ -283,66 +209,48 @@ const LandingPage = () => {
     setAuthModalOpen(true);
   };
 
+  const handleExploreStreams = () => {
+    setAuthModalOpen(true);
+  };
+
+  const handleAPRewards = () => {
+    window.location.href = '/AP-reward-system';
+  };
+
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
       {/* Navigation */}
       <Navigation />
 
-      <main className="overflow-x-hidden pt-12 md:pt-14 lg:pt-16">
-        {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20 pointer-events-none" />
-          
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full blur-3xl"></div>
-          </div>
-          
-          <div className="relative z-10 text-center w-full max-w-none">
-            <div className="mb-8 lg:mb-12">
-              <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-base lg:text-lg font-medium text-purple-300 mb-8">
-                <ThunderboltOutlined className="mr-3 text-lg lg:text-xl" />
-                Powered by Solana Blockchain
-              </span>
-            </div>
-            
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-8 lg:mb-12 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight px-4">
-              Create, Connect, Earn.
-            </h1>
-            
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-300 mb-12 lg:mb-16 max-w-6xl mx-auto leading-relaxed px-4">
-              Join <span className="text-[var(--color-brand)] font-bold">AVIE</span>, the revolutionary streaming platform where creators and viewers earn{" "}
-              <span className="text-green-400 font-bold">AP Rewards</span> for every stream, every view and every interaction.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 lg:gap-8 justify-center items-center mb-16 lg:mb-20">
-              <Button 
-                type="primary" 
-                size="large"
-                icon={<RocketOutlined />}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 border-0 hover:from-purple-700 hover:to-blue-700 h-14 lg:h-16 xl:h-18 px-8 lg:px-12 text-lg lg:text-xl xl:text-2xl font-semibold"
-                onClick={handleStartStreaming}
-              >
-                Explore Streams
-              </Button>
-              <Link href="/en/AP-reward-system">
-                <Button 
-                  size="large"
-                  icon={<StarOutlined />}
-                  className="border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 h-14 lg:h-16 xl:h-18 px-8 lg:px-12 text-lg lg:text-xl xl:text-2xl"
-                >
-                  AP Rewards
-                </Button>
-              </Link>
-            </div>
+      <main className="overflow-x-hidden pt-12 md:pt-14 lg:pt-16 relative">
+        {/* Extended Background Gradients for entire page */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20 pointer-events-none" />
+        
+        {/* Background Pattern for entire page */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full blur-3xl"></div>
+        </div>
 
-            {/* Hero Graphics */}
-            <div className="scale-75 sm:scale-90 md:scale-100 lg:scale-110 xl:scale-125 2xl:scale-150">
-              <HeroGraphics />
-            </div>
-          </div>
-        </section>
+        {/* Hero Section */}
+        <CommunityHero 
+          badgeText="Powered by Solana Blockchain"
+          badgeIcon={<ThunderboltOutlined className="mr-2 text-white" />}
+          title="Create, Connect, Earn."
+          description="Join AVIE, the revolutionary streaming platform where creators and viewers earn AP Rewards for every stream, every view and every interaction."
+          button1={{
+            text: "Explore Streams",
+            icon: <PlayCircleOutlined />,
+            onClick: handleExploreStreams,
+            variant: 'primary'
+          }}
+          button2={{
+            text: "AP Rewards",
+            icon: <TrophyOutlined />,
+            onClick: handleAPRewards,
+            variant: 'secondary'
+          }}
+        />
 
         {/* How It Works Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -525,7 +433,7 @@ const LandingPage = () => {
         {/* CTA Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-purple-900/30 border border-purple-700/30">
+            <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-purple-900/30 border border-purple-700/30 backdrop-blur-sm">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Ready to be Rewarded?
               </h2>
@@ -535,21 +443,16 @@ const LandingPage = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  type="primary" 
-                  size="large"
-                  icon={<RocketOutlined />}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 border-0 hover:from-purple-700 hover:to-blue-700 h-12 px-8 text-lg font-semibold"
+                <button
                   onClick={handleStartStreaming}
+                  className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
                 >
+                  <RocketOutlined className="mr-2" />
                   Start Streaming Today
-                </Button>
-                <Button 
-                  size="large"
-                  className="border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 h-12 px-8 text-lg"
-                >
+                </button>
+                <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg transition-all duration-300">
                   Learn More
-                </Button>
+                </button>
               </div>
             </div>
           </div>
@@ -565,7 +468,7 @@ const LandingPage = () => {
           onClose={() => setAuthModalOpen(false)} 
         />
       )}
-    </>
+    </div>
   );
 };
 

@@ -25,8 +25,10 @@ import {
   CalendarOutlined,
   VideoCameraOutlined,
   BulbOutlined,
+  FileTextOutlined,
 } from "@ant-design/icons";
 import { AuthSheet } from "../../components/auth/AuthSheet";
+import { CommunityHero } from "../../components/landing/CommunityHero";
 
 const EARNING_ACTIVITIES = [
   {
@@ -123,81 +125,6 @@ const REWARD_TIERS = [
   }
 ];
 
-// Hero Graphics Component
-const HeroGraphics = () => {
-  return (
-    <div className="relative w-full max-w-4xl mx-auto mt-16">
-      {/* Central AVIE Points Hub */}
-      <div className="relative flex items-center justify-center">
-        {/* Main Central Circle */}
-        <div className="w-32 h-32 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-2xl border border-purple-400/30 relative z-10">
-          <TrophyOutlined className="text-4xl text-white" />
-          {/* Pulse Animation */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 animate-ping opacity-20"></div>
-        </div>
-
-        {/* Floating Elements Around Central Hub */}
-        {/* SOL Token */}
-        <div className="absolute -top-8 left-12 w-16 h-16 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full border border-green-400/30 flex items-center justify-center animate-bounce">
-          <DollarOutlined className="text-green-400 text-xl" />
-        </div>
-
-        {/* Viewer Engagement */}
-        <div className="absolute top-8 -right-16 w-20 h-12 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl border border-blue-400/30 flex items-center justify-center">
-          <EyeOutlined className="text-blue-400 mr-1" />
-          <span className="text-blue-400 text-sm font-bold">AP</span>
-        </div>
-
-        {/* Heart/Engagement */}
-        <div className="absolute -bottom-6 -left-12 w-14 h-14 bg-gradient-to-br from-pink-500/20 to-red-500/20 rounded-full border border-pink-400/30 flex items-center justify-center animate-pulse">
-          <HeartOutlined className="text-pink-400 text-lg" />
-        </div>
-
-        {/* Rewards */}
-        <div className="absolute bottom-12 right-8 w-16 h-16 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-full border border-yellow-400/30 flex items-center justify-center">
-          <GiftOutlined className="text-yellow-400 text-xl" />
-        </div>
-
-        {/* Trophy Achievement */}
-        <div className="absolute -top-12 -right-8 w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full border border-purple-400/30 flex items-center justify-center animate-bounce">
-          <StarOutlined className="text-purple-400 text-lg" />
-        </div>
-
-        {/* AVIE Points Indicator */}
-        <div className="absolute -bottom-8 right-16 w-18 h-12 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl border border-indigo-400/30 flex items-center justify-center">
-          <TrophyOutlined className="text-indigo-400 mr-1" />
-          <span className="text-indigo-400 text-sm font-bold">AP</span>
-        </div>
-
-        {/* Engagement Indicator */}
-        <div className="absolute top-16 left-16 w-16 h-8 bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-full border border-green-400/40 flex items-center justify-center">
-          <div className="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse"></div>
-          <span className="text-green-400 text-xs font-bold">EARN</span>
-        </div>
-      </div>
-
-      {/* Connecting Lines */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{zIndex: 1}}>
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgb(168, 85, 247)" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="rgb(59, 130, 246)" stopOpacity="0.1" />
-          </linearGradient>
-        </defs>
-        
-        {/* Connection lines from center to floating elements */}
-        <line x1="50%" y1="50%" x2="30%" y2="25%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
-        <line x1="50%" y1="50%" x2="75%" y2="35%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
-        <line x1="50%" y1="50%" x2="25%" y2="75%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
-        <line x1="50%" y1="50%" x2="70%" y2="80%" stroke="url(#lineGradient)" strokeWidth="1" strokeDasharray="4,4" />
-      </svg>
-
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-radial from-purple-600/10 via-transparent to-transparent rounded-full blur-3xl"></div>
-    </div>
-  );
-};
-
 const APRewardsPage = () => {
   const authSheetRef = useRef<HTMLDivElement>(null);
 
@@ -209,6 +136,20 @@ const APRewardsPage = () => {
         button.click();
       }
     }
+  };
+
+  const handleExploreStreams = () => {
+    // Trigger the AuthSheet modal by programmatically clicking the button
+    if (authSheetRef.current) {
+      const button = authSheetRef.current.querySelector('button');
+      if (button) {
+        button.click();
+      }
+    }
+  };
+
+  const handleWhitepaper = () => {
+    window.location.href = '/whitepaper';
   };
 
   return (
@@ -227,41 +168,24 @@ const APRewardsPage = () => {
         </div>
 
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-          <div className="relative z-10 text-center w-full max-w-none">
-            <div className="mb-8 lg:mb-12">
-              <span className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-base lg:text-lg font-medium text-purple-300 mb-8">
-                <TrophyOutlined className="mr-3 text-lg lg:text-xl" />
-                Earn While You Engage
-              </span>
-            </div>
-            
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-8 lg:mb-12 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight px-4">
-              AVIE Points System
-            </h1>
-            
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-300 mb-12 lg:mb-16 max-w-6xl mx-auto leading-relaxed px-4">
-              Turn your engagement into earnings. Watch, stream, chat, and earn{" "}
-              <span className="text-purple-400 font-bold">AVIE Points (AP)</span> that convert directly to{" "}
-              <span className="text-green-400 font-bold">$SOL</span> tokens bi-weekly.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 lg:gap-8 justify-center items-center mb-16 lg:mb-20">
-              <button 
-                onClick={handleJoinNow}
-                className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300 transform hover:scale-105"
-              >
-                <RocketOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
-                Start Earning Now
-              </button>
-            </div>
-
-            {/* Hero Graphics */}
-            <div className="scale-75 sm:scale-90 md:scale-100 lg:scale-110 xl:scale-125 2xl:scale-150">
-              <HeroGraphics />
-            </div>
-          </div>
-        </section>
+        <CommunityHero 
+          badgeText="Earn While You Engage"
+          badgeIcon={<DollarOutlined className="mr-2 text-white" />}
+          title="AP Reward System"
+          description="Turn your engagement into earnings. Watch, stream, chat, and earn AVIE Points (AP) that convert directly to $SOL tokens bi-weekly."
+          button1={{
+            text: "Explore Streams",
+            icon: <PlayCircleOutlined />,
+            onClick: handleExploreStreams,
+            variant: 'primary'
+          }}
+          button2={{
+            text: "Whitepaper",
+            icon: <FileTextOutlined />,
+            onClick: handleWhitepaper,
+            variant: 'secondary'
+          }}
+        />
 
         {/* How It Works */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -446,14 +370,14 @@ const APRewardsPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={handleJoinNow}
-                  className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300 transform hover:scale-105"
+                  className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105"
                 >
-                  <RocketOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
+                  <RocketOutlined className="mr-2" />
                   Start Earning Today
                 </button>
                 <Link href="/dashboard">
-                  <button className="inline-flex items-center justify-center px-8 lg:px-12 py-4 lg:py-5 xl:py-6 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg lg:text-xl xl:text-2xl transition-all duration-300">
-                    <TrophyOutlined className="mr-3 text-lg lg:text-xl xl:text-2xl" />
+                  <button className="inline-flex items-center justify-center px-8 py-3 rounded-lg border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 font-semibold text-lg transition-all duration-300">
+                    <TrophyOutlined className="mr-2" />
                     View Dashboard
                   </button>
                 </Link>
