@@ -20,50 +20,50 @@ import {
 // Community Graphics Component
 const CommunityGraphics = () => {
   return (
-    <div className="relative w-full max-w-4xl mx-auto mt-16">
+    <div className="relative w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-auto mt-8 sm:mt-12 lg:mt-16">
       {/* Central Community Hub */}
       <div className="relative flex items-center justify-center">
         {/* Main Central Circle */}
-        <div className="w-32 h-32 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-2xl border border-purple-400/30 relative z-10">
-          <TeamOutlined className="text-4xl text-white" />
+        <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-2xl border border-purple-400/30 relative z-10">
+          <TeamOutlined className="text-2xl sm:text-3xl lg:text-4xl text-white" />
           {/* Pulse Animation */}
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 animate-ping opacity-20"></div>
         </div>
 
         {/* Floating Social Platform Icons */}
         {/* Discord */}
-        <div className="absolute -top-8 left-12 w-16 h-16 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-full border border-indigo-400/30 flex items-center justify-center animate-bounce">
-          <DiscordOutlined className="text-indigo-400 text-xl" />
+        <div className="absolute -top-6 left-8 sm:-top-8 sm:left-12 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-full border border-indigo-400/30 flex items-center justify-center animate-bounce">
+          <DiscordOutlined className="text-indigo-400 text-base sm:text-lg lg:text-xl" />
         </div>
 
         {/* Telegram */}
-        <div className="absolute top-8 -right-16 w-16 h-16 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full border border-blue-400/30 flex items-center justify-center">
-          <SendOutlined className="text-blue-400 text-xl" />
+        <div className="absolute top-6 -right-12 sm:top-8 sm:-right-16 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full border border-blue-400/30 flex items-center justify-center">
+          <SendOutlined className="text-blue-400 text-base sm:text-lg lg:text-xl" />
         </div>
 
         {/* X Platform */}
-        <div className="absolute -bottom-6 -left-12 w-16 h-16 bg-gradient-to-br from-gray-500/20 to-slate-500/20 rounded-full border border-gray-400/30 flex items-center justify-center animate-pulse">
-          <XOutlined className="text-gray-400 text-xl" />
+        <div className="absolute -bottom-4 -left-8 sm:-bottom-6 sm:-left-12 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-gray-500/20 to-slate-500/20 rounded-full border border-gray-400/30 flex items-center justify-center animate-pulse">
+          <XOutlined className="text-gray-400 text-base sm:text-lg lg:text-xl" />
         </div>
 
         {/* Founder X */}
-        <div className="absolute bottom-12 right-8 w-16 h-16 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-full border border-amber-400/30 flex items-center justify-center">
-          <XOutlined className="text-amber-400 text-xl" />
+        <div className="absolute bottom-8 right-6 sm:bottom-12 sm:right-8 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-full border border-amber-400/30 flex items-center justify-center">
+          <XOutlined className="text-amber-400 text-base sm:text-lg lg:text-xl" />
         </div>
 
         {/* Community Members */}
-        <div className="absolute -top-12 -right-8 w-14 h-14 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full border border-green-400/30 flex items-center justify-center animate-bounce">
-          <UserOutlined className="text-green-400 text-lg" />
+        <div className="absolute -top-8 -right-6 sm:-top-12 sm:-right-8 w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full border border-green-400/30 flex items-center justify-center animate-bounce">
+          <UserOutlined className="text-green-400 text-sm sm:text-base lg:text-lg" />
         </div>
 
         {/* Community Heart */}
-        <div className="absolute -bottom-8 right-16 w-14 h-14 bg-gradient-to-br from-pink-500/20 to-red-500/20 rounded-full border border-pink-400/30 flex items-center justify-center">
-          <HeartOutlined className="text-pink-400 text-lg" />
+        <div className="absolute -bottom-6 right-12 sm:-bottom-8 sm:right-16 w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-pink-500/20 to-red-500/20 rounded-full border border-pink-400/30 flex items-center justify-center">
+          <HeartOutlined className="text-pink-400 text-sm sm:text-base lg:text-lg" />
         </div>
 
         {/* Active Status */}
-        <div className="absolute top-16 left-16 w-16 h-8 bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-full border border-green-400/40 flex items-center justify-center">
-          <div className="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse"></div>
+        <div className="absolute top-12 left-12 sm:top-16 sm:left-16 w-12 h-6 sm:w-14 sm:h-7 lg:w-16 lg:h-8 bg-gradient-to-r from-green-500/30 to-emerald-500/30 rounded-full border border-green-400/40 flex items-center justify-center">
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full mr-1 animate-pulse"></div>
           <span className="text-green-400 text-xs font-bold">LIVE</span>
         </div>
       </div>
@@ -136,7 +136,7 @@ const CommunityHero: React.FC<CommunityHeroProps> = ({
   const finalButton2 = button2 || defaultButton2;
 
   return (
-    <section className={`relative min-h-[50vh] lg:min-h-[60vh] xl:min-h-[70vh] 2xl:min-h-[80vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 xl:py-20 ${className}`}>
+    <section className={`relative min-h-[36vh] lg:min-h-[44vh] xl:min-h-[52vh] 2xl:min-h-[60vh] flex items-center justify-center px-3 sm:px-4 lg:px-6 xl:px-8 py-4 sm:py-6 lg:py-8 xl:py-12 ${className}`}>
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20 pointer-events-none" />
       
       {/* Background Pattern */}
@@ -145,60 +145,60 @@ const CommunityHero: React.FC<CommunityHeroProps> = ({
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full blur-3xl"></div>
       </div>
       
-      <div className="relative z-10 text-center max-w-6xl mx-auto">
-        <div className="mb-2 sm:mb-3 lg:mb-4">
-          <span className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-xs sm:text-sm font-medium text-purple-300">
+      <div className="relative z-10 text-center max-w-5xl mx-auto">
+        <div className="mb-1 sm:mb-1.5 lg:mb-2">
+          <span className="inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 text-xs font-medium text-purple-300">
             {badgeIcon}
             {badgeText}
           </span>
         </div>
         
-        <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-2 sm:mb-3 lg:mb-4 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight">
+        <h1 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-1 sm:mb-1.5 lg:mb-2 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight">
           {title}
         </h1>
         
-        <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-300 mb-3 sm:mb-4 lg:mb-6 max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed px-2 sm:px-4">
+        <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-300 mb-2 sm:mb-2.5 lg:mb-3 max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto leading-snug px-1 sm:px-2 lg:px-4">
           {description}
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 justify-center items-center mb-4 sm:mb-6 lg:mb-8">
+        <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-2 lg:gap-2.5 justify-center items-center mb-2 sm:mb-3 lg:mb-4">
           <button
             onClick={finalButton1.onClick}
-            className={`inline-flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 lg:px-6 lg:py-3 rounded-lg font-semibold text-xs sm:text-sm md:text-base lg:text-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto ${
+            className={`inline-flex items-center justify-center px-3 py-1.5 sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 xl:px-6 xl:py-3 rounded-lg font-semibold text-xs sm:text-sm lg:text-base xl:text-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto ${
               finalButton1.variant === 'primary' 
-                ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white h-9 sm:h-10 lg:h-11 xl:h-12'
-                : 'border border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 h-9 sm:h-10 lg:h-11 xl:h-12'
+                ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white h-8 sm:h-9 lg:h-10 xl:h-11 2xl:h-12'
+                : 'border border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 h-8 sm:h-9 lg:h-10 xl:h-11 2xl:h-12'
             }`}
           >
             {finalButton1.icon}
-            <span className="ml-2">{finalButton1.text}</span>
+            <span className="ml-1.5 sm:ml-2">{finalButton1.text}</span>
           </button>
           <button
             onClick={finalButton2.onClick}
-            className={`inline-flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 lg:px-6 lg:py-3 rounded-lg font-semibold text-xs sm:text-sm md:text-base lg:text-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto ${
+            className={`inline-flex items-center justify-center px-3 py-1.5 sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 xl:px-6 xl:py-3 rounded-lg font-semibold text-xs sm:text-sm lg:text-base xl:text-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto ${
               finalButton2.variant === 'primary' 
-                ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white h-9 sm:h-10 lg:h-11 xl:h-12'
-                : 'border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 h-9 sm:h-10 lg:h-11 xl:h-12'
+                ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white h-8 sm:h-9 lg:h-10 xl:h-11 2xl:h-12'
+                : 'border border-gray-600 text-gray-300 hover:border-purple-500 hover:text-purple-400 h-8 sm:h-9 lg:h-10 xl:h-11 2xl:h-12'
             }`}
           >
             {finalButton2.icon}
-            <span className="ml-2">{finalButton2.text}</span>
+            <span className="ml-1.5 sm:ml-2">{finalButton2.text}</span>
           </button>
         </div>
 
-        {/* Community Graphics - Only on large screens */}
+        {/* Community Graphics - Only on very large screens */}
         {showGraphics && (
-          <div className="hidden xl:block mt-8 xl:mt-12 2xl:mt-16">
+          <div className="hidden 2xl:block mt-4 2xl:mt-6">
             <CommunityGraphics />
           </div>
         )}
         
-        {/* Simple minimal graphics for smaller screens */}
+        {/* Minimal graphics for all other screens */}
         {showGraphics && (
-          <div className="block xl:hidden mt-3 sm:mt-4 lg:mt-6">
+          <div className="block 2xl:hidden mt-1.5 sm:mt-2 lg:mt-3">
             <div className="relative w-full max-w-xs mx-auto">
-              <div className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg border border-purple-400/30 relative mx-auto">
-                <TeamOutlined className="text-lg sm:text-xl md:text-2xl text-white" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 xl:w-18 xl:h-18 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-lg border border-purple-400/30 relative mx-auto">
+                <TeamOutlined className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-white" />
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 animate-ping opacity-20"></div>
               </div>
             </div>
