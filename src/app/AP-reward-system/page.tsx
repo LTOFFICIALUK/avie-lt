@@ -172,7 +172,7 @@ const APRewardsPage = () => {
           badgeText="Earn While You Engage"
           badgeIcon={<DollarOutlined className="mr-2 text-white" />}
           title="AP Reward System"
-          description="Turn your engagement into earnings. Watch, stream, chat, and earn AVIE Points (AP) that convert directly to $SOL tokens bi-weekly."
+          description="Turn your engagement into rewards. Watch, stream, chat, and earn AVIE Points (AP) that convert directly to $SOL tokens bi-weekly."
           button1={{
             text: "Explore Streams",
             icon: <PlayCircleOutlined />,
@@ -283,44 +283,6 @@ const APRewardsPage = () => {
           </div>
         </section>
 
-        {/* Reward Tiers */}
-        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12 sm:mb-14 md:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
-                Reward Tiers & Multipliers
-              </h2>
-              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
-                Unlock higher earning potential as you engage more with the platform
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-              {REWARD_TIERS.map((tier, index) => (
-                <div key={index} className={`bg-gradient-to-br ${tier.bgGradient} border ${tier.borderColor} rounded-xl sm:rounded-2xl p-5 sm:p-6 text-center hover:border-opacity-75 transition-all duration-300 backdrop-blur-sm`}>
-                  <div className={`text-xl sm:text-2xl font-bold ${tier.color} mb-2`}>{tier.tier}</div>
-                  <div className="text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4">
-                    {tier.tier} Tier Member
-                  </div>
-                  
-                  <div className={`text-2xl sm:text-3xl font-bold ${tier.color} mb-3 sm:mb-4`}>
-                    {tier.multiplier}
-                  </div>
-                  
-                  <div className="space-y-1.5 sm:space-y-2">
-                    {tier.perks.map((perk, perkIndex) => (
-                      <div key={perkIndex} className="flex items-center text-xs sm:text-sm text-gray-300">
-                        <CheckCircleOutlined className="text-green-400 mr-2 text-xs" />
-                        {perk}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Key Features */}
         <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent">
           <div className="max-w-6xl mx-auto">
@@ -337,7 +299,7 @@ const APRewardsPage = () => {
               <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl sm:rounded-2xl p-6 sm:p-7 md:p-8 text-center backdrop-blur-sm">
                 <DollarOutlined className="text-3xl sm:text-4xl text-green-400 mb-3 sm:mb-4" />
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">Real Value</h3>
-                <p className="text-gray-300 text-sm sm:text-base">Convert AP directly to $SOL tokens with transparent exchange rates</p>
+                <p className="text-gray-300 text-sm sm:text-base">Convert AP Rewards directly to $SOL at the end of each period</p>
               </div>
               
               <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-xl sm:rounded-2xl p-6 sm:p-7 md:p-8 text-center backdrop-blur-sm">
@@ -363,7 +325,7 @@ const APRewardsPage = () => {
                 Ready to Start Earning?
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto px-2 sm:px-0">
-                Join thousands of users already earning $SOL through the AVIE Points system. 
+                Join our growing community and earn rewards through the AVIE Points system. 
                 Your engagement has never been more valuable.
               </p>
               

@@ -21,9 +21,11 @@ const DynamicLayout = ({ children }: any) => {
     }
   }, [isMobile]);
   
-  // Check if we're on a stream page or landing page
+  // Check if we're on a stream page, landing page, dashboard page, or main navigation pages
   const isStreamPage = pathname.includes("/streams/");
   const isLandingPage = pathname.includes("/landing");
+  const isDashboardPage = pathname.includes("/dashboard");
+  const isMainNavPage = pathname.includes("/trending") || pathname.includes("/following") || pathname.includes("/previously-watched");
 
   const toggleSidebarOpened = () => {
     setIsSidebarOpened(!isSidebarOpened);
@@ -83,7 +85,7 @@ const DynamicLayout = ({ children }: any) => {
             }}
           />
           <main className={`flex flex-col gap-12 ${isStreamPage ? '' : 'sm:max-w-[1300px]'} mx-auto sm:px-4 pt-6 pb-24 ${isStreamPage ? 'lg:p-0' : ''} max-w-full overflow-hidden`}>
-            {!isStreamPage && <BreadcrumbsNav />}
+            {!isStreamPage && !isDashboardPage && !isMainNavPage && <BreadcrumbsNav />}
             {children}
           </main>
         </div>

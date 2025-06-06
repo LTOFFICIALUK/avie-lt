@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import { Typography, Spin, Pagination, Empty } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import { Typography, Spin, Pagination, Empty, Select } from "antd";
+import { LoadingOutlined, FilterOutlined } from "@ant-design/icons";
 import api from "@/lib/api";
 import { StreamCard } from "@/components/stream/StreamCard";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ import Link from "next/link";
 import { Category, Stream } from "@/types/stream";
 
 const { Title } = Typography;
+const { Option } = Select;
 
 interface PaginationInfo {
   page: number;
@@ -17,6 +18,8 @@ interface PaginationInfo {
   totalStreams: number;
   totalPages: number;
 }
+
+type SortOption = 'viewers_desc' | 'viewers_asc' | 'recent' | 'oldest';
 
 export default function CategoryPage() {
   const params = useParams();
@@ -35,10 +38,11 @@ export default function CategoryPage() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<SortOption>('viewers_desc');
 
   // Fetch streams by category
   const fetchCategoryStreams = useCallback(
-    async (page: number = 1) => {
+    async (page: number = 1, sort: SortOption = sortBy) => {
       try {
         setIsLoading(true);
 
@@ -46,12 +50,35 @@ export default function CategoryPage() {
           params: {
             page,
             limit: 12,
+            sortBy: sort,
           },
         });
 
         if (response.data.status === "success") {
           const { streams, pagination, category } = response.data.data;
-          setStreams(streams || []);
+          
+          // Apply client-side sorting if API doesn't support it
+          let sortedStreams = streams || [];
+          switch (sort) {
+            case 'viewers_desc':
+              sortedStreams = [...sortedStreams].sort((a, b) => b.viewers - a.viewers);
+              break;
+            case 'viewers_asc':
+              sortedStreams = [...sortedStreams].sort((a, b) => a.viewers - b.viewers);
+              break;
+            case 'recent':
+              sortedStreams = [...sortedStreams].sort((a, b) => 
+                new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()
+              );
+              break;
+            case 'oldest':
+              sortedStreams = [...sortedStreams].sort((a, b) => 
+                new Date(a.startedAt).getTime() - new Date(b.startedAt).getTime()
+              );
+              break;
+          }
+          
+          setStreams(sortedStreams);
           setPagination(pagination);
           setCategory(category);
           setError(null);
@@ -65,18 +92,27 @@ export default function CategoryPage() {
         setIsLoading(false);
       }
     },
-    [slug]
+    [slug, sortBy]
   );
 
   useEffect(() => {
     if (slug) {
-      fetchCategoryStreams(currentPage);
+      fetchCategoryStreams(currentPage, sortBy);
     }
-  }, [slug, currentPage, fetchCategoryStreams]);
+  }, [slug, currentPage, sortBy, fetchCategoryStreams]);
 
   // Handle pagination change
   const handlePageChange = (page: number) => {
     router.push(`/streams/category/${slug}?page=${page}`);
+  };
+
+  // Handle sort change
+  const handleSortChange = (value: SortOption) => {
+    setSortBy(value);
+    // Reset to page 1 when changing sort
+    if (currentPage !== 1) {
+      router.push(`/streams/category/${slug}`);
+    }
   };
 
   return (
@@ -90,15 +126,40 @@ export default function CategoryPage() {
             ← Back to All Streams
           </Link>
 
-          <Title level={2} className="text-white mt-2 mb-2">
-            {isLoading ? "Loading..." : category?.name || "Category"}
-          </Title>
+          <div className="flex items-start justify-between gap-4 mt-2 mb-6">
+            <div className="flex-1">
+              <Title level={2} className="text-white mb-2">
+                {isLoading ? "Loading..." : category?.name || "Category"}
+              </Title>
 
-          {category?.description && (
-            <p className="text-gray-400 mt-1 mb-6 max-w-3xl">
-              {category.description}
-            </p>
-          )}
+              {category?.description && (
+                <p className="text-gray-400 mt-1 max-w-3xl">
+                  {category.description}
+                </p>
+              )}
+            </div>
+
+            {/* Filter Dropdown */}
+            {!isLoading && streams.length > 0 && (
+              <div className="flex items-center gap-2 mt-1">
+                <FilterOutlined className="text-gray-400" />
+                <Select
+                  value={sortBy}
+                  onChange={handleSortChange}
+                  className="w-44"
+                  size="small"
+                  style={{
+                    backgroundColor: 'transparent',
+                  }}
+                >
+                  <Option value="viewers_desc">Most Viewers</Option>
+                  <Option value="viewers_asc">Least Viewers</Option>
+                  <Option value="recent">Recently Started</Option>
+                  <Option value="oldest">Oldest First</Option>
+                </Select>
+              </div>
+            )}
+          </div>
         </div>
 
         {isLoading ? (
@@ -119,10 +180,33 @@ export default function CategoryPage() {
         ) : (
           <>
             {streams.length > 0 ? (
-              <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
-                {streams.map((stream) => (
-                  <StreamCard key={stream.id} stream={stream} />
-                ))}
+              <div className="w-full">
+                {/* Streams Container - Horizontal Scrolling */}
+                <div className="relative">
+                  <div className="flex overflow-x-auto scrollbar-hide gap-4 pb-2"
+                       style={{
+                         scrollbarWidth: 'none',
+                         msOverflowStyle: 'none',
+                       }}>
+                    {streams.map((stream) => (
+                      <div key={stream.id} className="flex-shrink-0 w-60">
+                        <StreamCard stream={stream} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {pagination.totalPages > 1 && (
+                  <div className="mt-8 flex justify-center">
+                    <Pagination
+                      current={pagination.page}
+                      total={pagination.totalStreams}
+                      pageSize={pagination.limit}
+                      onChange={handlePageChange}
+                      showSizeChanger={false}
+                    />
+                  </div>
+                )}
               </div>
             ) : (
               <Empty
@@ -131,21 +215,20 @@ export default function CategoryPage() {
                 style={{ color: "white", marginTop: "2rem" }}
               />
             )}
-
-            {pagination.totalPages > 1 && (
-              <div className="mt-8 flex justify-center">
-                <Pagination
-                  current={pagination.page}
-                  total={pagination.totalStreams}
-                  pageSize={pagination.limit}
-                  onChange={handlePageChange}
-                  showSizeChanger={false}
-                />
-              </div>
-            )}
           </>
         )}
       </main>
+
+      {/* Add custom styles to hide scrollbar */}
+      <style jsx global>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 }

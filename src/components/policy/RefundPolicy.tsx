@@ -55,9 +55,9 @@ export function RefundPolicy() {
         Contact our support team providing sufficient evidence within 72 hours of purchase if you believe a plugin is malfunctioning and refund may be warranted.
       </Paragraph>
 
-      <Title level={3}>4. Chargebacks & Disputes</Title>
+      <Title level={3}>4. Disputes</Title>
       <Paragraph>
-        Filing a chargeback or payment dispute without first contacting our support team may result in:
+        Filing a payment dispute without first contacting our support team for support first may result in:
       </Paragraph>
       <ul className="policy-list">
         <li>Immediate suspension of your AVIE account</li>
@@ -65,7 +65,7 @@ export function RefundPolicy() {
         <li>Permanent loss of monetization privileges</li>
       </ul>
       <Paragraph>
-        We encourage users to reach out to support@avie.live for resolution before pursuing disputes through payment providers.
+        We encourage users to reach out to support@avie.live for resolution.
       </Paragraph>
 
       <Title level={3}>5. Legal Compliance & Jurisdiction</Title>

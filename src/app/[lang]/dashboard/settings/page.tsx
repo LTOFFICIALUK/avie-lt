@@ -92,19 +92,20 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
-      {/* Header */}
-      <div className="space-y-2">
-        <div className="flex items-center">
-          <FiUser className="w-6 h-6 text-emerald-400 mr-3" />
-          <h1 className="text-2xl font-bold text-white">Account Settings</h1>
+    <div className="w-full max-w-7xl mx-auto px-4 py-8">
+      <div className="space-y-6 max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="space-y-2">
+          <div className="flex items-center">
+            <FiUser className="w-6 h-6 text-emerald-400 mr-3" />
+            <h2 className="text-2xl font-bold text-white">Account Settings</h2>
+          </div>
+          <p className="text-zinc-400">
+            Manage your personal information, preferences, and account security.
+          </p>
         </div>
-        <p className="text-zinc-400">
-          Manage your personal information, preferences, and account security.
-        </p>
-      </div>
 
-      <div className="space-y-8">
+        <div className="space-y-8">
         {/* Profile Picture Section */}
         <div className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800">
           <h3 className="text-lg font-semibold text-white mb-4">Profile Picture</h3>
@@ -383,6 +384,7 @@ export default function SettingsPage() {
             </button>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );

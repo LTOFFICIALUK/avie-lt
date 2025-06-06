@@ -99,9 +99,10 @@ const Navigation = () => {
               {NAVIGATION_LINKS.map((link, index) => (
                 <Link key={index} href={link.href} legacyBehavior>
                   <a
-                    className="relative whitespace-nowrap px-2 md:px-2.5 lg:px-3 xl:px-4 2xl:px-5 py-1 md:py-1.5 lg:py-2 text-white hover:text-white font-bold text-xs md:text-xs lg:text-sm xl:text-sm 2xl:text-base transition-all duration-300 rounded-lg hover:bg-gradient-to-r hover:from-purple-600/10 hover:to-blue-600/10 border border-transparent hover:border-purple-500/20 group"
+                    className="relative whitespace-nowrap px-2 md:px-2.5 lg:px-3 xl:px-4 2xl:px-5 py-1 md:py-1.5 lg:py-2 text-white hover:text-white font-bold text-xs md:text-xs lg:text-sm xl:text-sm 2xl:text-base transition-all duration-300 rounded-lg hover:bg-gradient-to-r hover:from-purple-600/10 hover:to-blue-600/10 border border-transparent hover:border-purple-500/20 group no-underline"
+                    style={{ color: 'white' }}
                   >
-                    <span className="relative z-10">{link.label}</span>
+                    <span className="relative z-10 text-white">{link.label}</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-blue-600/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </a>
                 </Link>
@@ -120,8 +121,26 @@ const Navigation = () => {
           </div>
         </div>
 
-        {/* Enhanced Custom CSS for AuthSheet styling - Fully responsive */}
+        {/* Enhanced Custom CSS for AuthSheet styling and Navigation links - Fully responsive */}
         <style jsx global>{`
+          /* Navigation Links Styling - Force white color */
+          nav a {
+            color: white !important;
+            text-decoration: none !important;
+          }
+          
+          nav a:visited {
+            color: white !important;
+          }
+          
+          nav a:link {
+            color: white !important;
+          }
+          
+          nav a:hover {
+            color: white !important;
+          }
+          
           .auth-button-wrapper .ant-btn {
             background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%) !important;
             border: 1px solid rgba(124, 58, 237, 0.3) !important;

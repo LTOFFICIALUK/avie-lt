@@ -6,7 +6,7 @@ import { GiCrown } from "react-icons/gi";
 
 const SubscriptionsPage = () => {
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
+    <div className="space-y-6 max-w-4xl mx-auto mt-4">
       {/* Header */}
       <div className="space-y-2">
         <div className="flex items-center">

@@ -107,6 +107,12 @@ const FollowingPage = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-8">
+      {/* Page Header */}
+      <div className="mb">
+      <h1 className="text-3xl font-bold text-white mb-1">Following</h1>
+        <p className="text-lg text-gray-400 mb-2">See your followed creators and their content.</p>
+      </div>
+      
       {creators.length === 0 ? (
         <div className="text-center py-16">
           <UsergroupAddOutlined className="text-6xl text-gray-400 mb-6" />
@@ -126,12 +132,12 @@ const FollowingPage = () => {
         </div>
       ) : (
         <div className="space-y-12">
-          {/* Divider Line */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent mb-6"></div>
-
           {/* Live Now Section */}
           {liveCreators.length > 0 && (
             <section>
+              {/* Divider Line */}
+              <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent mb-6"></div>
+              
               {/* Section Header */}
               <div className="flex items-center mb-6">
                 <div className="flex items-center space-x-3">
@@ -279,22 +285,17 @@ const FollowingPage = () => {
 
                     {/* Creator Name */}
                     <Link href={`/${lang}/profile/${creator.displayName}`}>
-                      <h3 className="text-white text-xs font-medium hover:text-purple-300 transition-colors cursor-pointer mb-1 max-w-full truncate">
+                      <h3 className="mt-1 text-white text-xs font-medium hover:text-purple-300 transition-colors cursor-pointer mb-1 max-w-full truncate">
                         {creator.displayName}
                       </h3>
                     </Link>
-
-                    {/* Follower Count */}
-                    <p className="text-gray-400 text-xs mb-1">
-                      {creator.followers ? formatFollowers(creator.followers) : '0'} followers
-                    </p>
 
                     {/* Unfollow Button */}
                     <Button 
                       onClick={() => handleUnfollow(creator.id, creator.displayName)}
                       icon={<UserDeleteOutlined />}
                       size="small"
-                      className="bg-gray-800/50 hover:bg-red-600 text-gray-300 hover:text-white border border-gray-600/50 hover:border-red-600 transition-all duration-200 text-xs h-7 px-3 rounded-md"
+                      className="mt-1 bg-gray-800/50 hover:bg-red-600 text-gray-300 hover:text-white border border-gray-600/50 hover:border-red-600 transition-all duration-200 text-xs h-7 px-3 rounded-md"
                       title="Unfollow"
                     >
                       Unfollow

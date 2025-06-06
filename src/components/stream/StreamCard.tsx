@@ -3,11 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { Avatar, Typography } from 'antd';
 import { Stream } from '../../types/stream';
-
-const { Text } = Typography;
 
 interface StreamCardProps {
   stream: Stream;
@@ -15,29 +13,28 @@ interface StreamCardProps {
 
 export function StreamCardSkeleton() {
   return (
-    <div className="w-full">
-      {/* Thumbnail Skeleton */}
-      <div className="aspect-[16/9] relative bg-[var(--color-gray)]/40 overflow-hidden rounded animate-pulse">
-        <div className="absolute bottom-1 right-1 bg-[var(--color-gray)]/80 h-4 w-16 rounded"></div>
-      </div>
-      
-      {/* Info Skeleton */}
-      <div className="pt-2 flex gap-3 items-start">
-        {/* Avatar Skeleton */}
-        <div className="flex items-center self-start pt-1">
-          <div className="w-10 h-10 rounded-full bg-[var(--color-gray)]/40 animate-pulse"></div>
-        </div>
-        
-        {/* Text Skeletons */}
-        <div className="min-w-0 flex-1">
-          {/* Title */}
-          <div className="h-4 bg-[var(--color-gray)]/40 rounded w-full mb-2 animate-pulse"></div>
-          
-          {/* Username */}
-          <div className="h-3 bg-[var(--color-gray)]/40 rounded w-2/3 mb-2 animate-pulse"></div>
-          
-          {/* Category name */}
-          <div className="h-3 bg-[var(--color-gray)]/40 rounded w-3/4 animate-pulse"></div>
+    <div className="flex-shrink-0 w-60 bg-transparent border border-gray-700/50 rounded-lg overflow-hidden shadow-lg animate-pulse">
+      {/* Stream Thumbnail Skeleton */}
+      <div className="relative aspect-[16/9] bg-gray-800"></div>
+
+      {/* Stream Info Skeleton */}
+      <div className="p-3">
+        {/* Category Skeleton */}
+        <div className="h-3 bg-gray-700 rounded w-1/3 mb-2"></div>
+
+        {/* Stream Title Skeleton */}
+        <div className="h-4 bg-gray-700 rounded w-2/3 mb-3"></div>
+
+        {/* Streamer Info Skeleton */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2 min-w-0 flex-1">
+            {/* Streamer Avatar Skeleton */}
+            <div className="w-5 h-5 rounded-full bg-gray-700"></div>
+            {/* Streamer Name Skeleton */}
+            <div className="h-3 bg-gray-700 rounded w-16"></div>
+          </div>
+          {/* Watch Button Skeleton */}
+          <div className="h-6 bg-gray-700 rounded-full w-16"></div>
         </div>
       </div>
     </div>
@@ -48,79 +45,106 @@ export function StreamCard({ stream }: StreamCardProps) {
   // Format viewer count
   const formatViewers = (count: number): string => {
     if (count >= 1000) {
-      return (count / 1000).toFixed(1) + 'K viewers';
+      return (count / 1000).toFixed(1) + 'K';
     }
-    return count + ' viewers';
+    return count.toString();
   };
 
-  // Get the current language from the URL
-  const pathSegments = typeof window !== 'undefined' ? window.location.pathname.split('/') : [];
+  // Get current locale from path
+  const pathSegments =
+    typeof window !== 'undefined' ? window.location.pathname.split('/') : [];
   const lang = pathSegments.length > 1 ? pathSegments[1] : 'en';
 
   return (
-    <div className="w-full hover:opacity-90 transition-all duration-200">
-      {/* Thumbnail - linked to stream */}
-      <Link href={`/${lang}/streams/${stream.user.displayName}`} style={{ display: 'block' }}>
-        <div className="aspect-[16/9] relative bg-black overflow-hidden rounded">
+    <div className="group flex-shrink-0 relative mx-2 my-1">
+      
+              {/* Actual Card Content */}
+        <div className="w-60 bg-transparent rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 hover:border-gray-600/50 relative group-hover:scale-105">
+      
+      {/* Stream Thumbnail */}
+      <Link
+        href={`/${lang}/streams/${stream.user.displayName}`}
+        className="block relative"
+      >
+        <div className="relative aspect-[16/9] bg-black overflow-hidden">
           {stream.thumbnail ? (
             <Image
               src={stream.thumbnail}
-              alt={`${stream.user.displayName}'s stream`}
+              alt={`${stream.user.displayName}'s stream preview`}
               fill
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ 
+              style={{
                 objectFit: 'cover',
-                objectPosition: 'center'
+                objectPosition: 'center',
               }}
-              className="transition-all duration-300"
+              className="transition-transform duration-200 ease-out"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-black">
-              <Text style={{ color: 'var(--text-secondary)' }} className="text-sm">No Preview</Text>
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
+              <div className="w-4 h-4 bg-purple-500 rounded-full animate-pulse"></div>
             </div>
           )}
           
-          {/* Viewer count in bottom right corner - exact styling */}
-          <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-1 rounded">
-            {formatViewers(stream.viewers)}
+          {/* Live Badge */}
+          <div className="absolute top-2 left-2">
+            <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">
+              Live
+            </span>
+          </div>
+
+          {/* Viewer Count */}
+          <div className="absolute bottom-2 right-2">
+            <span className="bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-full">
+              {formatViewers(stream.viewers)} viewers
+            </span>
           </div>
         </div>
       </Link>
-      
-      {/* Stream Info - Avatar on left, all text on right */}
-      <div className="pt-2 flex gap-3 items-center">
-        {/* Avatar on left - linked to profile */}
-        <Link href={`/${lang}/profile/${stream.user.displayName}`} className="flex items-center self-start pt-1 hover:opacity-80 transition-opacity">
-          <Avatar 
-            size={40} 
-            src={stream.user.avatarUrl} 
-            icon={!stream.user.avatarUrl && <UserOutlined />}
-            className="flex-shrink-0"
-          />
+
+      {/* Stream Info */}
+      <div className="flex gap-1">
+      <Link href={`/${lang}/profile/${stream.user.displayName}`}>
+        <div className="pt-3">
+          <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+            {stream.user.avatarUrl ? (
+              <Image
+                src={stream.user.avatarUrl}
+                alt={stream.user.displayName}
+                width={40}
+                height={40}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-purple-500 rounded-full flex items-center justify-center">
+                <UserOutlined className="text-white text-xs" />
+              </div>
+              )}
+            </div>
+          </div>
         </Link>
-        
-        {/* All text info on right */}
-        <div className="min-w-0 flex-1">
-          {/* Title - linked to stream */}
+
+        <div className="p-2">
+          {/* Stream Title */}
           <Link href={`/${lang}/streams/${stream.user.displayName}`}>
-            <h3 className="text-white text-sm font-medium leading-tight m-0 mb-1 line-clamp-2 hover:text-gray-300 transition-colors cursor-pointer">
-              {stream.title || `${stream.user.displayName}'s Stream`}
+            <h3 className="line-clamp-1 text-white text-sm font-semibold leading-tight mb-0 hover:text-purple-300 transition-colors cursor-pointer">
+              {stream.title}
             </h3>
           </Link>
-          
-          {/* Channel name - linked to profile */}
+
+          {/* Streamer Name */}
           <Link href={`/${lang}/profile/${stream.user.displayName}`}>
-            <p className="text-[13px] m-0 truncate hover:text-gray-400 transition-colors cursor-pointer" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-gray-300 text-xs font-medium truncate pt-2 hover:text-white transition-colors cursor-pointer">
               {stream.user.displayName}
             </p>
           </Link>
-          
-          {/* Category name */}
-          <p className="text-[13px] m-0 truncate" style={{ color: 'var(--text-secondary)' }}>
-            {stream.category ? stream.category.name : "Uncategorized"}
-          </p>
+
+          {/* Category */}
+          <Link href={`/${lang}/streams/category/${stream.category?.slug}`}>
+            <p className="text-[var(--text-secondary)] text-xs font-medium mb-1 tracking-wide pt-1 hover:text-white transition-colors cursor-pointer">
+              {stream.category?.name || 'General'}
+            </p>
+          </Link>
         </div>
+      </div>
       </div>
     </div>
   );

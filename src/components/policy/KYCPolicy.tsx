@@ -6,129 +6,129 @@ export function KYCPolicy() {
   return (
     <div className="policy-content">
       <Title level={2}>KYC / AML Policy</Title>
-      <Text type="secondary">Updated: 05/14/2025</Text>
+      <Text type="secondary">Effective Date: 05/14/2025</Text>
+      <Text type="secondary" style={{ display: 'block', marginBottom: '16px' }}>Last Updated: 05/14/2025</Text>
 
       <Paragraph>
-        This Policy outlines AVIE's approach to Know Your Customer (KYC) and Anti-Money Laundering (AML) compliance. We are committed to preventing illegal activity on our platform while protecting user privacy and providing a seamless experience.
+        AVIE is committed to the highest standards of Anti-Money Laundering (AML) compliance and Know Your Customer (KYC) procedures to protect our users, ensure platform integrity, and comply with applicable laws and regulations. This policy outlines how AVIE implements KYC and AML protocols for platform participants.
       </Paragraph>
 
       <Title level={3}>1. Purpose</Title>
       <Paragraph>
-        AVIE implements KYC and AML procedures to:
+        The purpose of this policy is to:
       </Paragraph>
       <ul className="policy-list">
-        <li>Prevent money laundering, terrorist financing, fraud, and other illicit activities</li>
-        <li>Comply with applicable international AML laws and regulations</li>
-        <li>Verify the identity of users engaged in significant financial transactions</li>
-        <li>Protect the integrity of the AVIE ecosystem and its users</li>
+        <li>Prevent the use of AVIE for money laundering, terrorism financing, fraud, crypto scams, and other illicit activity</li>
+        <li>Ensure compliance with international AML laws, including those of the U.S., UK, EU, and other applicable jurisdictions</li>
+        <li>Verify the identity of users participating in financial transactions, including token presales, donations, and payouts</li>
+        <li>Protect the AVIE ecosystem and its community from bad actors</li>
       </ul>
 
       <Title level={3}>2. Scope</Title>
       <Paragraph>
-        This policy applies to the following AVIE users:
+        This policy may apply to:
       </Paragraph>
       <ul className="policy-list">
-        <li>Users participating in the $AVIE token presale or acquiring tokens above certain thresholds</li>
-        <li>Creators receiving financial benefits above specified thresholds</li>
-        <li>Users engaged in high-value or high-frequency transactions</li>
-        <li>Accounts flagged for suspicious activity or risk indicators</li>
+        <li>Users participating in the $AVIE token presale</li>
+        <li>Users or creators receiving AP Rewards, tips, subscriptions, or plugin revenue</li>
+        <li>Users accessing platform features with financial value</li>
+        <li>Any wallet address, account, or entity flagged for suspicious behavior or compliance risk</li>
       </ul>
 
       <Title level={3}>3. User Verification (KYC)</Title>
       <Paragraph>
-        Depending on user activity and risk factors, AVIE may require varying levels of identity verification:
+        Users subject to KYC must provide the following:
       </Paragraph>
-      
-      <Title level={4}>3.1 Basic Verification</Title>
       <ul className="policy-list">
         <li>Full legal name</li>
         <li>Date of birth</li>
-        <li>Residential address</li>
-        <li>Email verification</li>
-        <li>Phone number verification</li>
+        <li>Government-issued ID (passport, national ID, or driver's license)</li>
+        <li>Proof of address (utility bill, bank statement, or official document issued within the last 3 months)</li>
+        <li>Selfie verification (for facial recognition where applicable)</li>
       </ul>
-
-      <Title level={4}>3.2 Enhanced Verification</Title>
-      <ul className="policy-list">
-        <li>Government-issued photo ID (passport, driver's license, or national ID card)</li>
-        <li>Proof of address (utility bill, bank statement dated within 3 months)</li>
-        <li>Selfie verification (photo of yourself holding your ID)</li>
-        <li>Additional documentation as required based on risk assessment</li>
-      </ul>
-
       <Paragraph>
-        All KYC data is collected securely through a compliant third-party KYC provider. AVIE does not directly store copies of your identity documents.
+        All KYC information is securely collected through a third-party KYC provider compliant with industry standards and local regulations (e.g., GDPR, CCPA, UK DPA 2018).
       </Paragraph>
 
       <Title level={3}>4. AML Risk Controls</Title>
       <Paragraph>
-        AVIE employs several methods to detect and prevent illicit activity:
+        AVIE uses both automated and manual methods to detect and prevent illicit activity:
       </Paragraph>
       <ul className="policy-list">
-        <li><strong>Wallet Monitoring:</strong> Analysis of blockchain transactions to and from connected wallets for suspicious patterns</li>
-        <li><strong>Transaction Tracking:</strong> Monitoring user activities for unusual patterns</li>
-        <li><strong>Threshold Triggers:</strong> Additional verification requirements activated by transaction amounts or frequency</li>
-        <li><strong>Geofencing:</strong> Restrictions for users in high-risk jurisdictions</li>
-        <li><strong>Watchlist Screening:</strong> Checking user information against global sanctions lists, politically exposed persons (PEPs) databases, and other relevant watchlists</li>
+        <li><strong>Wallet monitoring:</strong> Analysis of wallet history and behavior using blockchain analytics tools</li>
+        <li><strong>Transaction tracking:</strong> Pattern analysis for donations, tips, or purchases that indicate unusual behavior</li>
+        <li><strong>Geofencing:</strong> Restricted access to users in sanctioned jurisdictions (e.g., North Korea, Iran)</li>
+        <li><strong>Watchlists:</strong> Screening against global sanction and PEP (Politically Exposed Person) lists</li>
       </ul>
 
       <Title level={3}>5. Enhanced Due Diligence (EDD)</Title>
       <Paragraph>
-        Additional checks may be required for:
+        In certain cases, additional checks may be required:
       </Paragraph>
       <ul className="policy-list">
-        <li>Users from high-risk countries identified by FATF or other regulatory bodies</li>
-        <li>Users with transaction patterns indicating potential money laundering risk</li>
-        <li>Politically exposed persons (PEPs) and their close associates</li>
-        <li>High-volume transactions that exceed standard thresholds</li>
+        <li>High-volume creators or users with significant earnings</li>
+        <li>Users flagged by transaction behavior or third-party risk signals</li>
+        <li>Jurisdictions deemed high-risk by FATF or regulatory authorities</li>
+        <li>Community reports of suspicious or fraudulent activity</li>
       </ul>
+      <Paragraph>
+        EDD may include additional documentation, background checks, or source-of-funds validation.
+      </Paragraph>
 
       <Title level={3}>6. Data Privacy & Retention</Title>
       <ul className="policy-list">
-        <li>All personal data collected for KYC/AML purposes is encrypted, stored securely, and protected in accordance with our Privacy Policy.</li>
-        <li>KYC data is retained for at least five years after the end of the business relationship or as required by applicable law.</li>
-        <li>Users have rights concerning their personal data as outlined in our Privacy Policy, including rights to access, correct, and delete data, subject to our legal obligations.</li>
+        <li>All personal data collected under KYC is encrypted and stored securely in accordance with our Privacy Policy.</li>
+        <li>KYC records are retained for at least 5 years after account closure or last activity, as required by applicable AML laws.</li>
+        <li>Users have rights under GDPR and UK GDPR to access or delete their data, except where we are legally required to retain it.</li>
       </ul>
 
       <Title level={3}>7. Prohibited Users</Title>
       <Paragraph>
-        AVIE cannot provide services to:
+        AVIE does not permit platform access or financial transactions from:
       </Paragraph>
       <ul className="policy-list">
-        <li>Individuals under 18 years of age</li>
-        <li>Residents of countries subject to comprehensive sanctions or where cryptocurrency is prohibited</li>
-        <li>Users who fail to complete required KYC procedures when prompted</li>
-        <li>Users who provide false or fraudulent information during the verification process</li>
-        <li>Users on global sanctions lists or involved in known illegal activities</li>
+        <li>Users under the age of 18</li>
+        <li>Users from sanctioned or restricted jurisdictions</li>
+        <li>Users who fail to complete KYC when required</li>
+        <li>Wallets or individuals flagged for money laundering, fraud, or terrorism financing</li>
       </ul>
+      <Paragraph>
+        We reserve the right to block, suspend, or terminate such users without notice.
+      </Paragraph>
 
       <Title level={3}>8. Reporting Suspicious Activity</Title>
+      <Paragraph>
+        If AVIE detects or is notified of suspicious behavior, we may:
+      </Paragraph>
       <ul className="policy-list">
-        <li>AVIE reserves the right to freeze funds, block access, or limit functionality where suspicious activity is detected.</li>
-        <li>We may conduct internal investigations into suspicious transactions or user behavior.</li>
-        <li>We will report suspicious activities to relevant authorities as required by law.</li>
-        <li>Users are encouraged to report violations of our terms or suspicious activities to support@avie.live.</li>
+        <li>Freeze associated funds or wallet addresses</li>
+        <li>Conduct an internal investigation</li>
+        <li>Submit a Suspicious Activity Report (SAR) to appropriate authorities</li>
+        <li>Cooperate with law enforcement agencies</li>
       </ul>
+      <Paragraph>
+        Users may report suspected AML or KYC violations by emailing compliance@avie.live.
+      </Paragraph>
 
       <Title level={3}>9. Compliance Officer & Oversight</Title>
       <Paragraph>
-        AVIE maintains a dedicated Compliance Officer responsible for:
+        AVIE has appointed a dedicated Compliance Officer responsible for:
       </Paragraph>
       <ul className="policy-list">
-        <li>Implementing and updating KYC/AML procedures</li>
-        <li>Overseeing relationships with KYC/AML service providers</li>
-        <li>Monitoring regulatory developments and ensuring compliance</li>
-        <li>Conducting regular internal audits of compliance procedures</li>
-        <li>Training relevant staff on KYC/AML requirements</li>
+        <li>Ensuring ongoing KYC/AML implementation</li>
+        <li>Maintaining relationships with KYC vendors and regulators</li>
+        <li>Monitoring changes to applicable law and updating this policy</li>
+        <li>Conducting internal audits and compliance training</li>
       </ul>
 
       <Title level={3}>10. Amendments</Title>
       <Paragraph>
-        This policy may be updated from time to time to reflect regulatory changes, improved security practices, or platform evolution. Significant changes will be notified to users through appropriate channels.
+        This policy may be updated as needed to reflect changes in legal requirements, technology, or risk. Any changes will be posted on this page with a revised effective date.
       </Paragraph>
 
       <Paragraph>
-        For questions regarding this policy or our KYC/AML procedures, please contact support@avie.live.
+        By using AVIE, you agree to comply with this KYC / AML Policy.<br />
+        If you have any questions please contact support@avie.live.
       </Paragraph>
     </div>
   );

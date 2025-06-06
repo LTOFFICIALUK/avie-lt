@@ -91,8 +91,8 @@ const TabSubmenu = ({ children, navigation }: Props) => {
         </div>
         
         {/* Desktop tabs navigation */}
-        <nav className="hidden md:block mx-auto overflow-x-auto">
-          <div className="flex items-center gap-6 min-w-max py-1" ref={tabsRef}>
+        <nav className="hidden md:block w-full">
+          <div className="flex items-center justify-start gap-2 sm:gap-4 lg:gap-6 py-1 w-full" ref={tabsRef}>
             {navigation.map((item) => {
               const itemPathSegment = getLastPathSegment(item.href);
               const isActive = currentPathSegment === itemPathSegment;
@@ -102,7 +102,7 @@ const TabSubmenu = ({ children, navigation }: Props) => {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "px-1 py-2.5 text-base font-medium transition-colors relative whitespace-nowrap",
+                    "px-1 sm:px-2 lg:px-3 py-2.5 text-sm sm:text-base font-medium transition-colors relative flex-shrink-0",
                     isActive
                       ? "text-[var(--color-brand)] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--color-brand)]"
                       : "text-white !hover:text-white"

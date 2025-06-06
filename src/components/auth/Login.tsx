@@ -116,6 +116,18 @@ const Login = ({ onRequiresVerification, onForgotPassword }: Props) => {
             caret-color: #ffffff !important;
             transition: background-color 5000s ease-in-out 0s !important;
           }
+
+          /* White placeholder text overrides for Login */
+          .login-email-input::placeholder,
+          .login-password-input input::placeholder {
+            color: #ffffff !important;
+            opacity: 0.8 !important;
+          }
+
+          .login-password-input .ant-input::placeholder {
+            color: #ffffff !important;
+            opacity: 0.8 !important;
+          }
         `
       }} />
       <Form onFinish={handleLogin} layout="vertical" className="space-y-5">
@@ -126,7 +138,7 @@ const Login = ({ onRequiresVerification, onForgotPassword }: Props) => {
           className="mb-4"
         >
           <Input
-            placeholder="info@bluedreamtea.co.uk"
+            placeholder="example@email.com"
             value={loginData.emailOrUsername}
             onChange={(e) =>
               setLoginData((prev) => ({
@@ -134,7 +146,7 @@ const Login = ({ onRequiresVerification, onForgotPassword }: Props) => {
                 emailOrUsername: e.target.value,
               }))
             }
-            className="bg-gray-800/80 border-gray-700/60 text-white placeholder-gray-500 rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200"
+            className="bg-gray-800/80 border-gray-700/60 text-white placeholder-white rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 login-email-input"
             style={{
               backgroundColor: 'rgba(31, 41, 55, 0.8)',
               borderColor: 'rgba(75, 85, 99, 0.6)',
@@ -158,7 +170,7 @@ const Login = ({ onRequiresVerification, onForgotPassword }: Props) => {
                 password: e.target.value,
               }))
             }
-            className="bg-gray-800/80 border-gray-700/60 text-white placeholder-gray-500 rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 [&_.ant-input]:bg-transparent [&_.ant-input]:border-0 [&_.ant-input]:text-white [&_.ant-input]:placeholder-gray-500 [&_.ant-input-suffix]:bg-transparent"
+            className="bg-gray-800/80 border-gray-700/60 text-white placeholder-white rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 [&_.ant-input]:bg-transparent [&_.ant-input]:border-0 [&_.ant-input]:text-white [&_.ant-input]:placeholder-white [&_.ant-input-suffix]:bg-transparent login-password-input"
             style={{
               backgroundColor: 'rgba(31, 41, 55, 0.8)',
               borderColor: 'rgba(75, 85, 99, 0.6)',

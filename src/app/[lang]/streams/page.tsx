@@ -109,13 +109,13 @@ export default function StreamsPage() {
         />
       </div>
 
-      {/* Popular Live Streams - First section */}
+      {/* Featured Streams - First section */}
       <div className="w-full px-2 md:px-4 mt-8">
         {isLoadingStreams ? (
-          <StreamCategorySkeleton title="Popular Live Streams" />
+          <StreamCategorySkeleton title="Featured Streams" />
         ) : (
           <StreamCategory
-            title="Popular Live Streams"
+            title="Featured Streams"
             streams={liveStreams.slice(0, 10)}
             viewAllLink="/streams"
           />

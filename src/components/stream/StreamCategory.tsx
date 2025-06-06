@@ -24,21 +24,38 @@ export function StreamCategorySkeleton({
   skeletonCount?: number;
 }) {
   return (
-    <div className="pt-8 pb-4 relative border-t border-[#2f2f34] max-w-full overflow-hidden">
-      {/* Category Title with loading effect */}
-      <div className="flex justify-between items-center mb-4 px-2">
-        <h2 className="text-white text-xl font-semibold m-0">
-          {title}
-        </h2>
+    <div className="w-full pt-8 pb-0 -mb-4 max-w-full overflow-hidden">
+      {/* Small Breaker Line */}
+      <div className="w-full mb-6">
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent"></div>
+      </div>
+
+      {/* Section Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-2xl font-bold text-white mb-1">{title}</h2>
+        </div>
+
+        {/* Navigation Controls Placeholder */}
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-gray-800 rounded-full animate-pulse"></div>
+          <div className="w-8 h-8 bg-gray-800 rounded-full animate-pulse"></div>
+        </div>
       </div>
       
-      {/* Scrollable Stream Cards Container with skeletons */}
-      <div className="flex gap-2 xs:gap-3 sm:gap-4 overflow-x-auto pb-2 hide-scrollbar px-1 sm:px-2 w-full">
-        {Array(skeletonCount).fill(0).map((_, index) => (
-          <div key={index} className="min-w-[200px] xs:min-w-[220px] sm:min-w-[280px] max-w-[200px] xs:max-w-[220px] sm:max-w-[280px] flex-shrink-0">
-            <StreamCardSkeleton />
-          </div>
-        ))}
+      {/* Streams Container */}
+      <div className="relative">
+        <div className="flex overflow-x-auto scrollbar-hide gap-4 pb-2"
+             style={{
+               scrollbarWidth: 'none',
+               msOverflowStyle: 'none',
+             }}>
+          {Array(skeletonCount).fill(0).map((_, index) => (
+            <div key={index} className="flex-shrink-0 w-60">
+              <StreamCardSkeleton />
+            </div>
+          ))}
+        </div>
       </div>
       
       {/* Add custom styles to hide scrollbar */}
@@ -115,10 +132,14 @@ export function StreamCategory({
     return () => {};
   }, [streams, isLoading]);
 
+  // Get current locale from path
+  const pathSegments = typeof window !== 'undefined' ? window.location.pathname.split('/') : [];
+  const lang = pathSegments.length > 1 ? pathSegments[1] : 'en';
+
   // Determine the "View All" link
   const getCategoryLink = () => {
     if (viewAllLink) return viewAllLink;
-    if (slug) return `/streams/category/${slug}`;
+    if (slug) return `/${lang}/streams/category/${slug}`;
     return null;
   };
 
@@ -130,86 +151,80 @@ export function StreamCategory({
   }
 
   return (
-    <div className="pt-8 pb-4 relative border-t border-[#2f2f34] max-w-full overflow-hidden">
-      {/* Category Title - exactly as in the image */}
-      <div className="flex justify-between items-center mb-4 px-2">
-        <h2 className="text-white text-xl font-semibold m-0">
-          {title}
-        </h2>
-        
-        {categoryLink && (
-          <div className="flex items-center">
+    <section className="w-full pt-8 pb-0 -mb-4 max-w-full overflow-hidden">
+      {/* Small Breaker Line */}
+      <div className="w-full mb-6">
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent"></div>
+      </div>
+
+      {/* Section Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-2xl font-bold text-white mb-1">{title}</h2>
+          {categoryLink && (
             <Link 
               href={categoryLink}
-              className="text-xs hover:text-white transition-colors flex items-center"
-              style={{ color: 'var(--text-secondary)' }}
+              className="text-sm text-gray-400 hover:text-white transition-colors"
             >
-              Show more{' '}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="ml-1">
-                <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"></path>
-              </svg>
+              View all →
             </Link>
-          </div>
-        )}
+          )}
+        </div>
+
+        {/* Navigation Controls */}
+        <div className="flex items-center space-x-2">
+          <Button
+            type="text"
+            size="small"
+            icon={<LeftOutlined />}
+            onClick={() => scroll('left')}
+            className="text-gray-400 hover:text-white hover:bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
+            style={{ 
+              opacity: showLeftArrow ? 1 : 0.3,
+              pointerEvents: showLeftArrow ? 'auto' : 'none'
+            }}
+            tabIndex={0}
+            aria-label="Scroll left"
+          />
+          <Button
+            type="text"
+            size="small"
+            icon={<RightOutlined />}
+            onClick={() => scroll('right')}
+            className="text-gray-400 hover:text-white hover:bg-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
+            style={{ 
+              opacity: showRightArrow ? 1 : 0.3,
+              pointerEvents: showRightArrow ? 'auto' : 'none'
+            }}
+            tabIndex={0}
+            aria-label="Scroll right"
+          />
+        </div>
       </div>
       
-      {/* Navigation Arrows - styled to match the image exactly */}
-      {showLeftArrow && (
-        <Button 
-          icon={<LeftOutlined />} 
-          onClick={() => scroll('left')}
-          className="absolute left-0 sm:-left-1 top-1/2 z-10 transform -translate-y-1/2 flex items-center justify-center"
+      {/* Streams Container */}
+      <div className="relative">
+        <div 
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto scrollbar-hide gap-4 pb-2"
           style={{ 
-            backgroundColor: 'rgba(30,30,30,0.7)',
-            borderRadius: '50%',
-            width: '36px',
-            height: '36px',
-            border: 'none',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
-            marginTop: '10px'
+            scrollbarWidth: 'none', 
+            msOverflowStyle: 'none',
           }}
-        />
-      )}
-      
-      {showRightArrow && (
-        <Button 
-          icon={<RightOutlined />} 
-          onClick={() => scroll('right')}
-          className="absolute right-0 sm:-right-1 top-1/2 z-10 transform -translate-y-1/2 flex items-center justify-center"
-          style={{ 
-            backgroundColor: 'rgba(30,30,30,0.7)',
-            borderRadius: '50%',
-            width: '36px',
-            height: '36px',
-            border: 'none',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
-            marginTop: '10px'
-          }}
-        />
-      )}
-      
-      {/* Scrollable Stream Cards Container - 1:1 with the image */}
-      <div 
-        ref={scrollContainerRef}
-        className="flex gap-2 xs:gap-3 sm:gap-4 overflow-x-auto pb-2 hide-scrollbar px-1 sm:px-2 w-full"
-        style={{ 
-          scrollbarWidth: 'none', 
-          msOverflowStyle: 'none',
-          scrollBehavior: 'smooth'
-        }}
-      >
-        {streams.map(stream => (
-          <div key={stream.id} className="min-w-[200px] xs:min-w-[220px] sm:min-w-[280px] max-w-[200px] xs:max-w-[220px] sm:max-w-[280px] flex-shrink-0">
-            <StreamCard stream={stream} />
-          </div>
-        ))}
-        
-        {/* If no streams display a message */}
-        {streams.length === 0 && (
-          <div className="w-full py-4 text-center" style={{ color: 'var(--text-secondary)' }}>
-            No streams available in this category.
-          </div>
-        )}
+        >
+          {streams.map(stream => (
+            <div key={stream.id} className="flex-shrink-0 w-60">
+              <StreamCard stream={stream} />
+            </div>
+          ))}
+          
+          {/* If no streams display a message */}
+          {streams.length === 0 && (
+            <div className="w-full py-4 text-center text-gray-400">
+              No streams available in this category.
+            </div>
+          )}
+        </div>
       </div>
       
       {/* Add custom styles to hide scrollbar */}
@@ -235,6 +250,6 @@ export function StreamCategory({
           }
         }
       `}</style>
-    </div>
+    </section>
   );
 }

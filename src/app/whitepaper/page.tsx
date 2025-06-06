@@ -84,15 +84,7 @@ const KEY_FEATURES = [
     icon: PlayCircleOutlined,
     color: "text-purple-400"
   },
-  {
-    title: "AI Character Generator",
-    purpose: "Build out your own virtual brand or identity for interacting with your community through live chats and social media.",
-    howItWorks: "Upload an image and fill in some basic information about your character, then use AVIE's AI pipeline to generate an autonomous engagement character to communicate with your live chat and provide presence on social media seamlessly.",
-    whoItsFor: "Streamers seeking to provide more interaction with their community.",
-    whyItMatters: "This tool allows creators to maintain an active and engaging presence—even when offline—by automating real-time responses in chat and posting content on social media.",
-    icon: BulbOutlined,
-    color: "text-green-400"
-  },
+
   {
     title: "Creator Dashboard",
     purpose: "Centralize performance metrics and creative tools.",
@@ -105,7 +97,7 @@ const KEY_FEATURES = [
   {
     title: "Reward System (AVIE Points - AP)",
     purpose: "Turn engagement into earnings for creators and viewers.",
-    howItWorks: "Viewers earn AP by watching streams and interacting; creators earn AP based on audience activity. AP can be redeemed weekly for $SOL directly from the platform.",
+    howItWorks: "Viewers earn AP by watching streams and interacting; creators earn AP based on audience activity. AP can be redeemed bi-weekly for $SOL directly from the platform.",
     whoItsFor: "Creators and viewers alike.",
     whyItMatters: "Incentivizes long-term platform engagement and delivers real value to users for participation—without requiring ad revenue or brand sponsorships.",
     icon: TrophyOutlined,
@@ -426,8 +418,8 @@ const WhitepaperPage = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="p-4 rounded-lg bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-500/30 text-center">
-                  <h4 className="text-green-400 font-semibold mb-2">Weekly Distribution</h4>
-                  <p className="text-gray-400 text-sm">AP is calculated at the end of each week and automatically credited to the user's platform wallet</p>
+                  <h4 className="text-green-400 font-semibold mb-2">Bi-Weekly Distribution</h4>
+                  <p className="text-gray-400 text-sm">AP is calculated and redeemable at the end of each bi-week</p>
                 </div>
                 
                 <div className="p-4 rounded-lg bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-500/30 text-center">

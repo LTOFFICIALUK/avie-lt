@@ -110,52 +110,56 @@ const PreviouslyWatchedPage = () => {
   }
 
   return (
-    <div className="min-h-screen text-white">
-      <div className="container mx-auto px-4 py-6">
-        {/* Live Now Section */}
-        {liveContent.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-xl font-semibold text-white mb-6">Live Now</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {liveContent.map((item) => (
-                <PreviouslyWatchedCard key={item.id} item={item} formatViewerCount={formatViewerCount} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Ended Streams Section */}
-        {endedContent.length > 0 && (
-          <div>
-            {/* Section Header with Divider */}
-            <div className="w-full mb-6">
-              <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent mb-6"></div>
-              <h2 className="text-xl font-semibold text-white mb-6">Ended Streams</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {endedContent.map((item) => (
-                <PreviouslyWatchedCard key={item.id} item={item} formatViewerCount={formatViewerCount} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Empty State */}
-        {watchHistory.length === 0 && (
-          <div className="text-center py-16">
-            <div className="text-6xl mb-4">📺</div>
-            <h3 className="text-xl font-semibold text-white mb-2">No watch history yet</h3>
-            <p className="text-zinc-400 mb-6">
-              Start watching streams and clips to see your history here
-            </p>
-            <Link href="/browse">
-              <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-                Discover Content
-              </button>
-            </Link>
-          </div>
-        )}
+    <div className="w-full max-w-7xl mx-auto px-4 py-8">
+      {/* Page Header */}
+      <div className="mb">
+      <h1 className="text-3xl font-bold text-white mb-1">Previously Watched</h1>
+        <p className="text-lg text-gray-400 mb-2">See your previously watched streams and clips.</p>
       </div>
+      
+      {/* Live Now Section */}
+      {liveContent.length > 0 && (
+        <div className="mb-12">
+          <h2 className="text-xl font-semibold text-white mb-6">Live Now</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {liveContent.map((item) => (
+              <PreviouslyWatchedCard key={item.id} item={item} formatViewerCount={formatViewerCount} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Ended Streams Section */}
+      {endedContent.length > 0 && (
+        <div>
+          {/* Section Header with Divider */}
+          <div className="w-full mb-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent mb-6"></div>
+            <h2 className="text-xl font-semibold text-white mb-6">Ended Streams</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {endedContent.map((item) => (
+              <PreviouslyWatchedCard key={item.id} item={item} formatViewerCount={formatViewerCount} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Empty State */}
+      {watchHistory.length === 0 && (
+        <div className="text-center py-16">
+          <div className="text-6xl mb-4">📺</div>
+          <h3 className="text-xl font-semibold text-white mb-2">No watch history yet</h3>
+          <p className="text-zinc-400 mb-6">
+            Start watching streams and clips to see your history here
+          </p>
+          <Link href="/browse">
+            <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+              Discover Content
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

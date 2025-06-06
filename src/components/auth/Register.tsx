@@ -1,7 +1,7 @@
 "use client";
 import api from "@/lib/api";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Form, Input, Typography, Checkbox } from "antd";
 import React, { useEffect, useState } from "react";
 import { ApiLoginErrorResponse } from "@/types/api";
 
@@ -19,6 +19,7 @@ interface RegisterFormValues {
   email: string;
   password: string;
   confirmPassword: string;
+  agreeToTerms: boolean;
 }
 
 const Register = () => {
@@ -92,6 +93,12 @@ const Register = () => {
     const usernameValidation = validateUsername(values.username);
     if (!usernameValidation.isValid) {
       setError(usernameValidation.message);
+      setIsLoading(false);
+      return;
+    }
+
+    if (!values.agreeToTerms) {
+      setError("You must agree to the Terms of Service and Privacy Notice");
       setIsLoading(false);
       return;
     }
@@ -196,6 +203,21 @@ const Register = () => {
             caret-color: #ffffff !important;
             transition: background-color 5000s ease-in-out 0s !important;
           }
+
+          /* White placeholder text overrides */
+          .username-input::placeholder,
+          .email-input::placeholder,
+          .password-input input::placeholder,
+          .confirm-password-input input::placeholder {
+            color: #ffffff !important;
+            opacity: 0.8 !important;
+          }
+
+          .password-input .ant-input::placeholder,
+          .confirm-password-input .ant-input::placeholder {
+            color: #ffffff !important;
+            opacity: 0.8 !important;
+          }
         `
       }} />
       <Form 
@@ -229,7 +251,7 @@ const Register = () => {
             >
               <Input 
                 placeholder="Choose a username" 
-                className="bg-gray-800/80 border-gray-700/60 text-white placeholder-gray-500 rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200"
+                className="bg-gray-800/80 border-gray-700/60 text-white placeholder-white rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 username-input"
                 style={{
                   backgroundColor: 'rgba(31, 41, 55, 0.8)',
                   borderColor: 'rgba(75, 85, 99, 0.6)',
@@ -237,7 +259,7 @@ const Register = () => {
                 }}
               />
             </Form.Item>
-            <div className="-mt-3 mb-4">
+            <div className="mt-2 mb-4">
               <Typography.Text className="text-xs text-amber-400/80">
                 <span className="font-medium">Important:</span> Your username is permanent and cannot be changed later.
               </Typography.Text>
@@ -255,7 +277,7 @@ const Register = () => {
           >
             <Input 
               placeholder="Enter your email" 
-              className="bg-gray-800/80 border-gray-700/60 text-white placeholder-gray-500 rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200"
+              className="bg-gray-800/80 border-gray-700/60 text-white placeholder-white rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 email-input"
               style={{
                 backgroundColor: 'rgba(31, 41, 55, 0.8)',
                 borderColor: 'rgba(75, 85, 99, 0.6)',
@@ -276,7 +298,7 @@ const Register = () => {
             >
               <Input.Password
                 placeholder="Choose a password"
-                className="bg-gray-800/80 border-gray-700/60 text-white placeholder-gray-500 rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 [&_.ant-input]:bg-transparent [&_.ant-input]:border-0 [&_.ant-input]:text-white [&_.ant-input]:placeholder-gray-500 [&_.ant-input-suffix]:bg-transparent"
+                className="bg-gray-800/80 border-gray-700/60 text-white placeholder-white rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 [&_.ant-input]:bg-transparent [&_.ant-input]:border-0 [&_.ant-input]:text-white [&_.ant-input]:placeholder-white [&_.ant-input-suffix]:bg-transparent password-input"
                 style={{
                   backgroundColor: 'rgba(31, 41, 55, 0.8)',
                   borderColor: 'rgba(75, 85, 99, 0.6)',
@@ -341,7 +363,7 @@ const Register = () => {
           >
             <Input.Password
               placeholder="Confirm your password"
-              className="bg-gray-800/80 border-gray-700/60 text-white placeholder-gray-500 rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 [&_.ant-input]:bg-transparent [&_.ant-input]:border-0 [&_.ant-input]:text-white [&_.ant-input]:placeholder-gray-500 [&_.ant-input-suffix]:bg-transparent"
+              className="bg-gray-800/80 border-gray-700/60 text-white placeholder-white rounded-lg h-12 px-4 text-sm focus:border-purple-500/60 focus:shadow-none hover:border-gray-600/80 transition-all duration-200 [&_.ant-input]:bg-transparent [&_.ant-input]:border-0 [&_.ant-input]:text-white [&_.ant-input]:placeholder-white [&_.ant-input-suffix]:bg-transparent confirm-password-input"
               style={{
                 backgroundColor: 'rgba(31, 41, 55, 0.8)',
                 borderColor: 'rgba(75, 85, 99, 0.6)',
@@ -375,6 +397,48 @@ const Register = () => {
             </div>
           )}
 
+          <Form.Item
+            name="agreeToTerms"
+            valuePropName="checked"
+            rules={[
+              {
+                validator: (_, value) =>
+                  value ? Promise.resolve() : Promise.reject(new Error('You must agree to the Terms of Service and Privacy Notice')),
+              },
+            ]}
+            className="mb-4"
+          >
+            <Checkbox 
+              className="text-gray-300 text-xs [&_.ant-checkbox]:bg-gray-800/80 [&_.ant-checkbox]:border-gray-600/60 [&_.ant-checkbox-checked_.ant-checkbox-inner]:bg-gradient-to-r [&_.ant-checkbox-checked_.ant-checkbox-inner]:from-purple-600 [&_.ant-checkbox-checked_.ant-checkbox-inner]:to-blue-600 [&_.ant-checkbox-checked_.ant-checkbox-inner]:border-purple-500 hover:[&_.ant-checkbox]:border-purple-500/60"
+              style={{
+                fontSize: '12px',
+                lineHeight: '1.4'
+              }}
+            >
+                             <span className="text-gray-300 text-xs leading-relaxed">
+                 By clicking Create Account, you are agreeing to our{' '}
+                 <a 
+                   href="/policy" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   className="text-purple-400 hover:text-purple-300 underline"
+                 >
+                   Terms of Service
+                 </a>
+                 {' '}and acknowledging our{' '}
+                 <a 
+                   href="/policy" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   className="text-purple-400 hover:text-purple-300 underline"
+                 >
+                   Privacy Notice
+                 </a>
+                 .
+               </span>
+            </Checkbox>
+          </Form.Item>
+
           <Button
             type="primary"
             htmlType="submit"
@@ -389,11 +453,6 @@ const Register = () => {
           >
             {isLoading ? "Creating Account..." : "Create Account"}
           </Button>
-
-          <Typography.Text className="text-xs text-gray-400 text-center block">
-            By clicking Create Account, you are agreeing to our Terms of Service and
-            acknowledging our Privacy Notice.
-          </Typography.Text>
         </div>
       </Form>
     </div>

@@ -6,95 +6,57 @@ export function DMCAPolicy() {
   return (
     <div className="policy-content">
       <Title level={2}>DMCA / Copyright Policy</Title>
-      <Text type="secondary">Updated: 05/14/2025</Text>
+      <Text type="secondary">Effective Date: 05/14/2025</Text>
 
       <Paragraph>
-        AVIE respects the intellectual property rights of others and expects its users to do the same. In accordance with the Digital Millennium Copyright Act of 1998 ("DMCA"), we have established the following policy to address claims of copyright infringement on our platform.
+        AVIE respects the intellectual property rights of creators and content owners and complies with the provisions of the Digital Millennium Copyright Act (DMCA). This policy explains how copyright owners can report alleged infringement, and how users can respond if their content is removed by mistake.
       </Paragraph>
 
-      <Title level={3}>1. Notification of Claimed Copyright Infringement</Title>
+      <Title level={3}>1. Reporting Copyright Infringement (Takedown Notice)</Title>
       <Paragraph>
-        If you believe that your copyrighted work has been used or displayed on AVIE in a way that constitutes copyright infringement, please send a notification to our designated copyright agent with the following information:
-      </Paragraph>
-      <ul className="policy-list">
-        <li>A physical or electronic signature of the copyright owner or a person authorized to act on their behalf.</li>
-        <li>Identification of the copyrighted work claimed to have been infringed.</li>
-        <li>Identification of the material that is claimed to be infringing or to be the subject of infringing activity and that is to be removed or access to which is to be disabled, and information reasonably sufficient to permit us to locate the material.</li>
-        <li>Your contact information, including address, telephone number, and email address.</li>
-        <li>A statement by you that you have a good faith belief that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law.</li>
-        <li>A statement that the information in the notification is accurate, and, under penalty of perjury, that you are authorized to act on behalf of the copyright owner.</li>
-      </ul>
-
-      <Paragraph>
-        Please submit DMCA notices to: copyright@avie.live
-      </Paragraph>
-
-      <Title level={3}>2. Counter-Notification Process</Title>
-      <Paragraph>
-        If you believe that your content was removed by mistake or misidentification, you may submit a counter-notification to our designated copyright agent with the following information:
+        If you are a copyright owner (or authorized to act on behalf of one) and believe that content hosted on AVIE infringes your copyright, please send us a DMCA takedown notice that includes the following:
       </Paragraph>
       <ul className="policy-list">
+        <li>Your full name, address, telephone number, and email address.</li>
+        <li>A clear description of the copyrighted work you claim has been infringed.</li>
+        <li>The exact URL or identification of where the infringing content appears on AVIE.</li>
+        <li>A statement that you have a good faith belief that the use of the material is not authorized by the copyright owner, its agent, or the law.</li>
+        <li>A statement, under penalty of perjury, that the information in the notice is accurate, and that you are the copyright owner or authorized to act on their behalf.</li>
         <li>Your physical or electronic signature.</li>
-        <li>Identification of the material that has been removed or to which access has been disabled and the location at which the material appeared before it was removed or access to it was disabled.</li>
-        <li>A statement under penalty of perjury that you have a good faith belief that the material was removed or disabled as a result of mistake or misidentification of the material to be removed or disabled.</li>
-        <li>Your name, address, and telephone number, and a statement that you consent to the jurisdiction of the federal court for the judicial district in which your address is located, or if your address is outside of the United States, for any judicial district in which AVIE may be found, and that you will accept service of process from the person who provided notification or an agent of such person.</li>
       </ul>
-
-      <Title level={3}>3. Repeat Infringer Policy</Title>
       <Paragraph>
-        AVIE maintains a policy of terminating, in appropriate circumstances, the accounts of users who are repeat copyright infringers. We reserve the right to terminate an account based on a single instance of copyright infringement where the circumstances warrant such action.
+        Send your DMCA notice to support@avie.live
       </Paragraph>
 
-      <Title level={3}>4. AVIE's Response to DMCA Notices</Title>
+      <Title level={3}>2. Responding to a Takedown (Counter-Notice)</Title>
       <Paragraph>
-        Upon receipt of a valid DMCA notice, AVIE will:
+        If your content was removed in response to a DMCA notice and you believe the removal was a mistake or that you have the right to use the content, you may submit a counter-notice. The counter-notice must include:
       </Paragraph>
       <ul className="policy-list">
-        <li>Remove or disable access to the allegedly infringing content.</li>
-        <li>Make a reasonable effort to notify the user whose content has been removed.</li>
-        <li>Provide the user with a copy of the copyright infringement complaint and information about submitting a counter-notice.</li>
-        <li>Upon receipt of a valid counter-notice, we will promptly forward it to the original complainant.</li>
-        <li>If the copyright owner does not notify us within 10 business days that they have filed a legal action seeking a court order to prevent further infringement, we will restore the removed content.</li>
+        <li>Your full name, address, telephone number, and email address.</li>
+        <li>Identification of the material that was removed and the location where it previously appeared.</li>
+        <li>A statement under penalty of perjury that you believe the content was removed due to mistake or misidentification.</li>
+        <li>A statement that you consent to the jurisdiction of the federal district court where you are located (or AVIE's jurisdiction if outside the U.S.) and will accept service of process from the original complainant.</li>
+        <li>Your physical or electronic signature.</li>
       </ul>
+      <Paragraph>
+        Send your counter-notice to support@avie.live
+      </Paragraph>
 
-      <Title level={3}>5. Fair Use & Content Guidelines</Title>
+      <Title level={3}>3. Designated DMCA Agent</Title>
       <Paragraph>
-        AVIE encourages creativity and respects fair use principles. Fair use permits limited use of copyrighted material without permission for purposes such as criticism, comment, news reporting, teaching, scholarship, or research.
+        AVIE's designated agent's information can be obtained by contacting support@avie.live providing sufficient evidence supporting a claim can be provided.
+        We will register this agent with the U.S. Copyright Office for formal compliance.
       </Paragraph>
-      <Paragraph>
-        However, users should be aware that:
-      </Paragraph>
-      <ul className="policy-list">
-        <li>The determination of whether a use is "fair" depends on several factors and can be subjective.</li>
-        <li>AVIE cannot provide legal advice regarding whether specific uses constitute fair use.</li>
-        <li>When in doubt, it's best to obtain permission from the copyright holder or use content available under appropriate licenses (such as Creative Commons).</li>
-      </ul>
 
-      <Title level={3}>6. Content ID & Licensing</Title>
+      <Title level={3}>4. Repeat Infringer Policy</Title>
       <Paragraph>
-        AVIE works with content identification services and copyright holders to identify potential copyright infringement on our platform. We may implement automated systems to detect copyrighted content.
-      </Paragraph>
-      <Paragraph>
-        To avoid copyright issues, we recommend:
-      </Paragraph>
-      <ul className="policy-list">
-        <li>Using original content you've created yourself.</li>
-        <li>Obtaining proper licenses for any third-party content you wish to use.</li>
-        <li>Using royalty-free or Creative Commons licensed content with appropriate attribution.</li>
-        <li>Understanding the terms of any platform-specific licenses for content you may use.</li>
-      </ul>
-
-      <Title level={3}>7. Disclaimer</Title>
-      <Paragraph>
-        This policy is intended to comply with the DMCA and is not legal advice. If you have questions about copyright law or the DMCA, please consult an attorney.
+        AVIE has a zero-tolerance policy for repeat copyright infringement. Users who receive multiple valid DMCA takedown notices may have their accounts permanently terminated.
+        We also reserve the right to remove content, restrict features, or suspend accounts at our discretion if we believe a user is abusing the copyright system.
       </Paragraph>
 
       <Paragraph>
-        AVIE reserves the right to modify this policy at any time by posting changes on this page.
-      </Paragraph>
-
-      <Paragraph>
-        If you have any questions about this Copyright Policy, please contact us at copyright@avie.live
+        If you have any questions about this policy or need help navigating copyright concerns, please contact support@avie.live. We're here to help protect creators and uphold fair use across the platform.
       </Paragraph>
     </div>
   );

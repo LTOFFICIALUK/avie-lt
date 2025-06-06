@@ -142,7 +142,7 @@ export function TermsOfService() {
         Email: support@avie.live<br />
         Discord: https://discord.gg/EPJCeVfK<br />
         Telegram: https://t.me/+Ng4-vF6UAFE2NWE0<br />
-        X (formerly Twitter): @AvieProtocol
+        X (formerly Twitter): @AvieStreaming
       </Paragraph>
       <Paragraph>
         These links may expire. Please get in touch via email to obtain a valid link.

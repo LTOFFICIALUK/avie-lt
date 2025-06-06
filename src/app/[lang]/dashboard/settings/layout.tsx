@@ -36,5 +36,15 @@ export default function SettingsLayout({ children }: PluginsLayoutProps) {
     },
   ];
 
-  return <TabSubmenu navigation={navigation}>{children}</TabSubmenu>;
+  return (
+    <div className="w-full max-w-7xl mx-auto px-4 py-8">
+      {/* Page Header */}
+      <div className="mb">
+        <h1 className="text-3xl font-bold text-white mb-1">Settings</h1>
+        <p className="text-lg text-gray-400 mb-2">Manage your personal information, preferences, and account security.</p>
+      </div>
+      
+      <TabSubmenu navigation={navigation}>{children}</TabSubmenu>
+    </div>
+  );
 }

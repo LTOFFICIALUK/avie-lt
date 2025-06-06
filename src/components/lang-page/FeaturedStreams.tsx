@@ -57,7 +57,7 @@ const FeaturedStreams: React.FC<FeaturedStreamsProps> = ({
   const lang = pathSegments.length > 1 ? pathSegments[1] : 'en';
 
   return (
-    <section className={`w-full py-8 ${className}`}>
+    <section className={`w-full pt-8 ${className}`}>
       {/* Small Breaker Line */}
       <div className="w-full mb-6">
         <div className="h-px bg-gradient-to-r from-transparent via-gray-600/50 to-transparent"></div>
