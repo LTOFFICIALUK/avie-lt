@@ -48,16 +48,16 @@ export function TopNavigation({ onOpenSidebar }: TopNavigationProps) {
       label: <Link href={`/${lang}`}>Home</Link>,
     },
     {
-      key: "settings",
-      label: <Link href={`/${lang}/dashboard/settings`}>Settings</Link>,
-    },
-    {
       key: "dashboard",
       label: <Link href={`/${lang}/dashboard`}>Dashboard</Link>,
     },
     {
       key: "profile",
       label: <Link href={`/${lang}/profile`}>Profile</Link>,
+    },
+    {
+      key: "settings",
+      label: <Link href={`/${lang}/dashboard/settings`}>Settings</Link>,
     },
     {
       type: "divider",
@@ -115,8 +115,8 @@ export function TopNavigation({ onOpenSidebar }: TopNavigationProps) {
                 style={{ 
                   border: "none", 
                   background: "transparent", 
-                  width: 48, 
-                  height: 48,
+                  width: 24, 
+                  height: 24,
                   padding: 0
                 }}
                 title="Settings"
@@ -149,7 +149,7 @@ export function TopNavigation({ onOpenSidebar }: TopNavigationProps) {
 
   return (
     <>
-      <div className="flex h-16 items-center px-4 gap-4">
+      <div className="mb-2 mt-2 flex h-16 items-center px-4 gap-4">
         {/* Left side - Menu button */}
         <div className="md:hidden">
           <Button type="text" icon={<MenuOutlined />} onClick={onOpenSidebar} />

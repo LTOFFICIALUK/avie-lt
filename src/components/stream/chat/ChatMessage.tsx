@@ -34,6 +34,25 @@ interface ChatMessageProps {
   currentUserId?: string;
 }
 
+// Helper function to format relative time
+const formatRelativeTime = (timestamp: Date): string => {
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.getTime() - timestamp.getTime()) / 1000);
+  
+  if (diffInSeconds < 60) {
+    return `${diffInSeconds}s`;
+  } else if (diffInSeconds < 3600) {
+    const minutes = Math.floor(diffInSeconds / 60);
+    return `${minutes}m`;
+  } else if (diffInSeconds < 86400) {
+    const hours = Math.floor(diffInSeconds / 3600);
+    return `${hours}h`;
+  } else {
+    const days = Math.floor(diffInSeconds / 86400);
+    return `${days}d`;
+  }
+};
+
 const ChatMessage: React.FC<ChatMessageProps> = ({ message, onEmojiClick, currentUserId }) => {
   const { lang } = useParams();
   
@@ -50,23 +69,23 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, onEmojiClick, curren
   // Check if this is a system user that shouldn't have profile links
   const isSystemUser = message.username.toLowerCase() === 'system' || isSystemMessage;
   
-  // Izberi ikono glede na tip sporočila
+  // Izberi ikono glede na tip sporočila - Updated with gold for donations and cyan for branded elements
   let MessageIcon = null;
   let iconColor = '';
   let iconBgColor = '';
   
   if (isFollowNotification) {
     MessageIcon = HeartOutlined;
-    iconColor = '#1890ff';
-    iconBgColor = 'rgba(24, 144, 255, 0.3)';
+    iconColor = '#06b6d4'; // Cyan brand color
+    iconBgColor = 'rgba(6, 182, 212, 0.3)';
   } else if (isDonationMessage) {
     MessageIcon = DollarCircleOutlined;
-    iconColor = '#52c41a';
-    iconBgColor = 'rgba(82, 196, 26, 0.3)';
+    iconColor = '#f59e0b'; // Gold color for donations
+    iconBgColor = 'rgba(245, 158, 11, 0.3)';
   } else if (isSystemMessage) {
     MessageIcon = NotificationOutlined;
-    iconColor = '#1890ff';
-    iconBgColor = 'rgba(24, 144, 255, 0.3)';
+    iconColor = '#06b6d4'; // Cyan brand color
+    iconBgColor = 'rgba(6, 182, 212, 0.3)';
   } else if (isKick) {
     MessageIcon = SiKick;
     iconColor = '#53fc18';
@@ -77,8 +96,8 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, onEmojiClick, curren
     iconBgColor = 'rgba(145, 70, 255, 0.2)';
   } else if (message.username.toLowerCase() === 'system') {
     MessageIcon = FaRobot;
-    iconColor = '#84eef5';
-    iconBgColor = 'rgba(132, 238, 245, 0.2)';
+    iconColor = '#06b6d4'; // Cyan brand color
+    iconBgColor = 'rgba(6, 182, 212, 0.2)';
   }
 
   // Pripravi URL za avatar
@@ -101,8 +120,8 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, onEmojiClick, curren
         size={36} 
         src={!isExternalPlatform ? avatarUrl : undefined}
         style={{ 
-          backgroundColor: isSystemMessage ? '#1890ff' : '#2d2d2d',
-          border: isSystemMessage ? '1px solid #1890ff' : '1px solid #3a3a3a',
+          backgroundColor: isSystemMessage ? '#06b6d4' : '#2d2d2d', // Cyan for system messages
+          border: isSystemMessage ? '1px solid #06b6d4' : '1px solid #3a3a3a',
           cursor: !isSystemUser && !isExternalPlatform ? 'pointer' : 'default'
         }}
       >
@@ -123,21 +142,32 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, onEmojiClick, curren
 
   // Username component with conditional linking
   const UsernameComponent = () => {
+    // Determine display name based on message type
+    const getDisplayName = () => {
+      if (isFollowNotification) {
+        return 'New Follower';
+      } else if (isDonationMessage) {
+        return 'New Donation';
+      } else {
+        return message.username;
+      }
+    };
+
     const username = (
       <Text style={{ 
         fontSize: '14px', 
         fontWeight: 600, 
         color: isSystemMessage ? 
-               (isFollowNotification ? '#1890ff' : 
-                isDonationMessage ? '#52c41a' : 
-                '#84eef5') : 
+               (isFollowNotification ? '#06b6d4' : // Cyan for follow notifications
+                isDonationMessage ? '#f59e0b' : // Gold for donations
+                '#06b6d4') : // Cyan for other system messages
                isKick ? '#53fc18' :
                isTwitch ? '#9146FF' :
                '#fff', 
         margin: 0,
         cursor: !isSystemUser && !isExternalPlatform ? 'pointer' : 'default'
       }} className="truncate max-w-[120px]">
-        {message.username}
+        {getDisplayName()}
       </Text>
     );
 
@@ -155,8 +185,8 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, onEmojiClick, curren
   return (
     <div 
       className={`flex items-start gap-2 ${message.isHighlighted ? 'py-2 px-3 bg-opacity-20 rounded-lg' : ''} ${
-        isFollowNotification ? 'bg-blue-900 bg-opacity-20 border border-blue-700 border-opacity-30 rounded-lg py-2 px-3' : 
-        isDonationMessage ? 'bg-green-900 bg-opacity-20 border border-green-700 border-opacity-30 rounded-lg py-2 px-3' : 
+        isFollowNotification ? 'bg-cyan-900 bg-opacity-20 border border-cyan-700 border-opacity-30 rounded-lg py-2 px-3' : 
+        isDonationMessage ? 'bg-yellow-900 bg-opacity-20 border border-yellow-700 border-opacity-30 rounded-lg py-2 px-3' : 
         isKick ? 'border-l-2 border-[#53fc18] pl-2' :
         isTwitch ? 'border-l-2 border-[#9146FF] pl-2' :
         ''
@@ -187,10 +217,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, onEmojiClick, curren
             color: 'rgba(255,255,255,0.5)', 
             margin: 0 
           }}>
-            {new Date(message.timestamp).toLocaleTimeString(undefined, {
-              hour: '2-digit',
-              minute: '2-digit'
-            })}
+            {formatRelativeTime(message.timestamp)}
           </Text>
           
           {/* Prikaz značke platforme */}
@@ -203,9 +230,9 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, onEmojiClick, curren
         <Text style={{ 
           fontSize: '14px', 
           color: isSystemMessage ? 
-                (isFollowNotification ? '#1890ff' : 
-                 isDonationMessage ? '#52c41a' : 
-                 '#84eef5') : 
+                (isFollowNotification ? '#06b6d4' : // Cyan for follow notifications
+                 isDonationMessage ? '#f59e0b' : // Gold for donations
+                 '#06b6d4') : // Cyan for other system messages
                 'rgba(255,255,255,0.8)', 
           margin: 0, 
           wordBreak: 'break-word', 

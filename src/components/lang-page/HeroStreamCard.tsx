@@ -97,7 +97,7 @@ const HeroStreamCard: React.FC<HeroStreamCardProps> = ({
       <div className="flex-1 flex flex-col justify-between pl-3 min-w-0">
         <div>
           {/* Category - use actual stream category without uppercase transform */}
-          <p className="text-gray-400 text-xs font-medium mb-1">
+          <p className="text-gray-400 text-xs font-medium mb-2">
             {stream.category?.name || 'Crypto & Trading'}
           </p>
 
@@ -106,10 +106,10 @@ const HeroStreamCard: React.FC<HeroStreamCardProps> = ({
             {stream.title || 'Live Stream'}
           </h3>
 
-          {/* Streamer info with avatar and bullet point */}
-          <div className="flex items-center space-x-2 mb-2 min-w-0">
-            {/* Streamer Avatar instead of tick icon */}
-            <div className="w-4 h-4 rounded-full overflow-hidden flex-shrink-0">
+          {/* Streamer info with avatar */}
+          <div className="flex items-start space-x-2 mb-2 min-w-0">
+            {/* Streamer Avatar */}
+            <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0 mt-0.5">
               {stream.user.avatarUrl ? (
                 <Image
                   src={stream.user.avatarUrl}
@@ -125,27 +125,19 @@ const HeroStreamCard: React.FC<HeroStreamCardProps> = ({
               )}
             </div>
 
-            {/* Streamer DisplayName + viewer count with bullet */}
-            <p className="flex-1 text-gray-300 text-xs min-w-0 break-words">
-              <span className="font-medium text-white">
+            {/* Streamer DisplayName and viewer count stacked */}
+            <div className="flex-1 min-w-0">
+              <p className="font-medium text-white text-xs break-words">
                 {stream.user.displayName}
-              </span>
-              <span className="text-gray-400"> • {formatViewers(stream.viewers)}</span>
-            </p>
+              </p>
+              <p className="text-gray-400 text-xs">
+                {formatViewers(stream.viewers)}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Watch Now/View Stream button - exact same styling for both views */}
-        <Link href={`/${lang}/streams/${stream.user.displayName}`}>
-          <Button 
-            type="primary" 
-            size="small"
-            className="bg-[var(--color-brand)] hover:bg-[var(--color-brand-darker)] text-white font-medium text-xs h-6 rounded-full shadow-md hover:shadow-lg transition-all"
-            style={{ marginTop: '-1px', justifyContent: 'flex-start', paddingLeft: '12px', paddingRight: '12px'}} 
-          >
-            {isOffline ? 'View Stream' : 'Watch Now'}
-          </Button>
-        </Link>
+
       </div>
     </div>
   );

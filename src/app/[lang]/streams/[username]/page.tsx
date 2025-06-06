@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { MobileStreamLayout } from '@/components/stream/MobileStreamLayout';
 import { DesktopStreamLayout } from '@/components/stream/DesktopStreamLayout';
+import { Suggested } from '@/components/stream/Suggested';
 import { Alert } from 'antd';
 import { useSession } from '@/providers/SessionProvider';
 
@@ -14,6 +15,11 @@ interface StreamInfo {
   viewers: number;
   title: string;
   tags?: string[];
+  category?: {
+    id: string;
+    name: string;
+    slug: string;
+  } | null;
 }
 
 interface StreamerInfo {
@@ -53,6 +59,7 @@ export default function StreamPage({ params }: StreamPageProps) {
   const [likeCount, setLikeCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isMobileContentHidden, setIsMobileContentHidden] = useState(false);
 
   // Check if current user is the streamer
   const isCurrentUserStreamer = user?.displayName === username;
@@ -174,6 +181,11 @@ export default function StreamPage({ params }: StreamPageProps) {
     }
   };
 
+  // Handle mobile content hide/show toggle
+  const handleMobileContentToggle = () => {
+    setIsMobileContentHidden(!isMobileContentHidden);
+  };
+
   useEffect(() => {
     fetchAllData();
     const interval = setInterval(fetchAllData, 30000);
@@ -189,7 +201,7 @@ export default function StreamPage({ params }: StreamPageProps) {
   }
 
   return (
-    <div className="flex min-h-screen w-full relative md:p-4 pb-16 sm:pb-0">
+    <div className="flex w-full relative md:min-h-screen md:p-4 pb-0 sm:pb-0">
       <main className="flex-1 w-full">
         {/* Mobile Layout - Only visible on small screens */}
         <MobileStreamLayout 
@@ -203,14 +215,28 @@ export default function StreamPage({ params }: StreamPageProps) {
           isLiked={isLiked}
           onLike={handleLike}
           isCurrentUserStreamer={isCurrentUserStreamer}
+          isMobileContentHidden={isMobileContentHidden}
+          onMobileContentToggle={handleMobileContentToggle}
         />
         
         {/* Desktop Layout - Hidden on small screens */}
         <DesktopStreamLayout 
           username={username}
           streamInfo={streamInfo}
+          streamerInfo={streamerInfo}
           isCurrentUserStreamer={isCurrentUserStreamer}
+          isSubscribed={isSubscribed}
+          onSubscribe={handleSubscribe}
+          isSubscribing={isSubscribing}
         />
+        
+        {/* Suggested Streams - Show only on desktop/tablet (hidden on mobile), below ALL content (full width) */}
+        <div className="hidden sm:block w-full pb-8">
+          <Suggested 
+            currentStreamId={streamInfo?.id}
+            currentStreamCategory={streamInfo?.category || null}
+          />
+        </div>
       </main>
     </div>
   );

@@ -3,7 +3,7 @@
 import React from 'react';
 import { StreamPlayer } from '@/components/stream/StreamPlayer';
 import { Chat } from '@/components/stream/chat/Chat';
-import { AccountSubscribe } from '@/components/stream/AccountSubscribe';
+
 import { VideoTitle } from '@/components/stream/VideoTitle';
 import { Button } from 'antd';
 import { BarChartOutlined } from '@ant-design/icons';
@@ -20,13 +20,31 @@ interface DesktopStreamLayoutProps {
     title: string;
     tags?: string[];
   } | null;
+  streamerInfo: {
+    id: string;
+    displayName: string;
+    avatarUrl: string | null;
+    bio: string | null;
+    isVerified: boolean;
+    stats: {
+      followers: number;
+      videos: number;
+    };
+  } | null;
   isCurrentUserStreamer: boolean;
+  isSubscribed?: boolean;
+  onSubscribe?: () => void;
+  isSubscribing?: boolean;
 }
 
 export function DesktopStreamLayout({
   username,
   streamInfo,
-  isCurrentUserStreamer
+  streamerInfo,
+  isCurrentUserStreamer,
+  isSubscribed,
+  onSubscribe,
+  isSubscribing
 }: DesktopStreamLayoutProps) {
   const { lang } = useParams();
 
@@ -51,6 +69,12 @@ export function DesktopStreamLayout({
           tags={streamInfo.tags || []}
           username={username || ''}
           streamId={streamInfo.id}
+          avatarUrl={streamerInfo?.avatarUrl || undefined}
+          followerCount={streamerInfo?.stats?.followers || 0}
+          videoCount={streamerInfo?.stats?.videos || 0}
+          isSubscribed={isSubscribed}
+          onSubscribe={onSubscribe}
+          isSubscribing={isSubscribing}
         />
         
         {/* Stats Button - Only show if user is live and is the current user's stream */}
@@ -76,8 +100,7 @@ export function DesktopStreamLayout({
           </div>
         )}
         
-        {/* Channel Subscribe Section */}
-        <AccountSubscribe username={username} />
+
       </div>
       
       {/* Chat (Right column) */}

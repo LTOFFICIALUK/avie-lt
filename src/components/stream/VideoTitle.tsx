@@ -2,7 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { ShareAltOutlined, HeartOutlined, HeartFilled, FlagOutlined, MoreOutlined, GiftOutlined, ScissorOutlined } from '@ant-design/icons';
-import { Typography, Button, Space, Tag, Dropdown, Modal, Form, Input, message } from 'antd';
+import { Typography, Button, Space, Tag, Dropdown, Modal, Form, Input, message, Avatar } from 'antd';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { api } from '@/lib/api';
 import { DonationModal } from '../donation/DonationModal';
 import { ClipSuccessModal } from './ClipSuccessModal';
@@ -19,9 +21,16 @@ interface VideoTitleProps {
   tags?: string[];
   username: string;
   streamId: string;
+  avatarUrl?: string;
+  followerCount?: number;
+  videoCount?: number;
+  isSubscribed?: boolean;
+  onSubscribe?: () => void;
+  isSubscribing?: boolean;
 }
 
-export function VideoTitle({ title, views, timestamp, tags = [], username, streamId}: VideoTitleProps) {
+export function VideoTitle({ title, views, timestamp, tags = [], username, streamId, avatarUrl, followerCount, videoCount, isSubscribed, onSubscribe, isSubscribing}: VideoTitleProps) {
+  const { lang } = useParams();
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
@@ -161,28 +170,99 @@ export function VideoTitle({ title, views, timestamp, tags = [], username, strea
 
   return (
     <div className="flex flex-col gap-1 px-1 border-none">
-      {/* Title and Actions Section - Always in a Row */}
-      <div className="flex flex-row justify-between items-start gap-3">
-        {/* Title Column */}
-        <div className="flex-1 min-w-0">
-          <Title level={4} style={{ margin: 0, color: '#ffffff' }}>
-            {title}
-          </Title>
+      {/* Title and Actions Section - Responsive Layout */}
+      <div className="flex flex-wrap justify-between items-start gap-3">
+        {/* Profile Picture and Title Column */}
+        <div className="flex-1 min-w-0 flex items-start gap-4" style={{ minWidth: '300px' }}>
+          {/* Profile Picture */}
+          <Link href={`/${lang}/profile/${username}`}>
+            <Avatar 
+              size={64}
+              src={avatarUrl || `https://api.dicebear.com/6.x/pixel-art/svg?seed=${username}`}
+              style={{ 
+                backgroundColor: '#2d2d2d',
+                border: '3px solid #84eef5',
+                flexShrink: 0,
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease'
+              }}
+              className="hover:scale-105"
+            >
+              {username[0]?.toUpperCase() || '?'}
+            </Avatar>
+          </Link>
           
-          {/* Stats - Only on Mobile (below the title) */}
-          <div className="flex items-center gap-2 sm:hidden mt-1.5">
-            <Text style={{ color: 'var(--text-secondary)' }}>
-              {views.toLocaleString()} views
-            </Text>
-            <Text style={{ color: 'var(--text-secondary)' }}>•</Text>
-            <Text style={{ color: 'var(--text-secondary)' }}>
-              {timestamp}
-            </Text>
+          {/* Title and Creator Info */}
+          <div className="flex-1 min-w-0">
+            <Title level={3} style={{ 
+              margin: 0, 
+              color: '#ffffff', 
+              marginBottom: '4px',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}>
+              {title}
+            </Title>
+            
+            {/* Creator Username and Following Button */}
+            <div className="flex items-center gap-2" style={{ marginBottom: '2px' }}>
+              <Link href={`/${lang}/profile/${username}`}>
+                <div style={{ 
+                  color: '#ffffff', 
+                  fontSize: '18px', 
+                  fontWeight: 600,
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  cursor: 'pointer',
+                  textDecoration: 'none'
+                }}
+                className="hover:underline"
+                >
+                  {username}
+                </div>
+              </Link>
+              
+              {/* Following Button */}
+              {onSubscribe && (
+                <Button
+                  onClick={onSubscribe}
+                  loading={isSubscribing}
+                  type={isSubscribed ? "text" : "primary"}
+                  size="small"
+                  style={{
+                    height: '24px',
+                    backgroundColor: isSubscribed ? 'var(--color-gray)' : '#84eef5',
+                    borderColor: isSubscribed ? 'rgba(255,255,255,0.2)' : '#84eef5',
+                    borderRadius: '12px',
+                    color: isSubscribed ? '#ffffff' : '#000000',
+                    fontSize: '11px',
+                    fontWeight: 'normal',
+                    padding: '0 8px',
+                    flexShrink: 0
+                  }}
+                >
+                  {isSubscribed ? "Following" : "Follow"}
+                </Button>
+              )}
+            </div>
+            
+            {/* Follower and Video Count */}
+            <div className="flex items-center gap-2" style={{ 
+              color: 'rgba(255,255,255,0.7)', 
+              fontSize: '14px',
+              whiteSpace: 'nowrap'
+            }}>
+              <span>{followerCount?.toLocaleString() || 0} followers</span>
+              <span>•</span>
+              <span>{videoCount?.toLocaleString() || 0} videos</span>
+            </div>
           </div>
         </div>
 
-        {/* Mobile Action Buttons - Next to title */}
-        <div className="flex sm:hidden items-center gap-2">
+        {/* Mobile Action Buttons - Responsive positioning */}
+        <div className="flex sm:hidden items-center gap-2 flex-shrink-0">
           {/* Donate Button */}
           <Button
             type="text" 
@@ -275,8 +355,8 @@ export function VideoTitle({ title, views, timestamp, tags = [], username, strea
           </Dropdown>
         </div>
 
-        {/* Desktop Action Buttons */}
-        <div className="hidden sm:flex items-center gap-2">
+        {/* Desktop Action Buttons - Responsive positioning */}
+        <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
           {/* Donate Button */}
           <Button
             type="text" 
@@ -388,19 +468,7 @@ export function VideoTitle({ title, views, timestamp, tags = [], username, strea
             </Tag>
           ))}
         </Space>
-        <div className="items-center gap-2 hidden md:flex">
-          <Text style={{ color: 'var(--text-secondary)' }}>
-            {username}&apos;s live stream! Enjoy the content.
-          </Text>
-          <Text style={{ color: 'var(--text-secondary)' }}>•</Text>
-          <Text style={{ color: 'var(--text-secondary)' }}>
-            {views.toLocaleString()} views
-          </Text>
-          <Text style={{ color: 'var(--text-secondary)' }}>•</Text>
-          <Text style={{ color: 'var(--text-secondary)' }}>
-            {timestamp === 'Just now' ? 'Offline' : timestamp}
-          </Text>
-        </div>
+
       </div>
 
       {/* Donation Modal */}

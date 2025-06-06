@@ -756,9 +756,9 @@ export function Chat({ username }: ChatBoxProps) {
   }
 
   return (
-    <div className="flex flex-col h-full border-4 shadow-2xl border-[rgba(255,255,255,0.1)] w-full rounded-xl overflow-hidden">
+    <div className="flex flex-col h-full border-2 shadow-2xl border-[rgba(255,255,255,0.25)] w-full rounded-xl overflow-hidden">
       {/* Chat Header */}
-      <div className="py-3 px-4 border-b border-[rgba(255,255,255,0.1)]" style={{ flexShrink: 0 }}>
+      <div className="py-3 px-4 border-b-2 border-[rgba(255,255,255,0.2)]" style={{ flexShrink: 0 }}>
         <div className="flex items-center justify-center">
           <h3 className="text-lg font-semibold text-white">Welcome To {username}'s Live Chat</h3>
         </div>
@@ -794,7 +794,7 @@ export function Chat({ username }: ChatBoxProps) {
 
       {/* Ban notification */}
       {banMessage && (
-        <div className="px-4 py-2 bg-red-500/20 border-t border-red-500/30">
+        <div className="px-4 py-2 bg-red-500/20 border-t-2 border-red-500/40">
           <Text style={{ color: 'rgba(255,255,255,0.9)', textAlign: 'center', display: 'block' }}>
             <StopOutlined style={{ marginRight: '8px' }} />
             You are banned from chatting in this room
@@ -803,7 +803,7 @@ export function Chat({ username }: ChatBoxProps) {
       )}
 
       {/* Message Input */}
-      <div className="p-3 border-t border-[rgba(255,255,255,0.1)]" style={{ flexShrink: 0 }}>
+      <div className="px-4 pt-2 pb-3 border-t-2 border-[rgba(255,255,255,0.2)]" style={{ flexShrink: 0 }}>
         <form onSubmit={handleSendMessage}>
           <div className="flex gap-2 relative">
             <Input
@@ -833,7 +833,7 @@ export function Chat({ username }: ChatBoxProps) {
                 height: '40px', 
                 borderRadius: '20px',
                 backgroundColor: 'rgba(45,45,45,0.4)',
-                borderColor: messageLengthError ? 'rgba(255,0,0,0.5)' : banMessage ? 'rgba(255,0,0,0.3)' : 'rgba(255,255,255,0.1)',
+                borderColor: messageLengthError ? 'rgba(255,0,0,0.7)' : banMessage ? 'rgba(255,0,0,0.5)' : 'rgba(255,255,255,0.3)',
                 color: '#fff',
               }}
               prefix={
@@ -858,7 +858,7 @@ export function Chat({ username }: ChatBoxProps) {
                     <SendOutlined
                       onClick={handleSendMessage}
                       style={{ 
-                        color: isConnected && newMessage.trim() && !inCooldown && !banMessage ? 'var(--color-brand)' : 'rgba(255,255,255,0.3)',
+                        color: isConnected && newMessage.trim() && !inCooldown && !banMessage ? '#06b6d4' : 'rgba(255,255,255,0.3)',
                         cursor: isConnected && newMessage.trim() && !inCooldown && !banMessage ? 'pointer' : 'not-allowed',
                         fontSize: '16px'
                       }}
@@ -876,7 +876,7 @@ export function Chat({ username }: ChatBoxProps) {
             {/* Emoji Picker */}
             {showEmojiPicker && (
               <div ref={emojiPickerRef} className="absolute bottom-full left-0 mb-2 z-50">
-                <div className="border border-[rgba(255,255,255,0.1)] rounded-lg shadow-lg overflow-hidden" style={{ backgroundColor: 'rgba(25,25,25,0.95)' }}>
+                <div className="border-2 border-[rgba(255,255,255,0.3)] rounded-lg shadow-lg overflow-hidden" style={{ backgroundColor: 'rgba(25,25,25,0.95)' }}>
                   <EmojiPicker
                     width={300}
                     height={400}
@@ -892,22 +892,22 @@ export function Chat({ username }: ChatBoxProps) {
           </div>
           
           {/* Message length and cooldown indicators */}
-          <div style={{ minHeight: "24px" }}>
+          <div style={{ minHeight: messageLengthError || inCooldown ? "20px" : "0px" }}>
             {messageLengthError && (
-              <div className="mt-2 text-red-500 text-xs">
+              <div className="mt-1 text-red-500 text-xs">
                 Message too long! Maximum {MAX_MESSAGE_LENGTH} characters allowed.
               </div>
             )}
             
             {inCooldown && (
-              <div className="mt-2 text-yellow-500 text-xs">
+              <div className="mt-1 text-yellow-500 text-xs">
                 Cooldown active. You can send messages again in {Math.ceil(cooldownRemaining / 1000)} seconds.
               </div>
             )}
           </div>
           
           {!isAuthenticated && !banMessage && (
-            <div className="mt-3 flex justify-center">
+            <div className="mt-2 flex justify-center">
               <Button
                 type="primary"
                 icon={<LoginOutlined />}

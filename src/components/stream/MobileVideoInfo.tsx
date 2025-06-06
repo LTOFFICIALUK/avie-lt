@@ -117,7 +117,7 @@ export function MobileVideoInfo({
   ];
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       {/* Action Buttons - All in one row */}
       <div className="grid grid-cols-4 gap-2">
         {/* Follow Button */}
@@ -126,39 +126,41 @@ export function MobileVideoInfo({
           icon={isSubscribed ? <UserDeleteOutlined /> : <UserAddOutlined />}
           onClick={onSubscribe}
           loading={isSubscribing}
-          size="middle"
+          size="small"
           className="flex items-center justify-center"
           style={{
             backgroundColor: isSubscribed
-              ? "var(--color-gray)"
+              ? "rgba(45,45,45,0.8)"
               : "var(--color-brand)",
-            borderColor: isSubscribed ? "rgba(255,255,255,0.1)" : "transparent",
+            borderColor: isSubscribed ? "rgba(255,255,255,0.25)" : "transparent",
             color: isSubscribed ? "white" : "black",
-            borderRadius: "20px",
+            borderRadius: "16px",
             width: "100%",
             fontWeight: isSubscribed ? "normal" : "500",
-            fontSize: "12px",
+            fontSize: "11px",
+            height: "32px",
           }}
         >
-          {isSubscribed ? "Unfollow" : "Follow"}
+          {isSubscribed ? "Following" : "Follow"}
         </Button>
 
         {/* Like Button */}
         <Button
-          type={isLiked ? "primary" : "default"}
+          type="default"
           icon={isLiked ? <HeartFilled /> : <HeartOutlined />}
           onClick={onLike}
           className="flex items-center justify-center"
           style={{
-            backgroundColor: "var(--color-gray)",
-            borderColor: isLiked ? "var(--color-brand)" : "rgba(255,255,255,0.1)",
-            color: isLiked ? "var(--color-brand)" : "white",
-            borderRadius: "20px",
+            backgroundColor: "rgba(45,45,45,0.8)",
+            borderColor: "rgba(255,255,255,0.25)",
+            color: isLiked ? "#ff4d4f" : "white",
+            borderRadius: "16px",
             width: "100%",
             fontWeight: "normal",
-            fontSize: "12px",
+            fontSize: "11px",
+            height: "32px",
           }}
-          size="middle"
+          size="small"
         >
           {likeCount}
         </Button>
@@ -168,16 +170,17 @@ export function MobileVideoInfo({
           type="default"
           icon={<ShareAltOutlined />}
           onClick={handleShare}
-          size="middle"
+          size="small"
           className="flex items-center justify-center"
           style={{
-            backgroundColor: "var(--color-gray)",
-            borderColor: "rgba(255,255,255,0.1)",
+            backgroundColor: "rgba(45,45,45,0.8)",
+            borderColor: "rgba(255,255,255,0.25)",
             color: "white",
-            borderRadius: "20px",
+            borderRadius: "16px",
             width: "100%",
             fontWeight: "normal",
-            fontSize: "12px",
+            fontSize: "11px",
+            height: "32px",
           }}
         >
           Share
@@ -191,13 +194,14 @@ export function MobileVideoInfo({
           disabled={!streamId}
           className="flex items-center justify-center"
           style={{
-            backgroundColor: "var(--color-gray)",
-            borderColor: "rgba(255,255,255,0.1)",
+            backgroundColor: "rgba(45,45,45,0.8)",
+            borderColor: "rgba(255,255,255,0.25)",
             color: "white",
-            borderRadius: "20px",
+            borderRadius: "16px",
             width: "100%",
             fontWeight: "normal",
-            fontSize: "12px",
+            fontSize: "11px",
+            height: "32px",
           }}
         >
           Clip
@@ -206,16 +210,19 @@ export function MobileVideoInfo({
 
       {/* Tags */}
       {tags && tags.length > 0 && (
-        <Space size={[8, 8]} wrap>
+        <Space size={[6, 6]} wrap>
           {tags.map((tag) => (
             <Tag
               key={tag}
               style={{
-                backgroundColor: "var(--color-gray)",
-                borderColor: "rgba(255,255,255,0.2)",
-                color: "var(--text-secondary)",
-                borderRadius: "9999px",
-                padding: "4px 10px",
+                backgroundColor: "rgba(45,45,45,0.6)",
+                borderColor: "rgba(255,255,255,0.25)",
+                color: "rgba(255,255,255,0.7)",
+                borderRadius: "12px",
+                padding: "2px 8px",
+                fontSize: "10px",
+                lineHeight: "1.4",
+                border: "1px solid rgba(255,255,255,0.25)",
               }}
             >
               {tag}

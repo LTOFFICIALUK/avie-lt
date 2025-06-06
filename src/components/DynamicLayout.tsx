@@ -84,7 +84,7 @@ const DynamicLayout = ({ children }: any) => {
               toggleSidebarOpened();
             }}
           />
-          <main className={`flex flex-col gap-12 ${isStreamPage ? '' : 'sm:max-w-[1300px]'} mx-auto sm:px-4 pt-6 pb-24 ${isStreamPage ? 'lg:p-0' : ''} max-w-full overflow-hidden`}>
+          <main className={`flex flex-col gap-12 ${isStreamPage ? '' : 'sm:max-w-[1300px]'} mx-auto sm:px-4 ${isStreamPage ? 'lg:p-0' : ''} max-w-full overflow-hidden`}>
             {!isStreamPage && !isDashboardPage && !isMainNavPage && <BreadcrumbsNav />}
             {children}
           </main>

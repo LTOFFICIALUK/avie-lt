@@ -7,7 +7,7 @@ import { MobileDonationButton } from "./MobileDonationButton";
 import { MobileVideoInfo } from "./MobileVideoInfo";
 import { Chat } from "./chat/Chat";
 import { Typography, Divider, Button } from "antd";
-import { UpOutlined, DownOutlined, BarChartOutlined } from "@ant-design/icons";
+import { BarChartOutlined, UpOutlined, DownOutlined } from "@ant-design/icons";
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -41,6 +41,8 @@ interface MobileStreamLayoutProps {
   isLiked: boolean;
   onLike: () => void;
   isCurrentUserStreamer: boolean;
+  isMobileContentHidden: boolean;
+  onMobileContentToggle: () => void;
 }
 
 export function MobileStreamLayout({
@@ -54,8 +56,10 @@ export function MobileStreamLayout({
   isLiked,
   onLike,
   isCurrentUserStreamer,
+  isMobileContentHidden,
+  onMobileContentToggle,
 }: MobileStreamLayoutProps) {
-  const [infoExpanded, setInfoExpanded] = useState(true);
+  const [infoExpanded] = useState(true);
   const { lang } = useParams();
 
   if (!streamInfo) {
@@ -83,64 +87,49 @@ export function MobileStreamLayout({
   };
 
   return (
-    <div className="flex flex-col w-full sm:hidden h-[100svh] overflow-hidden bg-[var(--color-background)]">
-      {/* Upper section - Fixed content */}
-      <div className="flex-none">
-        {/* Video Player */}
-        <div className="w-full">
-          <StreamPlayer username={username} />
-        </div>
+    <div className={`flex flex-col w-full sm:hidden bg-[var(--color-background)] ${isMobileContentHidden ? 'h-[100svh] max-h-[100svh] overflow-hidden' : 'min-h-[100svh]'}`}>
+      {/* Video Player - Fixed at top */}
+      <div className="flex-none w-full">
+        <StreamPlayer username={username} />
+      </div>
 
-        {/* Collapse/Expand toggle button */}
-        <div className="px-4 py-2 flex justify-center">
-          <Button 
-            type="text"
-            icon={infoExpanded ? <UpOutlined /> : <DownOutlined />}
-            onClick={() => setInfoExpanded(!infoExpanded)}
-            className="text-white opacity-80 hover:opacity-100"
-            style={{ 
-              backgroundColor: 'rgba(255,255,255,0.1)',
-              borderRadius: '20px',
-              fontSize: '12px',
-              padding: '0 12px'
-            }}
-          >
-            {infoExpanded ? 'Hide details' : 'Show details'}
-          </Button>
-        </div>
+      {/* Donation Button - Always visible */}
+      <div className="flex-none mt-3 px-4">
+        <MobileDonationButton username={username} />
+      </div>
 
-        {/* Collapsible content */}
-        <div className={`transition-all duration-300 overflow-hidden ${infoExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-          {/* Donation Button - Standalone below video */}
-          <div className="mt-1 px-4">
-            <MobileDonationButton username={username} />
-          </div>
+      {/* Hide/Show Button - Always visible */}
+      <div className="flex-none mt-2 px-4 flex justify-center">
+        <Button
+          type="text"
+          size="small"
+          onClick={onMobileContentToggle}
+          icon={isMobileContentHidden ? <DownOutlined /> : <UpOutlined />}
+          style={{
+            color: 'var(--text-secondary)',
+            fontSize: '12px',
+            height: '32px',
+            width: '70px',
+            padding: '0 8px',
+            border: '1px solid rgba(255,255,255,0.25)',
+            borderRadius: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '4px',
+            flexShrink: 0,
+            backgroundColor: 'rgba(0,0,0,0.3)',
+          }}
+        >
+          {isMobileContentHidden ? 'Show' : 'Hide'}
+        </Button>
+      </div>
 
-          {/* Stats Button - Only show if user is live and is the current user's stream */}
-          {isCurrentUserStreamer && streamInfo.isLive && (
-            <div className="mt-3 px-4">
-              <Link href={`/${lang}/streams/${username}/stats`}>
-                <Button 
-                  type="primary"
-                  icon={<BarChartOutlined />}
-                  block
-                  style={{
-                    backgroundColor: 'var(--color-brand)',
-                    borderColor: 'var(--color-brand)',
-                    borderRadius: '20px',
-                    fontSize: '14px',
-                    fontWeight: 'normal',
-                    height: '36px'
-                  }}
-                >
-                  View Stream Stats
-                </Button>
-              </Link>
-            </div>
-          )}
-
+      {/* Collapsible content section */}
+      {!isMobileContentHidden && (
+        <div className="flex-none overflow-hidden">
           {/* Streamer info with title and stream stats */}
-          <div className="mt-4 px-4">
+          <div className="mt-3 px-4">
             <MobileAccountSubscribe
               username={username}
               streamerInfo={streamerInfo}
@@ -154,7 +143,7 @@ export function MobileStreamLayout({
           </div>
 
           {/* Mobile Video Info with action buttons including Follow */}
-          <div className="mt-4 px-4">
+          <div className="mt-3 px-4">
             <MobileVideoInfo
               streamId={streamInfo.id}
               title={streamInfo.title || ""}
@@ -168,23 +157,35 @@ export function MobileStreamLayout({
               isSubscribing={isSubscribing}
             />
           </div>
-        </div>
-      </div>
-      
-      {/* Divider - only shown when content is expanded */}
-      <div className={`transition-all duration-300 ${infoExpanded ? 'opacity-100' : 'opacity-0'}`}>
-        <Divider style={{ borderColor: 'rgba(255,255,255,0.1)', margin: '16px 0 0 0' }} />
-      </div>
 
-      {/* Chat section - Takes remaining space */}
-      <div className="flex-grow overflow-hidden flex flex-col min-h-0 pt-2">
-        <div className="px-4 mb-2 flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-white">Live Chat</h3>
-          <Text style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>
-            {streamInfo.viewers.toLocaleString()} viewers
-          </Text>
+          {/* Stats Button - Only show if user is live and is the current user's stream */}
+          {isCurrentUserStreamer && streamInfo.isLive && (
+            <div className="mt-3 px-4 mb-3">
+              <Link href={`/${lang}/streams/${username}/stats`}>
+                <Button 
+                  type="primary"
+                  icon={<BarChartOutlined />}
+                  block
+                  style={{
+                    backgroundColor: 'var(--color-brand)',
+                    borderColor: 'var(--color-brand)',
+                    borderRadius: '16px',
+                    fontSize: '13px',
+                    fontWeight: 'normal',
+                    height: '34px'
+                  }}
+                >
+                  View Stream Stats
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
-        <div className="flex-grow overflow-hidden relative">
+      )}
+
+      {/* Chat section - Takes all remaining space */}
+      <div className={`flex flex-col px-4 pb-4 pt-3 ${isMobileContentHidden ? 'flex-1 min-h-0' : 'min-h-[400px]'}`}>
+        <div className={`${isMobileContentHidden ? 'flex-1 min-h-0 overflow-hidden' : 'h-[400px] overflow-hidden'}`}>
           <Chat username={username} />
         </div>
       </div>

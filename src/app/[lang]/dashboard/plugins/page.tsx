@@ -18,6 +18,16 @@ const Page = () => {
       isRedeploying: false,
     },
     {
+      id: "multistream",
+      title: "MultiStream",
+      description:
+        "Configure multiple streaming destinations for your live stream. Reach audiences across all major platforms simultaneously.",
+      price: "$9.99",
+      settingsUrl: "plugins/multistream",
+      isActive: false,
+      isLoading: false,
+    },
+    {
       id: "character",
       title: "Character Generator",
       description: "Generate your own character based on your description using advanced AI technology",
@@ -28,14 +38,14 @@ const Page = () => {
       comingSoon: true,
     },
     {
-      id: "multistream",
-      title: "MultiStream",
-      description:
-        "Configure multiple streaming destinations for your live stream. Reach audiences across all major platforms simultaneously.",
-      price: "$9.99",
-      settingsUrl: "plugins/multistream",
+      id: "ai-chat-moderator",
+      title: "AI Chat Moderator",
+      description: "Intelligent AI-powered chat moderation to automatically filter inappropriate content and maintain a positive streaming environment.",
+      price: "$7.99",
+      settingsUrl: "plugins/ai-chat-moderator",
       isActive: false,
       isLoading: false,
+      comingSoon: true,
     },
   ];
 
@@ -71,7 +81,7 @@ const Page = () => {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8 items-stretch">
             {featuredPlugins.map((plugin) => (
-              <div key={plugin.id} className="relative">
+              <div key={plugin.id} className="relative h-full min-h-[280px] sm:min-h-[320px] lg:min-h-[280px]">
                 <div className="absolute -top-2 -right-2 bg-gradient-to-r from-cyan-400 to-blue-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold z-10">
                   Featured
                 </div>
@@ -91,13 +101,13 @@ const Page = () => {
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">All Plugins</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
             {plugins.map((plugin) => (
-              <div key={plugin.id} className="relative">
+              <div key={plugin.id} className="relative h-full min-h-[280px] sm:min-h-[320px] lg:min-h-[280px]">
                 {plugin.comingSoon && (
                   <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold z-10">
                     Coming Soon
                   </div>
                 )}
-                <div className={plugin.comingSoon ? "opacity-60 pointer-events-none cursor-not-allowed" : ""}>
+                <div className={`h-full ${plugin.comingSoon ? "opacity-60 pointer-events-none cursor-not-allowed" : ""}`}>
                   <PluginCard
                     href={plugin.comingSoon ? "#" : plugin.settingsUrl}
                     title={plugin.title}
